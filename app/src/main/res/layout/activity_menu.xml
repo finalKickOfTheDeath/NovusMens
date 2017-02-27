@@ -8,10 +8,58 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.math.novusmens_git.Menu">
+    tools:context="com.math.novusmens_git.Menu"
+    android:background="@drawable/cote_devaste">
 
-    <TextView
+    <!--<TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:text="Hello World!" />-->
+    <TextView
+        android:text="Novus Mens"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView"
+        android:textColorHighlight="@color/colorPrimaryDark"
+        android:textColor="@android:color/background_light"
+        android:width="120dp"
+        android:height="50dp"
+        android:scaleX="1.2"
+        android:scaleY="1"
+        android:textAlignment="center"
+        android:layout_marginRight="28dp"
+        android:layout_marginEnd="28dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/button1"
+        android:layout_alignEnd="@+id/button1" />
+
+    <Button
+        android:text="Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:id="@+id/button2"
+        android:onClick="test"
+        android:layout_below="@+id/button1"
+        android:layout_alignLeft="@+id/button1"
+        android:layout_alignStart="@+id/button1" />
+
+    <Button
+        android:text="Jouer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button1"
+        android:elevation="0dp"
+        android:onClick="commencer"
+        android:background="@android:color/background_light"
+        android:layout_marginRight="13dp"
+        android:layout_marginEnd="13dp"
+        android:layout_marginTop="43dp"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:scaleX="1"
+        android:scaleY="1"
+        android:cursorVisible="false" />
+
 </RelativeLayout>
