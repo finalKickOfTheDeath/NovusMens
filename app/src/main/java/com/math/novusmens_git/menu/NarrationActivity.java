@@ -1,4 +1,4 @@
-package com.math.novusmens_git;
+package com.math.novusmens_git.menu;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -9,6 +9,10 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+
+import com.math.novusmens_git.R;
+
+import niveau.Niveau1Activity;
 
 public class NarrationActivity extends AppCompatActivity {
     private String[] text = new String[4];
@@ -51,7 +55,7 @@ public class NarrationActivity extends AppCompatActivity {
             ImageView img = (ImageView) findViewById(R.id.imageView);
             img.setImageResource(R.drawable.desert);
             if(numero>3) {
-                Intent intent = new Intent(this, Menu.class);
+                Intent intent = new Intent(this, Niveau1Activity.class);
                 startActivity(intent);
             }
             else {

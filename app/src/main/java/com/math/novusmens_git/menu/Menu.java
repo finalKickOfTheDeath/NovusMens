@@ -1,4 +1,4 @@
-package com.math.novusmens_git;
+package com.math.novusmens_git.menu;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+
+import com.math.novusmens_git.R;
 
 public class Menu extends AppCompatActivity {
 

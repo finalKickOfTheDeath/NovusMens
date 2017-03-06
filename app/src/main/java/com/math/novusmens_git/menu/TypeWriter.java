@@ -1,4 +1,4 @@
-package com.math.novusmens_git;
+package com.math.novusmens_git.menu;
 
 import android.content.Context;
 import android.os.Handler;

@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.math.novusmens_git.NarrationActivity"
+    tools:context="com.math.novusmens_git.menu.NarrationActivity"
     android:background="@android:color/black"
     android:clickable="true"
     android:onClick="suite">
@@ -25,7 +25,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="115dp"/>
 
-    <com.math.novusmens_git.TypeWriter
+    <com.math.novusmens_git.menu.TypeWriter
         android:layout_width="wrap_content"
         android:text="Le monde que nous connaissons n'est plus"
         android:textColor="@android:color/background_light"
