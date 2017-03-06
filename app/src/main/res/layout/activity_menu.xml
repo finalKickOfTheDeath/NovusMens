@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:id="@+id/button2"
-        android:onClick="test"
+        android:onClick="reset"
         android:layout_below="@+id/button1"
         android:layout_alignLeft="@+id/button1"
         android:layout_alignStart="@+id/button1" />
