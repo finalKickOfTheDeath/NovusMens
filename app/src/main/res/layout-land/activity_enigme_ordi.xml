@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:weightSum="1"
+    android:background="@drawable/backgroundl1"
+    android:orientation="vertical">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.38">
+
+        <TextView
+            android:text="@string/descEnigmeOrdi"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtTitre" />
+    </ScrollView>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="87dp">
+
+        <TextView
+            android:text="@string/inputEnigmeOrdi"
+            android:textSize="50sp"
+            android:textColor="@color/back"
+            android:layout_gravity="center_vertical"
+            android:textAlignment="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TextViewInput"
+            android:layout_weight="0.85" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="77dp"
+            android:inputType="textPersonName"
+            android:textSize="35sp"
+            android:ems="10"
+            android:id="@+id/editTextClavier"
+            android:layout_weight="0.85" />
+
+        <ImageButton
+            android:layout_width="67dp"
+            android:layout_height="63dp"
+            android:scaleType="fitXY"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/enterarrow"
+            android:id="@+id/imgBtnEnter"
+            android:contentDescription="@string/level1_enigmeOrdi_imgBtn"
+            android:layout_weight="0.01" />
+
+    </LinearLayout>
+
+</LinearLayout>

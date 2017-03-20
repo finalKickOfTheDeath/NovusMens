@@ -2,54 +2,34 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:weightSum="1"
     android:background="@drawable/backgroundl1"
-    android:orientation="vertical">
+    android:weightSum="1">
 
+    <ProgressBar
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="331dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:id="@+id/progressBarDegat"
+        android:layout_marginTop="60dp"
+        android:scaleY="5" />
 
-    <ScrollView
+    <TextView
+        android:text="TextView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.38">
+        android:layout_height="wrap_content"
+        android:id="@+id/txtPassword" />
 
-        <TextView
-            android:text="@string/descEnigmeOrdi"
-            android:textColor="@color/white"
-            android:textSize="25sp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView" />
-    </ScrollView>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="87dp">
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="77dp"
-            android:inputType="textPersonName"
-            android:text="@string/inputEnigmeOrdi"
-            android:textSize="35sp"
-            android:ems="10"
-            android:id="@+id/editTextClavier"
-            android:layout_weight="0.85" />
-
-        <ImageButton
-            android:layout_width="67dp"
-            android:layout_height="63dp"
-            android:scaleType="fitXY"
-            android:layout_gravity="center"
-            app:srcCompat="@drawable/enterarrow"
-            android:id="@+id/imageButton"
-            android:contentDescription="@string/level1_enigmeOrdi_imgBtn"
-            android:layout_weight="0.01" />
-
-    </LinearLayout>
+    <ImageButton
+        android:layout_width="223dp"
+        android:layout_height="226dp"
+        app:srcCompat="@drawable/clickerordi"
+        android:layout_marginTop="50dp"
+        android:id="@+id/imgBtnCrane"
+        android:scaleType="fitXY"
+        android:layout_gravity="center"
+        android:background="@android:color/transparent"/>
 
 </LinearLayout>

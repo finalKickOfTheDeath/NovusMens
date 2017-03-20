@@ -33,6 +33,21 @@ public class Menu extends AppCompatActivity {
         getSupportActionBar().hide(); // cache la barre de menu
 
         sharedPreferences = getBaseContext().getSharedPreferences(PREFS,MODE_PRIVATE);
+
+        findViewById(R.id.btnJouer).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                commencer(v);
+            }
+        });
+
+        findViewById(R.id.btnReset).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                reset(v);
+            }
+        });
+
     }
 
     protected void commencer(View view){

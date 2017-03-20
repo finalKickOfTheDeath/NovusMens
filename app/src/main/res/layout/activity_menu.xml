@@ -19,7 +19,7 @@
         android:text="Novus Mens"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView"
+        android:id="@+id/txtTitre"
         android:textColorHighlight="@color/colorPrimaryDark"
         android:textColor="@android:color/background_light"
         android:width="120dp"
@@ -30,32 +30,30 @@
         android:layout_marginRight="28dp"
         android:layout_marginEnd="28dp"
         android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/button1"
-        android:layout_alignEnd="@+id/button1" />
+        android:layout_alignRight="@+id/btnJouer"
+        android:layout_alignEnd="@+id/btnJouer" />
 
     <Button
-        android:text="Button"
+        android:text="Reset"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:id="@+id/button2"
-        android:onClick="reset"
-        android:layout_below="@+id/button1"
-        android:layout_alignLeft="@+id/button1"
-        android:layout_alignStart="@+id/button1" />
+        android:id="@+id/btnReset"
+        android:layout_below="@+id/btnJouer"
+        android:layout_alignLeft="@+id/btnJouer"
+        android:layout_alignStart="@+id/btnJouer" />
 
     <Button
         android:text="Jouer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/button1"
+        android:id="@+id/btnJouer"
         android:elevation="0dp"
-        android:onClick="commencer"
         android:background="@android:color/background_light"
         android:layout_marginRight="13dp"
         android:layout_marginEnd="13dp"
         android:layout_marginTop="43dp"
-        android:layout_below="@+id/textView"
+        android:layout_below="@+id/txtTitre"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:scaleX="1"
