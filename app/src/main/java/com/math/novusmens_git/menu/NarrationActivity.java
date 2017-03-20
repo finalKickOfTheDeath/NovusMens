@@ -45,6 +45,18 @@ public class NarrationActivity extends AppCompatActivity {
         //Add a character every 150ms
         intro.setCharacterDelay(100);
         intro.animateText(text[0]);
+
+        findViewById(R.id.activity_narration).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    suite(v);
+                } catch (InterruptedException ie) {
+                    Log.i("catch", ie.toString());
+                }
+            }
+        });
+
     }
 
     protected void suite(View view) throws InterruptedException {

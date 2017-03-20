@@ -11,8 +11,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.math.novusmens_git.menu.NarrationActivity"
     android:background="@android:color/black"
-    android:clickable="true"
-    android:onClick="suite">
+    android:clickable="true">
 
     <ImageView
         android:layout_width="wrap_content"
