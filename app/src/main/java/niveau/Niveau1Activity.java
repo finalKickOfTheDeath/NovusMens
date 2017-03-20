@@ -54,5 +54,16 @@ public class Niveau1Activity extends AppCompatActivity {
         });
 
     }
+    protected void onActivityResult (int requestCode, int resultCode, Intent data) {
+        // on récupère le statut de retour de l'activité 2 c'est à dire l'activité numéro 1000
+        //if(requestCode==1000){
+            // si le code de retour est égal à 1 on stoppe l'activité 1
+            if(resultCode==1){
+                finish();
+            }
+       // }
+        super.onActivityResult (requestCode, resultCode, data);
+    }
+
 
 }
