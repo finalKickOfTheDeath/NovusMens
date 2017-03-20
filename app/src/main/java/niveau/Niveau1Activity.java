@@ -9,6 +9,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.math.novusmens_git.R;
+import com.math.novusmens_git.menu.Menu;
 
 import enigme.EnigmeJarresActivity;
 import enigme.EnigmeOrdi;
