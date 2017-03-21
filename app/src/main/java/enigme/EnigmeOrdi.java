@@ -1,5 +1,6 @@
 package enigme;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import com.math.novusmens_git.R;
 
 import niveau.IEnigme;
+import niveau.Niveau1Activity;
 
 
 public class EnigmeOrdi extends AppCompatActivity implements IEnigme {
@@ -64,6 +66,9 @@ public class EnigmeOrdi extends AppCompatActivity implements IEnigme {
                         Log.d("text", "On est là dans le if");
                         estResolue();
                         Toast.makeText(getApplicationContext(), "Enigme résolue !", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(v.getContext(), Niveau1Activity.class);
+                        startActivity(intent);
+                        finish();
                     }
                 }
             });

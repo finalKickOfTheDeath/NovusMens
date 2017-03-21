@@ -13,12 +13,13 @@ import android.widget.Toast;
 
 import com.math.novusmens_git.R;
 
+import enigme.EnigmeOrdi;
 import niveau.Niveau1Activity;
 
 public class Menu extends AppCompatActivity {
     SharedPreferences sharedPreferences;
-    private static final String PREFS = "PREFS";
-    private static final String PREF_AGE = "PREFS_AGE";
+    private static final String JOUEUR = "JOUEUR";
+    private static final String PREF_PTEMPS = "PREFS_TEMSP";
     private static final String PREFS_NAME = "PREFS_NAME";
 
     @Override
@@ -32,7 +33,7 @@ public class Menu extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
         getSupportActionBar().hide(); // cache la barre de menu
 
-        sharedPreferences = getBaseContext().getSharedPreferences(PREFS,MODE_PRIVATE);
+        sharedPreferences = getBaseContext().getSharedPreferences(JOUEUR,MODE_PRIVATE);
 
         findViewById(R.id.btnJouer).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,16 +55,20 @@ public class Menu extends AppCompatActivity {
         //Intent intent = new Intent(this, NarrationActivity.class);
         //startActivity(intent);
         //this.onStop();
-        if(sharedPreferences.contains(PREF_AGE) && sharedPreferences.contains(PREFS_NAME)){
-            int age = sharedPreferences.getInt(PREF_AGE,0);
-            String name = sharedPreferences.getString(PREFS_NAME,null);
+        if(sharedPreferences.contains(PREF_PTEMPS)){ //&& sharedPreferences.contains(PREFS_NAME)
+            int time = sharedPreferences.getInt(PREF_PTEMPS,0);
+            //Création du joueur
+            Joueur j = new Joueur(time);
+            //String name = sharedPreferences.getString(PREFS_NAME,null);
             //Toast.makeText(this,"Bonjour " + name + ", vous avez " + age +"ans",Toast.LENGTH_LONG).show();
-            Toast.makeText(this, "Une partie à déja été commencé. Nous sommes toujours en développement", Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(this, Niveau1Activity.class);
+            Toast.makeText(this, "Une partie à déja été commencé. Nous sommes toujours en développement", Toast.LENGTH_SHORT).show();
+            //Intent intent = new Intent(this, Niveau1Activity.class);
+            Intent intent = new Intent(this, EnigmeOrdi.class);
             startActivity(intent);
         }
         else { // si aucune information n'est trouvées, on en ajoute un
-            sharedPreferences.edit().putInt(PREF_AGE, 20).putString(PREFS_NAME, "Alexis").apply();
+            sharedPreferences.edit().putInt(PREF_PTEMPS, 20).apply(); //.putString(PREFS_NAME, "Alexis")
+            Joueur j = new Joueur(20);
             //Toast.makeText(this, "Nous avons sauvegarder vos informations. Redémarrer pour mettre a jour", Toast.LENGTH_LONG).show();
 
             Intent intent = new Intent(this, NarrationActivity.class);
@@ -73,7 +78,7 @@ public class Menu extends AppCompatActivity {
     }
 
     protected void reset(View view){
-        sharedPreferences.edit().remove(PREF_AGE).remove(PREFS_NAME).apply();
+        sharedPreferences.edit().remove(PREF_PTEMPS).apply(); //.remove(PREFS_NAME)
         Toast.makeText(this, "Vous avez réinitialisé votre partie. Amusez-vous bien !", Toast.LENGTH_LONG).show();
     }
 
@@ -86,6 +91,12 @@ public class Menu extends AppCompatActivity {
     @Override
     protected void onResume(){
         super.onResume();
+        if(Joueur.getTimePoint()>-1){
+            sharedPreferences.edit().putInt(PREF_PTEMPS, Joueur.getTimePoint()).apply();
+        }
+        if(Joueur.getTimePoint()<=0){
+            sharedPreferences.edit().remove(PREF_PTEMPS).apply();
+        }
         Log.i("iut","je suis dans onResume");
     }
 

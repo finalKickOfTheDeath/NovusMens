@@ -4,11 +4,14 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.math.novusmens_git.R;
+import com.math.novusmens_git.menu.Joueur;
 import com.math.novusmens_git.menu.Menu;
 
 import enigme.EnigmeJarresActivity;
@@ -37,6 +40,8 @@ public class Niveau1Activity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
+                Joueur.move();
+                Log.i("iut","Vous avez actuellement " + Joueur.getTimePoint() + " points de temps");
                 Intent intent = new Intent(v.getContext(), EnigmeJarresActivity.class);
                 intent.putExtra("EXTRA_MESSAGE", "contenu additionnel pour l'énigme jarres");
                 startActivity(intent);
@@ -47,14 +52,25 @@ public class Niveau1Activity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
+                Joueur.move();
+                Log.i("iut","Vous avez actuellement " + Joueur.getTimePoint() + " points de temps");
                 Intent intent = new Intent(v.getContext(), EnigmeOrdi.class);
                 intent.putExtra("EXTRA_MESSAGE", "contenu additionnel pour l'énigme ordi");
                 startActivity(intent);
             }
         });
-
+        Toast.makeText(this, "Vous avez actuellement " + Joueur.getTimePoint() + " points de temps", Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        Toast.makeText(this, "Vous avez actuellement " + Joueur.getTimePoint() + " points de temps", Toast.LENGTH_SHORT).show();
+    }
+
     protected void onActivityResult (int requestCode, int resultCode, Intent data) {
+
+        Log.i("iut","Je suis dans onActivityResult ");
         // on récupère le statut de retour de l'activité 2 c'est à dire l'activité numéro 1000
         //if(requestCode==1000){
             // si le code de retour est égal à 1 on stoppe l'activité 1

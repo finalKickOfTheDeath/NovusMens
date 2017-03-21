@@ -34,6 +34,10 @@ public class EnigmeJarresActivity extends AppCompatActivity implements IEnigme {
                     donneur.getTextView().setText(donneur.toString());
                     receveur.getTextView().setText(receveur.toString());
                     reset();
+                    if(estResolue()){
+                        Toast.makeText(getApplicationContext(), "Enigme résolue", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
                 } catch (VaseVideException e) {
                     Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
                     Log.d("toast", "toastvide");
@@ -67,6 +71,10 @@ public class EnigmeJarresActivity extends AppCompatActivity implements IEnigme {
                     donneur.getTextView().setText(donneur.toString());
                     receveur.getTextView().setText(receveur.toString());
                     reset();
+                    if(estResolue()){
+                        Toast.makeText(getApplicationContext(), "Enigme résolue", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
                 } catch (VaseVideException e) {
                     Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
                     Log.d("toast", "toastvide");
@@ -100,6 +108,10 @@ public class EnigmeJarresActivity extends AppCompatActivity implements IEnigme {
                     donneur.getTextView().setText(donneur.toString());
                     receveur.getTextView().setText(receveur.toString());
                     reset();
+                    if(estResolue()){
+                        Toast.makeText(getApplicationContext(), "Enigme résolue", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
                 } catch (VaseVideException e) {
                     Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
                     Log.d("toast", "toastvide");
