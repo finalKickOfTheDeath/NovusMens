@@ -29,10 +29,10 @@ public class NarrationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_narration);
         Intent intent = getIntent();
         getSupportActionBar().hide();
-        text[0]="A l'aube de ce nouveau siècle, le monde que nous connaissons à disparu...";
-        text[1]="L'Homme, en se développant, est devenu avide de pouvoir et à précipiter le monde dans une période de guerre...";
-        text[2]="Les Etats se montant les uns contre les autres, on finit par comettre l'irréparable...";
-        text[3]="Causant la fin de la civilisation humaine.";
+        text[0]="Ne rentre pas docilement dans cette douce nuit";//"A l'aube de ce nouveau siècle, le monde que nous connaissons à disparu...";
+        text[1]="Le vieil âge doit gronder, tempêter, au déclin du jour";//"L'Homme, en se développant, est devenu avide de pouvoir et à précipiter le monde dans une période de guerre...";
+        text[2]="Hurler, s'enrager, à l'agonie de la lumière";//"Les Etats se montant les uns contre les autres, on finit par comettre l'irréparable...";
+        text[3]="Le temps t'es compté, ne l'oublie pas !";//"Causant la fin de la civilisation humaine.";
         numero = 0;
         intro = (TypeWriter) findViewById(R.id.typeWriter);
         /*RelativeLayout r = (RelativeLayout) findViewById(R.id.activity_narration);
