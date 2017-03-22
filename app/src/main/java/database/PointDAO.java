@@ -4,7 +4,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.util.Log;
 
-import com.math.test_2.niveau.Point;
+import niveau.Point;
+
 
 /**
  * Created by Math on 22/03/2017.
