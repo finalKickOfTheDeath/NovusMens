@@ -8,7 +8,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".menu.Menu">
+        <activity android:name=".menu.MenuActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,7 +17,7 @@
         </activity>
         <activity android:name=".menu.NarrationActivity"></activity>
         <activity android:name="niveau.Niveau1Activity"></activity>
-        <activity android:name="enigme.EnigmeOrdi"></activity>
+        <activity android:name="enigme.EnigmeOrdiActivity"></activity>
         <activity android:name="enigme.EnigmeJarresActivity"></activity>
     </application>
 

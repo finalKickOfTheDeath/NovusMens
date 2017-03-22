@@ -31,7 +31,7 @@ import niveau.Point;
 import personnage.Joueur;
 
 
-public class EnigmeOrdi extends AppCompatActivity implements IEnigme {
+public class EnigmeOrdiActivity extends AppCompatActivity implements IEnigme {
 
     private final static String PASSWORD = "AnimusRoot12";
     private final static int NUM_NIVEAU = 1;
@@ -133,6 +133,17 @@ public class EnigmeOrdi extends AppCompatActivity implements IEnigme {
             Log.d("data", "point de temps : " + last.getPointTemps());
             Log.d("data", "numNiveau : " + last.getNumNiveau());
         }
+        //on update la sauvegarde
+        SimpleDateFormat format = new SimpleDateFormat("dd MMM yyyy", Locale.FRANCE);
+        String now = format.format(new Date().getTime());
+        last.setDate(now);
+        last.setPointTemps(Joueur.getTimePoint());
+        sauvegardeDAO.update(last);
+        Log.d("data", "ce qu'il y a dans la sauvegarde update");
+        Log.d("data", "id : " + last.getId());
+        Log.d("data", "date : " + last.getDate());
+        Log.d("data", "point de temps : " + last.getPointTemps());
+        Log.d("data", "numNiveau : " + last.getNumNiveau());
         //on recupere la liste de point
         PointDAO pointDAO = new PointDAO(this);
         pointDAO.open();

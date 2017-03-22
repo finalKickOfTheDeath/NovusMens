@@ -14,7 +14,7 @@ import com.math.novusmens_git.R;
 import personnage.Joueur;
 
 import enigme.EnigmeJarresActivity;
-import enigme.EnigmeOrdi;
+import enigme.EnigmeOrdiActivity;
 
 public class Niveau1Activity extends AppCompatActivity {
     // on met le package d'où provient l'intent
@@ -53,7 +53,7 @@ public class Niveau1Activity extends AppCompatActivity {
             public void onClick(View v) {
                 Joueur.move();
                 Log.i("iut","Vous avez actuellement " + Joueur.getTimePoint() + " points de temps");
-                Intent intent = new Intent(v.getContext(), EnigmeOrdi.class);
+                Intent intent = new Intent(v.getContext(), EnigmeOrdiActivity.class);
                 intent.putExtra("EXTRA_MESSAGE", "contenu additionnel pour l'énigme ordi");
                 startActivity(intent);
             }

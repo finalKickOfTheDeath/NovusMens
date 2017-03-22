@@ -33,6 +33,14 @@ public class SauvegardeDAO extends DAOBase {
         getDatabase().delete(DatabaseHandler.TABLE_NAME_SAVE, DatabaseHandler.SAVE_ID + " = ?", new String[] {String.valueOf(id)});
     }
 
+    public void update(Sauvegarde s) {
+        ContentValues value = new ContentValues();
+        value.put(DatabaseHandler.SAVE_DATE, s.getDate());
+        value.put(DatabaseHandler.SAVE_PT, s.getPointTemps());
+        getDatabase().update(DatabaseHandler.TABLE_NAME_SAVE, value, DatabaseHandler.SAVE_ID  + " = ?", new String[] {String.valueOf(s.getId())});
+
+    }
+
     public Sauvegarde selectionSave() {
         //obtenir la dernière sauvegarde
         Cursor cursor = getDatabase().rawQuery("SELECT " + DatabaseHandler.SAVE_ID + " AS _id, "

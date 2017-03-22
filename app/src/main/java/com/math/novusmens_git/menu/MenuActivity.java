@@ -13,18 +13,12 @@ import android.widget.Toast;
 
 import com.math.novusmens_git.R;
 
-import java.util.ArrayList;
-
-import database.PointDAO;
 import database.Sauvegarde;
 import database.SauvegardeDAO;
-import enigme.EnigmeOrdi;
-import niveau.Niveau;
 import niveau.Niveau1Activity;
-import niveau.Point;
 import personnage.Joueur;
 
-public class Menu extends AppCompatActivity {
+public class MenuActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     private static final String JOUEUR = "JOUEUR";
     private static final String PREF_PTEMPS = "PREFS_TEMSP";
@@ -97,7 +91,7 @@ public class Menu extends AppCompatActivity {
             //Toast.makeText(this,"Bonjour " + name + ", vous avez " + age +"ans",Toast.LENGTH_LONG).show();
             Toast.makeText(this, "Une partie à déja été commencé. Nous sommes toujours en développement", Toast.LENGTH_SHORT).show();
             //Intent intent = new Intent(this, Niveau1Activity.class);
-            Intent intent = new Intent(this, EnigmeOrdi.class);
+            Intent intent = new Intent(this, EnigmeOrdiActivity.class);
             startActivity(intent);
         }
         else { // si aucune information n'est trouvées, on en ajoute un
