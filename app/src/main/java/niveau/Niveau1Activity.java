@@ -28,7 +28,7 @@ public class Niveau1Activity extends AppCompatActivity {
         // pour mettre l'activité en fullscreen
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.niveau1);
+        setContentView(R.layout.activity_niveau1);
         //forcer l'orientation en mode paysage
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         // cacher l'action bar

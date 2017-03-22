@@ -13,7 +13,15 @@ import android.widget.Toast;
 
 import com.math.novusmens_git.R;
 
+import java.util.ArrayList;
+
+import database.PointDAO;
+import database.Sauvegarde;
+import database.SauvegardeDAO;
 import enigme.EnigmeOrdi;
+import niveau.Niveau;
+import niveau.Niveau1Activity;
+import niveau.Point;
 import personnage.Joueur;
 
 public class Menu extends AppCompatActivity {
@@ -21,6 +29,7 @@ public class Menu extends AppCompatActivity {
     private static final String JOUEUR = "JOUEUR";
     private static final String PREF_PTEMPS = "PREFS_TEMSP";
     private static final String PREFS_NAME = "PREFS_NAME";
+    private static final int POINT_TEMPS_START = 12;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +64,31 @@ public class Menu extends AppCompatActivity {
         //Intent intent = new Intent(this, NarrationActivity.class);
         //startActivity(intent);
         //this.onStop();
+
+        //Recupération de la dernière sauvegarde dans la base de donnée si elle existe
+        SauvegardeDAO sauvegardeDAO = new SauvegardeDAO(this);
+        sauvegardeDAO.open();
+        Sauvegarde s = sauvegardeDAO.selectionSave();
+        if(s == null) {
+            //pas de sauvegarde existante
+            Log.d("data", "pas de sauvegarde recuperee --> nouvelle partie");
+            //creation du joueur
+            Joueur j = new Joueur(POINT_TEMPS_START);
+            sauvegardeDAO.close();
+            Intent intent = new Intent(this, NarrationActivity.class);
+            startActivity(intent);
+        }
+        else {
+            //on a recuperer la derniere sauvegarde
+            Log.d("data", "derniere sauvegarde recuperee --> reprendre partie");
+            //creation du joueur
+            Joueur j = new Joueur(s.getPointTemps());
+            Toast.makeText(this, "Une partie à déja été commencé. Nous sommes toujours en développement", Toast.LENGTH_SHORT).show();
+            sauvegardeDAO.close();
+            Intent intent = new Intent(this, Niveau1Activity.class);
+            startActivity(intent);
+        }
+        /*
         if(sharedPreferences.contains(PREF_PTEMPS)){ //&& sharedPreferences.contains(PREFS_NAME)
             int time = sharedPreferences.getInt(PREF_PTEMPS,0);
             //Création du joueur
@@ -75,10 +109,16 @@ public class Menu extends AppCompatActivity {
             startActivity(intent);
             //this.onStop();
         }
+        */
     }
 
     protected void reset(View view){
-        sharedPreferences.edit().remove(PREF_PTEMPS).apply(); //.remove(PREFS_NAME)
+        //on reset la base de donnée
+        SauvegardeDAO sauvegardeDAO = new SauvegardeDAO(this);
+        sauvegardeDAO.open();
+        sauvegardeDAO.reset();
+        sauvegardeDAO.close();
+        //sharedPreferences.edit().remove(PREF_PTEMPS).apply(); //.remove(PREFS_NAME)
         Toast.makeText(this, "Vous avez réinitialisé votre partie. Amusez-vous bien !", Toast.LENGTH_LONG).show();
     }
 
@@ -104,5 +144,9 @@ public class Menu extends AppCompatActivity {
     protected void onStop(){
         super.onStop();
         Log.i("iut","je suis dans onStop");
+    }
+
+    private void initBase() {
+
     }
 }

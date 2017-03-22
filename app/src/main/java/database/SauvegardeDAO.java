@@ -37,7 +37,7 @@ public class SauvegardeDAO extends DAOBase {
         //obtenir la dernière sauvegarde
         Cursor cursor = getDatabase().rawQuery("SELECT " + DatabaseHandler.SAVE_ID + " AS _id, "
                                                          + DatabaseHandler.SAVE_DATE + ", "
-                                                         +  DatabaseHandler.SAVE_PT + ", "
+                                                         + DatabaseHandler.SAVE_PT + ", "
                                                          + DatabaseHandler.SAVE_NIVEAU + " from "
                                                          + DatabaseHandler.TABLE_NAME_SAVE
                                                          + " ORDER BY " + DatabaseHandler.SAVE_ID
@@ -53,6 +53,7 @@ public class SauvegardeDAO extends DAOBase {
             s = new Sauvegarde(id, date, pointTemps, numNiveau);
         }
         cursor.close();
+        Log.d("data", "on a selectionner la derniere sauvegarde");
         return s;
     }
 

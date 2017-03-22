@@ -28,6 +28,10 @@ public abstract class DAOBase {
         database.close();
     }
 
+    public void reset() {
+        dbHandler.reset(database);
+    }
+
     public SQLiteDatabase getDatabase() {
         return database;
     }

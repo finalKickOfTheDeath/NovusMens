@@ -11,11 +11,15 @@ public class Sauvegarde {
     private int pointTemps;
     private int numNiveau;
 
-    public Sauvegarde(long id, String date, int pointTemps, int numNiveau) {
-        this.id = id;
+    public Sauvegarde(String date, int pointTemps, int numNiveau) {
         this.date = date;
         this.pointTemps = pointTemps;
         this.numNiveau = numNiveau;
+    }
+
+    public Sauvegarde(long id, String date, int pointTemps, int numNiveau) {
+        this(date, pointTemps, numNiveau);
+        this.id = id;
     }
 
     public long getId() {
