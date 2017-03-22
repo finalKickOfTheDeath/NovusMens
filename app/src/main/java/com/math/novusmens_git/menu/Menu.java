@@ -14,7 +14,7 @@ import android.widget.Toast;
 import com.math.novusmens_git.R;
 
 import enigme.EnigmeOrdi;
-import niveau.Niveau1Activity;
+import personnage.Joueur;
 
 public class Menu extends AppCompatActivity {
     SharedPreferences sharedPreferences;

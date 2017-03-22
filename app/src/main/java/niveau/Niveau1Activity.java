@@ -11,8 +11,7 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.math.novusmens_git.R;
-import com.math.novusmens_git.menu.Joueur;
-import com.math.novusmens_git.menu.Menu;
+import personnage.Joueur;
 
 import enigme.EnigmeJarresActivity;
 import enigme.EnigmeOrdi;

@@ -1,6 +1,6 @@
 package com.math.novusmens_git.joueur;
 
-import com.math.novusmens_git.menu.Joueur;
+import personnage.Joueur;
 
 import org.junit.Test;
 

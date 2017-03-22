@@ -1,0 +1,61 @@
+package database;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.util.Log;
+
+import com.math.test_2.niveau.Point;
+
+import java.util.ArrayList;
+
+/**
+ * Created by Math on 22/03/2017.
+ */
+
+public class PossedePointDAO extends DAOBase{
+
+    public PossedePointDAO(Context pContext) {
+        super(pContext);
+    }
+
+    public void ajouter(long id_sauv, long id_point) {
+        //ajouter une sauvegarde à la base
+        ContentValues value = new ContentValues();
+        value.put(DatabaseHandler.SAVE_ID, id_sauv);
+        value.put(DatabaseHandler.POINT_ID, id_point);
+
+        //on insere une nouvelle entrée dans la base
+        getDatabase().insert(DatabaseHandler.TABLE_NAME_POSSEDEPOINT, null, value);
+        Log.d("data", "insersion dans la table possedepoint");
+    }
+
+    public ArrayList<Point> selectionSave(Sauvegarde s) {
+        //obtenir la liste de point de la sauvegarde
+        Cursor cursor = getDatabase().rawQuery("SELECT p1." + DatabaseHandler.POINT_ID + " AS _id, "
+                + "p1." + DatabaseHandler.POINT_RESOLU + " from "
+                + DatabaseHandler.TABLE_NAME_POINT + " p1 , "
+                + DatabaseHandler.TABLE_NAME_POSSEDEPOINT + " p2 "
+                + " WHERE p2." + DatabaseHandler.SAVE_ID + "=?", new String[]{String.valueOf(s.getId())});
+
+        ArrayList<Point> points = new ArrayList<Point>();
+
+        while (cursor.moveToNext()) {
+            long id = cursor.getLong(0);
+            int resolu = cursor.getInt(1);
+
+            boolean estResolu;
+            if(resolu == 1) {
+                estResolu = true;
+            }
+            else {
+                estResolu = false;
+            }
+            Point p = new Point(id, estResolu);
+            points.add(p);
+        }
+        cursor.close();
+        return points;
+    }
+
+}

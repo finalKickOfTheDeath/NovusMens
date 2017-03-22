@@ -1,4 +1,4 @@
-package com.math.novusmens_git.menu;
+package personnage;
 
 import java.util.ArrayList;
 
@@ -7,6 +7,7 @@ import java.util.ArrayList;
  */
 
 public class Joueur {
+
     private static int timePoint; // number of time points of the player
     private static ArrayList<String> object; // List of player's object
 
