@@ -1,4 +1,4 @@
-package personnage;
+package com.math.novusmens_git.personnage;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package enigme;
+package com.math.novusmens_git.enigme;
 
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -20,22 +20,22 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
-import database.PointDAO;
-import database.PossedePointDAO;
-import database.Sauvegarde;
-import database.SauvegardeDAO;
-import niveau.IEnigme;
-import niveau.Niveau;
-import niveau.Niveau1Activity;
-import niveau.Point;
-import personnage.Joueur;
+import com.math.novusmens_git.database.PointDAO;
+import com.math.novusmens_git.database.PossedePointDAO;
+import com.math.novusmens_git.database.Sauvegarde;
+import com.math.novusmens_git.database.SauvegardeDAO;
+import com.math.novusmens_git.niveau.IEnigme;
+import com.math.novusmens_git.niveau.Niveau;
+import com.math.novusmens_git.niveau.Niveau1Activity;
+import com.math.novusmens_git.niveau.Point;
+import com.math.novusmens_git.personnage.Joueur;
 
 
 public class EnigmeOrdiActivity extends AppCompatActivity implements IEnigme {
 
     private final static String PASSWORD = "AnimusRoot12";
-    private final static int NUM_NIVEAU = 1;
-    private final static int NUM_ENGME = 0;
+    private final static int NUM_NIVEAU = R.integer.level1;
+    private final static int NUM_ENGME = R.integer.level1_enigmeOrdinateur;
     private boolean mdpFind = false;
 
     @Override

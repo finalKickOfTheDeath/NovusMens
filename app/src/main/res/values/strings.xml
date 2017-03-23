@@ -30,4 +30,13 @@
     <string name="capacite10l">Max = 10L</string>
     <string name="capacite7l">Max = 7L</string>
     <string name="capacite3l">Max = 3L</string>
+
+    <string name="pointPNJ_dialogStart">Futile créature, tu viens troubler mon agonie. J\'ai souffert bien plus que tu ne pourras jamais imaginer.</string>
+    <string name="pointPNJ_btnAgree1">Je te comprends</string>
+    <string name="pointPNJ_btnDisagree1">Je ne devrais pas rester là</string>
+    <string name="pointPNJ_dialogProposition">Tu crois pouvoir m\'aider ? Pff...tss. Dans ce cas, retrouve l\'âme que l\'humain m\'a volé.</string>
+    <string name="pointPNJ_btnAgree2">J\'accepte</string>
+    <string name="pointPNJ_btnDisagree2">Je ne peux pas</string>
+    <string name="pointPNJ_dialogEnd">Grrr...il fait froid dans ce temps gris</string>
+
 </resources>

@@ -11,8 +11,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.math.novusmens_git.R;
-
-import enigme.EnigmeOrdiActivity;
+import com.math.novusmens_git.enigme.EnigmeOrdiActivity;
 
 public class NarrationActivity extends AppCompatActivity {
     private String[] text = new String[4];
@@ -66,7 +65,7 @@ public class NarrationActivity extends AppCompatActivity {
             //getRessource.getString
             ImageView img = (ImageView) findViewById(R.id.imageView);
             img.setImageResource(R.drawable.desert);
-            if(numero>3) {
+            if(numero > 3) {
                 //Intent intent = new Intent(this, Niveau1Activity.class);
                 Intent intent = new Intent(this, EnigmeOrdiActivity.class);
                 startActivity(intent);

@@ -1,4 +1,4 @@
-package database;
+package com.math.novusmens_git.database;
 
 /**
  * Created by Math on 20/03/2017.

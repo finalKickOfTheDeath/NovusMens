@@ -1,4 +1,4 @@
-package niveau;
+package com.math.novusmens_git.niveau;
 
 import android.util.Log;
 

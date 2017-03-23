@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <integer name="level1">1</integer>
+
+    <integer name="level1_enigmeNarrative1">0</integer>
+    <integer name="level1_enigmeRacine">1</integer>
+    <integer name="level1_enigmePNJ">2</integer>
+    <integer name="level1_enigmeJarre">3</integer>
+    <integer name="level1_enigmeSortie">4</integer>
+    <integer name="level1_enigmeOrdinateur">5</integer>
+    <integer name="level1_enigmeNarrative2">6</integer>
+    <integer name="level1_enigmePointBloque">7</integer>
+    <integer name="level1_enigmeBloc">8</integer>
+    <integer name="level1_enigmeNarrative3">9</integer>
+
+</resources>

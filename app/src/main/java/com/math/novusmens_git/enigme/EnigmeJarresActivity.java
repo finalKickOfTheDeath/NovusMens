@@ -1,4 +1,4 @@
-package enigme;
+package com.math.novusmens_git.enigme;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -9,15 +9,15 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import database.PointDAO;
-import database.PossedePointDAO;
-import database.Sauvegarde;
-import database.SauvegardeDAO;
-import exceptionEnigme.VaseDéjàPleinException;
-import exceptionEnigme.VaseVideException;
-import niveau.IEnigme;
-import niveau.Point;
-import personnage.Joueur;
+import com.math.novusmens_git.database.PointDAO;
+import com.math.novusmens_git.database.PossedePointDAO;
+import com.math.novusmens_git.database.Sauvegarde;
+import com.math.novusmens_git.database.SauvegardeDAO;
+import com.math.novusmens_git.exceptionEnigme.VaseDéjàPleinException;
+import com.math.novusmens_git.exceptionEnigme.VaseVideException;
+import com.math.novusmens_git.niveau.IEnigme;
+import com.math.novusmens_git.niveau.Point;
+import com.math.novusmens_git.personnage.Joueur;
 
 import com.math.novusmens_git.R;
 
@@ -30,7 +30,7 @@ import java.util.Locale;
 public class EnigmeJarresActivity extends AppCompatActivity implements IEnigme {
 
     private final static int NUM_NIVEAU = 1;
-    private final static int NUM_ENGME = 1;
+    private final static int NUM_ENGME = R.integer.level1_enigmeJarre;
 
     private View.OnClickListener onClickListenerButton10l = new View.OnClickListener() {
         @Override

@@ -1,4 +1,4 @@
-package niveau;
+package com.math.novusmens_git.niveau;
 
 /**
  * Created by Math on 05/02/2017.
