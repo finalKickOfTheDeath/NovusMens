@@ -1,9 +1,9 @@
-package enigme;
+package com.math.novusmens_git.enigme;
 
 import android.widget.TextView;
 
-import exceptionEnigme.VaseDéjàPleinException;
-import exceptionEnigme.VaseVideException;
+import com.math.novusmens_git.exceptionEnigme.VaseDéjàPleinException;
+import com.math.novusmens_git.exceptionEnigme.VaseVideException;
 
 
 /**

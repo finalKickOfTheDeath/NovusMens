@@ -5,9 +5,9 @@ package com.math.novusmens_git.enigme;
 import org.junit.Before;
 import org.junit.Test;
 
-import enigme.Vase;
-import exceptionEnigme.VaseDéjàPleinException;
-import exceptionEnigme.VaseVideException;
+import com.math.novusmens_git.enigme.Vase;
+import com.math.novusmens_git.exceptionEnigme.VaseDéjàPleinException;
+import com.math.novusmens_git.exceptionEnigme.VaseVideException;
 
 import static org.junit.Assert.assertEquals;
 

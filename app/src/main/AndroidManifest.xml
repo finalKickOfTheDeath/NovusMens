@@ -15,10 +15,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".menu.NarrationActivity"></activity>
-        <activity android:name="niveau.Niveau1Activity"></activity>
-        <activity android:name="enigme.EnigmeOrdiActivity"></activity>
-        <activity android:name="enigme.EnigmeJarresActivity"></activity>
+        <activity android:name=".menu.NarrationActivity" />
+        <activity android:name=".niveau.Niveau1Activity" />
+        <activity android:name="com.math.novusmens_git.enigme.EnigmeOrdiActivity" />
+        <activity android:name="com.math.novusmens_git.enigme.EnigmeJarresActivity" />
+        <activity android:name=".niveau.PointPNJActivity"></activity>
     </application>
 
 </manifest>

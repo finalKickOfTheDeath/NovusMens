@@ -1,4 +1,4 @@
-package personnage;
+package com.math.novusmens_git.personnage;
 
 /**
  * Created by Math on 21/03/2017.

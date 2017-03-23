@@ -1,4 +1,4 @@
-package database;
+package com.math.novusmens_git.database;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -7,7 +7,7 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
-import personnage.Item;
+import com.math.novusmens_git.personnage.Item;
 
 
 /**

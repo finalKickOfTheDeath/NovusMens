@@ -3,8 +3,8 @@ package com.math.novusmens_git.enigme;
 import org.junit.Before;
 import org.junit.Test;
 
-import enigme.EnigmeJarresActivity;
-import enigme.Vase;
+import com.math.novusmens_git.enigme.EnigmeJarresActivity;
+import com.math.novusmens_git.enigme.Vase;
 
 import static junit.framework.Assert.assertEquals;
 

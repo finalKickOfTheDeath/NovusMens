@@ -1,4 +1,4 @@
-package exceptionEnigme;
+package com.math.novusmens_git.exceptionEnigme;
 
 /**
  * Created by Math on 05/02/2017.

@@ -1,4 +1,4 @@
-package database;
+package com.math.novusmens_git.database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
