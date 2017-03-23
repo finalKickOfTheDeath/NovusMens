@@ -3,6 +3,7 @@ package com.math.novusmens_git.enigme;
 import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -15,8 +16,9 @@ import com.math.novusmens_git.personnage.Item;
 
 public class EnigmePNJActivity extends AppCompatActivity implements IEnigme {
 
-    private final static int NUM_ENGME = R.integer.level1_enigmePNJ;
-    private static int etape = 1;
+    private int numNiveau;
+    private int numEnigme;
+    private int etape = 1;
     private Item ame1;
     private Item ame2;
 
@@ -33,6 +35,11 @@ public class EnigmePNJActivity extends AppCompatActivity implements IEnigme {
         if(getSupportActionBar() != null)
             getSupportActionBar().hide();
         setContentView(R.layout.activity_point_pnj);
+
+        numEnigme= getResources().getInteger(R.integer.level1_enigmePNJ);
+        numNiveau = getResources().getInteger(R.integer.level1);
+        Log.d("data", "num niveau devrait être 1 il est : " + numNiveau);
+        Log.d("data", "num enigme devrait être 5 il est : " + numEnigme);
 
 
         findViewById(R.id.btnAgree).setOnClickListener(new View.OnClickListener() {
