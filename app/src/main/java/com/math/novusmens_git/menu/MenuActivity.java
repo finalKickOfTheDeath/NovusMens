@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import com.math.novusmens_git.R;
 
+import java.io.IOException;
+
 import database.Sauvegarde;
 import database.SauvegardeDAO;
 import niveau.Niveau1Activity;
@@ -25,6 +27,8 @@ public class MenuActivity extends AppCompatActivity {
     private static final String PREF_PTEMPS = "PREFS_TEMSP";
     private static final String PREFS_NAME = "PREFS_NAME";
     private static final int POINT_TEMPS_START = 12;
+    final String EXTRA_MUSIQUE = "musique";
+    MediaPlayer player;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,11 +58,8 @@ public class MenuActivity extends AppCompatActivity {
         });
 
         //Test pour musique
-        MediaPlayer player;
         player = MediaPlayer.create(this, R.raw.pjs4);
         player.setVolume(100, 100);
-        player.start();
-
     }
 
     protected void commencer(View view){
@@ -77,6 +78,7 @@ public class MenuActivity extends AppCompatActivity {
             Joueur j = new Joueur(POINT_TEMPS_START);
             sauvegardeDAO.close();
             Intent intent = new Intent(this, NarrationActivity.class);
+            intent.putExtra(EXTRA_MUSIQUE,player.getCurrentPosition()); //sauvegarde la position courrante de la musique
             startActivity(intent);
         }
         else {
@@ -87,6 +89,7 @@ public class MenuActivity extends AppCompatActivity {
             Toast.makeText(this, "Une partie à déja été commencé. Nous sommes toujours en développement", Toast.LENGTH_SHORT).show();
             sauvegardeDAO.close();
             Intent intent = new Intent(this, Niveau1Activity.class);
+            intent.putExtra(EXTRA_MUSIQUE,player.getCurrentPosition()); //sauvegarde la position courrante de la musique
             startActivity(intent);
         }
         /*
@@ -126,6 +129,10 @@ public class MenuActivity extends AppCompatActivity {
     @Override
     protected void onPause(){
         super.onPause();
+        if(player != null){
+            player.release();
+            player=null;
+        }
         Log.i("iut","je suis dans onPause");
     }
 
@@ -138,6 +145,12 @@ public class MenuActivity extends AppCompatActivity {
         if(Joueur.getTimePoint()<=0){
             sharedPreferences.edit().remove(PREF_PTEMPS).apply();
         }
+        if(player == null) {
+            player = MediaPlayer.create(this, R.raw.pjs4);
+            player.setVolume(100, 100);
+        }
+        player.start();
+        player.setLooping(true);
         Log.i("iut","je suis dans onResume");
     }
 
@@ -145,6 +158,16 @@ public class MenuActivity extends AppCompatActivity {
     protected void onStop(){
         super.onStop();
         Log.i("iut","je suis dans onStop");
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        if(player != null){
+            player.release();
+            player=null;
+        }
+        Log.i("iut","je suis dans onDestroy");
     }
 
     private void initBase() {

@@ -2,6 +2,7 @@ package com.math.novusmens_git.menu;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,6 +20,8 @@ public class NarrationActivity extends AppCompatActivity {
     private int[] image = new int[4];
     private int numero;
     private TypeWriter intro;
+    final String EXTRA_MUSIQUE = "musique";
+    MediaPlayer player;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +31,11 @@ public class NarrationActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_narration);
         Intent intent = getIntent();
+        if(intent != null){
+            player = MediaPlayer.create(this, R.raw.pjs4);
+            player.setVolume(100, 100);
+            player.seekTo(intent.getIntExtra(EXTRA_MUSIQUE,0));
+        }
         getSupportActionBar().hide();
         text[0]="N'entre pas docilement dans cette douce nuit";//"A l'aube de ce nouveau siècle, le monde que nous connaissons à disparu...";
         text[1]="Le vieil âge doit gronder, tempêter, au déclin du jour";//"L'Homme, en se développant, est devenu avide de pouvoir et à précipiter le monde dans une période de guerre...";
@@ -64,6 +72,31 @@ public class NarrationActivity extends AppCompatActivity {
 
     }
 
+    protected void onResume(){
+        super.onResume();
+        if(player == null){
+            player = MediaPlayer.create(this, R.raw.pjs4);
+            player.setVolume(100, 100);
+        }
+        player.start();
+        player.setLooping(true);
+    }
+
+    protected void onPause(){
+        super.onPause();
+        player.stop();
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        if(player != null){
+            player.release();
+            player=null;
+        }
+        Log.i("iut","je suis dans onDestroy");
+    }
+
     protected void suite(View view) throws InterruptedException {
         Log.i("iut","Le texte est fini ? " + intro.isEnded());
         if(intro.isEnded()){
@@ -74,6 +107,7 @@ public class NarrationActivity extends AppCompatActivity {
             if(numero>3) {
                 //Intent intent = new Intent(this, Niveau1Activity.class);
                 Intent intent = new Intent(this, EnigmeOrdiActivity.class);
+                intent.putExtra(EXTRA_MUSIQUE,player.getCurrentPosition()); //sauvegarde la position courrante de la musique
                 startActivity(intent);
                 finish();
             }
