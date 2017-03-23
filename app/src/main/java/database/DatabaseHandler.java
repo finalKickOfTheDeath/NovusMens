@@ -3,6 +3,7 @@ package database;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 /**
  * Created by Math on 21/03/2017.
@@ -25,7 +26,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public static final String ITEM_NOM = "nom";
 
     //nom des tables
-    public static final String TABLE_NAME_SAVE = "save";
+    public static final String TABLE_NAME_SAVE = "sauvegarde";
     public static final String TABLE_NAME_POINT = "point";
     public static final String TABLE_NAME_ITEM = "item";
     public static final String TABLE_NAME_POSSEDEPOINT = "possedePoint";
@@ -58,19 +59,19 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String CREATE_TABLE_POSSEDEPOINT =
         "CREATE TABLE " + TABLE_NAME_POSSEDEPOINT
         + " ("
-        + SAVE_ID + " INTEGER PRIMARY KEY, "
-        + POINT_ID + " INTEGER PRIMARY KEY, "
-        + "FOREIGN KEY(" + SAVE_ID + ") REFERENCES " + TABLE_NAME_SAVE + "(" + SAVE_ID + ") ON DELETE CASCADE"
-        + "FOREIGN KEY(" + POINT_ID + ") REFERENCES " + TABLE_NAME_POINT + "(" + POINT_ID + ") ON DELETE CASCADE"
+        + SAVE_ID + " INTEGER, "
+        + POINT_ID + " INTEGER, "
+        + "FOREIGN KEY(" + SAVE_ID + ") REFERENCES " + TABLE_NAME_SAVE + "(" + SAVE_ID + ") ON DELETE CASCADE, "
+        + "FOREIGN KEY(" + POINT_ID + ") REFERENCES " + TABLE_NAME_POINT + "(" + POINT_ID + ") ON DELETE CASCADE "
         + ");";
 
     private static final String CREATE_TABLE_POSSEDEITEM =
         "CREATE TABLE " + TABLE_NAME_POSSEDEITEM
         + " ("
-        + SAVE_ID + " INTEGER PRIMARY KEY, "
-        + ITEM_ID + " INTEGER PRIMARY KEY, "
-        + "FOREIGN KEY(" + SAVE_ID + ") REFERENCES " + TABLE_NAME_SAVE + "(" + SAVE_ID + ") ON DELETE CASCADE"
-        + "FOREIGN KEY(" + ITEM_ID + ") REFERENCES " + TABLE_NAME_ITEM + "(" + ITEM_ID + ") ON DELETE CASCADE"
+        + SAVE_ID + " INTEGER, "
+        + ITEM_ID + " INTEGER, "
+        + "FOREIGN KEY(" + SAVE_ID + ") REFERENCES " + TABLE_NAME_SAVE + "(" + SAVE_ID + ") ON DELETE CASCADE, "
+        + "FOREIGN KEY(" + ITEM_ID + ") REFERENCES " + TABLE_NAME_ITEM + "(" + ITEM_ID + ") ON DELETE CASCADE "
         + ");";
 
     //drop table
@@ -91,10 +92,20 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_ITEM);
         db.execSQL(CREATE_TABLE_POSSEDEPOINT);
         db.execSQL(CREATE_TABLE_POSSEDEITEM);
+        Log.d("data", "tables créees");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL(DROP_TABLE_SAVE);
+        db.execSQL(DROP_TABLE_POINT);
+        db.execSQL(DROP_TABLE_ITEM);
+        db.execSQL(DROP_TABLE_POSSEDEPOINT);
+        db.execSQL(DROP_TABLE_POSSEDEITEM);
+        onCreate(db);
+    }
+
+    public void reset(SQLiteDatabase db) {
         db.execSQL(DROP_TABLE_SAVE);
         db.execSQL(DROP_TABLE_POINT);
         db.execSQL(DROP_TABLE_ITEM);

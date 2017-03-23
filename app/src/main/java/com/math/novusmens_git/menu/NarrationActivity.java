@@ -12,8 +12,7 @@ import android.widget.ImageView;
 
 import com.math.novusmens_git.R;
 
-import enigme.EnigmeOrdi;
-import niveau.Niveau1Activity;
+import enigme.EnigmeOrdiActivity;
 
 public class NarrationActivity extends AppCompatActivity {
     private String[] text = new String[4];
@@ -74,7 +73,7 @@ public class NarrationActivity extends AppCompatActivity {
             //img.setImageResource(R.drawable.desert);
             if(numero>3) {
                 //Intent intent = new Intent(this, Niveau1Activity.class);
-                Intent intent = new Intent(this, EnigmeOrdi.class);
+                Intent intent = new Intent(this, EnigmeOrdiActivity.class);
                 startActivity(intent);
                 finish();
             }

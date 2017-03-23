@@ -14,7 +14,7 @@ import com.math.novusmens_git.R;
 import personnage.Joueur;
 
 import enigme.EnigmeJarresActivity;
-import enigme.EnigmeOrdi;
+import enigme.EnigmeOrdiActivity;
 
 public class Niveau1Activity extends AppCompatActivity {
     // on met le package d'où provient l'intent
@@ -28,7 +28,7 @@ public class Niveau1Activity extends AppCompatActivity {
         // pour mettre l'activité en fullscreen
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.niveau1);
+        setContentView(R.layout.activity_niveau1);
         //forcer l'orientation en mode paysage
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         // cacher l'action bar
@@ -53,7 +53,7 @@ public class Niveau1Activity extends AppCompatActivity {
             public void onClick(View v) {
                 Joueur.move();
                 Log.i("iut","Vous avez actuellement " + Joueur.getTimePoint() + " points de temps");
-                Intent intent = new Intent(v.getContext(), EnigmeOrdi.class);
+                Intent intent = new Intent(v.getContext(), EnigmeOrdiActivity.class);
                 intent.putExtra("EXTRA_MESSAGE", "contenu additionnel pour l'énigme ordi");
                 startActivity(intent);
             }

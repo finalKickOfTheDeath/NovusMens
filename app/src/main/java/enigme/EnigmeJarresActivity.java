@@ -9,14 +9,28 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import database.PointDAO;
+import database.PossedePointDAO;
+import database.Sauvegarde;
+import database.SauvegardeDAO;
 import exceptionEnigme.VaseDéjàPleinException;
 import exceptionEnigme.VaseVideException;
 import niveau.IEnigme;
+import niveau.Point;
+import personnage.Joueur;
 
 import com.math.novusmens_git.R;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+
 
 public class EnigmeJarresActivity extends AppCompatActivity implements IEnigme {
+
+    private final static int NUM_NIVEAU = 1;
+    private final static int NUM_ENGME = 1;
 
     private View.OnClickListener onClickListenerButton10l = new View.OnClickListener() {
         @Override
@@ -198,6 +212,52 @@ public class EnigmeJarresActivity extends AppCompatActivity implements IEnigme {
     @Override
     public boolean estResolue() {
         return (vase10l.getContenance() == CONTENANCE_FINALE && vase7l.getContenance() == CONTENANCE_FINALE);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //sauvegarde de l'état du jeu
+        SauvegardeDAO sauvegardeDAO = new SauvegardeDAO(this);
+        sauvegardeDAO.open();
+        Sauvegarde last = sauvegardeDAO.selectionSave();
+        Log.d("data", "ce qu'il y a dans la dernière sauvegarde");
+        Log.d("data", "id : " + last.getId());
+        Log.d("data", "date : " + last.getDate());
+        Log.d("data", "point de temps : " + last.getPointTemps());
+        Log.d("data", "numNiveau : " + last.getNumNiveau());
+        //on met a jour cette sauvegarde
+        SimpleDateFormat format = new SimpleDateFormat("dd MMM yyyy", Locale.FRANCE);
+        String now = format.format(new Date().getTime());
+        last.setDate(now);
+        last.setPointTemps(Joueur.getTimePoint());
+        sauvegardeDAO.update(last);
+        Log.d("data", "ce qu'il y a dans la sauvegarde update");
+        Log.d("data", "id : " + last.getId());
+        Log.d("data", "date : " + last.getDate());
+        Log.d("data", "point de temps : " + last.getPointTemps());
+        Log.d("data", "numNiveau : " + last.getNumNiveau());
+        sauvegardeDAO.close();
+        //on recupere la liste de point
+        PointDAO pointDAO = new PointDAO(this);
+        pointDAO.open();
+        ArrayList<Point> points = pointDAO.selectionner();
+        Log.d("data", "ce qu'il y a dans la liste de point");
+        for(int i = 0; i < points.size(); i++) {
+            Log.d("data", "point : " + points.get(i).getId() + " resolu = " + points.get(i).isResolu());
+        }
+        pointDAO.close();
+        //on insert le point resolu
+        if(estResolue()) {
+            PossedePointDAO possedePointDAO = new PossedePointDAO(this);
+            possedePointDAO.open();
+            possedePointDAO.ajouter(last.getId(), points.get(NUM_ENGME).getId());
+            Log.d("data", "liste des points resolus");
+            ArrayList<Point> pointsResolus = possedePointDAO.selectionner(last);
+            for (int j = 0; j < pointsResolus.size(); j++) {
+                Log.d("data", "point : " + pointsResolus.get(j).getId());
+            }
+        }
     }
 
     //utilisée pour les tests
