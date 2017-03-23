@@ -17,6 +17,7 @@ import niveau.Niveau1Activity;
 
 public class NarrationActivity extends AppCompatActivity {
     private String[] text = new String[4];
+    private int[] image = new int[4];
     private int numero;
     private TypeWriter intro;
 
@@ -29,10 +30,14 @@ public class NarrationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_narration);
         Intent intent = getIntent();
         getSupportActionBar().hide();
-        text[0]="Ne rentre pas docilement dans cette douce nuit";//"A l'aube de ce nouveau siècle, le monde que nous connaissons à disparu...";
+        text[0]="N'entre pas docilement dans cette douce nuit";//"A l'aube de ce nouveau siècle, le monde que nous connaissons à disparu...";
         text[1]="Le vieil âge doit gronder, tempêter, au déclin du jour";//"L'Homme, en se développant, est devenu avide de pouvoir et à précipiter le monde dans une période de guerre...";
         text[2]="Hurler, s'enrager, à l'agonie de la lumière";//"Les Etats se montant les uns contre les autres, on finit par comettre l'irréparable...";
         text[3]="Le temps t'es compté, ne l'oublie pas !";//"Causant la fin de la civilisation humaine.";
+        image[0] = R.drawable.desert;
+        image[1] = R.drawable.desert;
+        image[2] = R.drawable.bombe_h;
+        image[3] = R.drawable.bombe_h;
         numero = 0;
         intro = (TypeWriter) findViewById(R.id.typeWriter);
         /*RelativeLayout r = (RelativeLayout) findViewById(R.id.activity_narration);
@@ -66,7 +71,7 @@ public class NarrationActivity extends AppCompatActivity {
             numero++;
             //getRessource.getString
             ImageView img = (ImageView) findViewById(R.id.imageView);
-            img.setImageResource(R.drawable.desert);
+            //img.setImageResource(R.drawable.desert);
             if(numero>3) {
                 //Intent intent = new Intent(this, Niveau1Activity.class);
                 Intent intent = new Intent(this, EnigmeOrdi.class);
@@ -74,6 +79,7 @@ public class NarrationActivity extends AppCompatActivity {
                 finish();
             }
             else {
+                img.setImageResource(image[numero]);
                 intro.setCharacterDelay(100);
                 intro.animateText(text[numero]);
                 //t.startAnimation(AnimationUtils.loadAnimation(Level1Activity.this,android.R.anim.fade_in));

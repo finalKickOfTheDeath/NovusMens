@@ -3,6 +3,7 @@ package com.math.novusmens_git.menu;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -48,6 +49,12 @@ public class Menu extends AppCompatActivity {
                 reset(v);
             }
         });
+
+        //Test pour musique
+        MediaPlayer player;
+        player = MediaPlayer.create(this, R.raw.pjs4);
+        player.setVolume(100, 100);
+        player.start();
 
     }
 

@@ -5,9 +5,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
 
-import com.math.test_2.personnage.Item;
+
 
 import java.util.ArrayList;
+
+import personnage.Item;
 
 /**
  * Created by Math on 22/03/2017.
