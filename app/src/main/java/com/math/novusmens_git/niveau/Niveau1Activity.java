@@ -11,11 +11,16 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.math.novusmens_git.R;
+import com.math.novusmens_git.enigme.EnigmeBlocsActivity;
 import com.math.novusmens_git.enigme.EnigmeDesertMagnetiqueActivity;
 import com.math.novusmens_git.enigme.EnigmeJarresActivity;
+import com.math.novusmens_git.enigme.EnigmeMaisonAbandonneeActivity;
 import com.math.novusmens_git.enigme.EnigmeOrdiActivity;
 import com.math.novusmens_git.enigme.EnigmePNJActivity;
 import com.math.novusmens_git.enigme.EnigmePluiesAcidesActivity;
+import com.math.novusmens_git.enigme.EnigmeRacines;
+import com.math.novusmens_git.enigme.EnigmePointBloqueActivity;
+import com.math.novusmens_git.enigme.EnigmeSortie;
 import com.math.novusmens_git.personnage.Joueur;
 
 public class Niveau1Activity extends AppCompatActivity {
@@ -36,6 +41,28 @@ public class Niveau1Activity extends AppCompatActivity {
         // cacher l'action bar
         if(getSupportActionBar() != null)
             getSupportActionBar().hide();
+
+        findViewById(R.id.btn1_narrationMaisonAbandonnee).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Joueur.move();
+                Log.i("data", "Vous avez actuellement " + Joueur.getTimePoint() + " points de temps");
+                Intent intent = new Intent(v.getContext(), EnigmeMaisonAbandonneeActivity.class);
+                intent.putExtra("EXTRA_MESSAGE", "contenu additionnel pour l'énigme maison abandonnee");
+                startActivity(intent);
+            }
+        });
+
+        findViewById(R.id.btn2_enigmeRacine).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Joueur.move();
+                Log.i("data", "Vous avez actuellement " + Joueur.getTimePoint() + " points de temps");
+                Intent intent = new Intent(v.getContext(), EnigmeRacines.class);
+                intent.putExtra("EXTRA_MESSAGE", "contenu additionnel pour l'énigme des racines");
+                startActivity(intent);
+            }
+        });
 
         findViewById(R.id.btn3_pnj).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +87,17 @@ public class Niveau1Activity extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.btn5_sortie).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Joueur.move();
+                Log.i("data", "Vous avez actuellement " + Joueur.getTimePoint() + " points de temps");
+                Intent intent = new Intent(v.getContext(), EnigmeSortie.class);
+                intent.putExtra("EXTRA_MESSAGE", "contenu additionnel pour l'énigme sortie");
+                startActivity(intent);
+            }
+        });
+
         findViewById(R.id.btn6_enigmeOrdi).setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -79,6 +117,28 @@ public class Niveau1Activity extends AppCompatActivity {
                 Log.i("data", "Vous avez actuellement " + Joueur.getTimePoint() + " points de temps");
                 Intent intent = new Intent(v.getContext(), EnigmeDesertMagnetiqueActivity.class);
                 intent.putExtra("EXTRA_MESSAGE", "contenu additionnel pour l'énigme desert magnetique");
+                startActivity(intent);
+            }
+        });
+
+        findViewById(R.id.btn8_pointBloqué).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Joueur.move();
+                Log.i("data", "Vous avez actuellement " + Joueur.getTimePoint() + " points de temps");
+                Intent intent = new Intent(v.getContext(), EnigmePointBloqueActivity.class);
+                intent.putExtra("EXTRA_MESSAGE", "contenu additionnel pour l'énigme point bloqué");
+                startActivity(intent);
+            }
+        });
+
+        findViewById(R.id.btn9_enigmeBloc).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Joueur.move();
+                Log.i("data", "Vous avez actuellement " + Joueur.getTimePoint() + " points de temps");
+                Intent intent = new Intent(v.getContext(), EnigmeBlocsActivity.class);
+                intent.putExtra("EXTRA_MESSAGE", "contenu additionnel pour l'énigme blocs");
                 startActivity(intent);
             }
         });

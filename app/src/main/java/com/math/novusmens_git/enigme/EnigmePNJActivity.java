@@ -39,7 +39,7 @@ public class EnigmePNJActivity extends AppCompatActivity implements IEnigme {
         numEnigme= getResources().getInteger(R.integer.level1_enigmePNJ);
         numNiveau = getResources().getInteger(R.integer.level1);
         Log.d("data", "num niveau devrait être 1 il est : " + numNiveau);
-        Log.d("data", "num enigme devrait être 5 il est : " + numEnigme);
+        Log.d("data", "num enigme devrait être 2 il est : " + numEnigme);
 
 
         findViewById(R.id.btnAgree).setOnClickListener(new View.OnClickListener() {

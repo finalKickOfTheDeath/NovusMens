@@ -21,7 +21,12 @@
         <activity android:name=".enigme.EnigmeJarresActivity" />
         <activity android:name=".enigme.EnigmePNJActivity" />
         <activity android:name=".enigme.EnigmePluiesAcidesActivity" />
-        <activity android:name=".enigme.EnigmeDesertMagnetiqueActivity"></activity>
+        <activity android:name=".enigme.EnigmeDesertMagnetiqueActivity" />
+        <activity android:name=".enigme.EnigmeRacines" />
+        <activity android:name=".enigme.EnigmePointBloqueActivity" />
+        <activity android:name=".enigme.EnigmeSortie" />
+        <activity android:name=".enigme.EnigmeBlocsActivity" />
+        <activity android:name=".enigme.EnigmeMaisonAbandonneeActivity"></activity>
     </application>
 
 </manifest>

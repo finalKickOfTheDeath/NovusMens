@@ -173,7 +173,7 @@ public class EnigmeJarresActivity extends AppCompatActivity implements IEnigme {
         numEnigme= getResources().getInteger(R.integer.level1_enigmeJarre);
         numNiveau = getResources().getInteger(R.integer.level1);
         Log.d("data", "num niveau devrait être 1 il est : " + numNiveau);
-        Log.d("data", "num enigme devrait être 5 il est : " + numEnigme);
+        Log.d("data", "num enigme devrait être 3 il est : " + numEnigme);
 
         text10l = (TextView)findViewById(R.id.textViewcontenance10l);
         text7l = (TextView)findViewById(R.id.textViewcontenance7l);

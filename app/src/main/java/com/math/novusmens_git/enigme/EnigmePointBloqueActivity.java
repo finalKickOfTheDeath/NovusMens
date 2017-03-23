@@ -6,7 +6,7 @@ import android.util.Log;
 
 import com.math.novusmens_git.R;
 
-public class EnigmeDesertMagnetiqueActivity extends AppCompatActivity {
+public class EnigmePointBloqueActivity extends AppCompatActivity {
 
     private int numNiveau;
     private int numEnigme;
@@ -14,12 +14,11 @@ public class EnigmeDesertMagnetiqueActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_enigme_desert_magnetique);
+        setContentView(R.layout.activity_point_bloque);
 
-        numEnigme= getResources().getInteger(R.integer.level1_enigmeNarrative2DesertMagnetique);
+        numEnigme= getResources().getInteger(R.integer.level1_enigmePointBloque);
         numNiveau = getResources().getInteger(R.integer.level1);
         Log.d("data", "num niveau devrait être 1 il est : " + numNiveau);
-        Log.d("data", "num enigme devrait être 6 il est : " + numEnigme);
-
+        Log.d("data", "num enigme devrait être 7 il est : " + numEnigme);
     }
 }
