@@ -19,7 +19,7 @@
         <activity android:name=".niveau.Niveau1Activity" />
         <activity android:name="com.math.novusmens_git.enigme.EnigmeOrdiActivity" />
         <activity android:name="com.math.novusmens_git.enigme.EnigmeJarresActivity" />
-        <activity android:name=".niveau.PointPNJActivity"></activity>
+        <activity android:name=".enigme.EnigmePNJActivity"></activity>
     </application>
 
 </manifest>

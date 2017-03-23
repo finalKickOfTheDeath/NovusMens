@@ -9,11 +9,11 @@ import java.util.ArrayList;
 public class Joueur {
 
     private static int timePoint; // number of time points of the player
-    private static ArrayList<String> object; // List of player's object
+    private static ArrayList<Item> object; // List of player's object
 
     public Joueur(int timePoint){
         this.timePoint = timePoint;
-        object = new ArrayList<String>();
+        object = new ArrayList<Item>();
     }
 
     public static int getTimePoint() {
@@ -28,12 +28,12 @@ public class Joueur {
         timePoint = timePoint/2;
     }
 
-    public ArrayList<String> getItems() {
+    public ArrayList<Item> getItems() {
         return object;
     }
 
-    public void win(String s) {
-        if(!object.contains(s))
-            object.add(s);
+    public void win(Item i) {
+        if(!object.contains(i))
+            object.add(i);
     }
 }

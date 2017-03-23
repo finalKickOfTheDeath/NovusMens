@@ -1,4 +1,4 @@
-package com.math.novusmens_git.niveau;
+package com.math.novusmens_git.enigme;
 
 import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
@@ -10,11 +10,15 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.math.novusmens_git.R;
+import com.math.novusmens_git.niveau.IEnigme;
+import com.math.novusmens_git.personnage.Item;
 
-public class PointPNJActivity extends AppCompatActivity {
+public class EnigmePNJActivity extends AppCompatActivity implements IEnigme {
 
     private final static int NUM_ENGME = R.integer.level1_enigmePNJ;
     private static int etape = 1;
+    private Item ame1;
+    private Item ame2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,4 +66,8 @@ public class PointPNJActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public boolean estResolue() {
+        return (ame1 != null && ame2 != null);
+    }
 }

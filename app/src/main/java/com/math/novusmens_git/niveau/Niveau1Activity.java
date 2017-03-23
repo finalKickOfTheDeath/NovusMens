@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.math.novusmens_git.R;
 import com.math.novusmens_git.enigme.EnigmeJarresActivity;
 import com.math.novusmens_git.enigme.EnigmeOrdiActivity;
+import com.math.novusmens_git.enigme.EnigmePNJActivity;
 import com.math.novusmens_git.personnage.Joueur;
 
 public class Niveau1Activity extends AppCompatActivity {
@@ -39,7 +40,7 @@ public class Niveau1Activity extends AppCompatActivity {
             public void onClick(View v) {
                 Joueur.move();
                 Log.i("data", "Vous avez actuellement " + Joueur.getTimePoint() + " points de temps");
-                Intent intent = new Intent(v.getContext(), PointPNJActivity.class);
+                Intent intent = new Intent(v.getContext(), EnigmePNJActivity.class);
                 intent.putExtra("EXTRA_MESSAGE", "contenu additionnel pour l'énigme pnj");
                 startActivity(intent);
             }
