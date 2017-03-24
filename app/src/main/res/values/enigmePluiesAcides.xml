@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="PA_Q1">Une lumière étrange brille au loin. Je dois me rendre de l\'autre côté de ces bâtiments, mais les pluies acides tombent à verse ! Comment faire ?</string>
+    <string name="PA_Q1_RG">Je sors quand même, ce parapluie tiendra !</string>
+    <string name="PA_Q1_RD">Je cherche un passage à couvert</string>
+
+    <string name="PA_Q2_G">J\'ai 1km à parcourir...</string>
+    <string name="PA_Q2_G_RG">Je cours le plus rapidement possible</string>
+    <string name="PA_Q2_G_RD">Je fais attention où je mets les pieds, au risque de rester plus longtemps à découvert</string>
+
+    <string name="PA_Q2_D">Deux choix s\'offrent à moi : un couloir obstrué ou les sous-sols plongés dans le noir...</string>
+    <string name="PA_Q2_D_RG">Je dégage cette pile de débris du couloir</string>
+    <string name="PA_Q2_D_RD">Je descends au sous-sol, au moins je suis sûr d\'être à couvert</string>
+
+
+    <string name="PA_Q3_G_G">Je trébuche et je lâche le parapluie qui tombe dans une flaque acide...</string>
+    <string name="PA_Q3_G_G_RG">Tant pis, je fonce !</string>
+    <string name="PA_Q3_G_G_RD">Je récupère le parapluie et je sprinte</string>
+
+    <string name="PA_Q3_G_D">Il me reste 250m à parcourir...</string>
+    <string name="PA_Q3_G_D_RG">Le parapluie est presque fichu, je le lâche et je sprinte</string>
+    <string name="PA_Q3_G_D_RD">Ca tiendra ! Je continue à faire attention</string>
+
+    <string name="PA_Q3_D_G">Le couloir est dégagé...</string>
+    <string name="PA_Q3_D_G_RG">J\'avance rapidement</string>
+    <string name="PA_Q3_D_G_RD">Au cas où, je prends le temps de dessiner un plan</string>
+
+    <string name="PA_Q3_D_D">Un couloir sombre s\'ouvre devant moi...</string>
+    <string name="PA_Q3_D_D_RG">Je cherches des piles de rechange pour ma torche, toute précaution est bonne à prendre</string>
+    <string name="PA_Q3_D_D_RD">La batterie de ma torche devrait largement suffire, ne perdons pas de temps !</string>
+
+    <string name="PA_Res_Q3_G_G_RG">Vous rendez votre dernier souffle à quelques pas du but, rongé par la pluie corrosive. RIP...</string>
+    <string name="PA_Res_Q3_G_G_RD">Votre parapluie est inutilisable, mais vous avez évité le pire. Bien joué, vous avez atteint votre but !</string>
+    <string name="PA_Res_Q3_G_D_RG">Dans votre course, vous avez trébuché et êtes tombé la tête la première dans une flaque corrosive. RIP...</string>
+    <string name="PA_Res_Q3_G_D_RD">Vous avez évité le pire de justesse ! Bien joué !</string>
+    <string name="PA_Res_Q3_D_G_RG">Le plafond s\'écroule juste après votre passage, quelle chance !</string>
+    <string name="PA_Res_Q3_D_G_RD">Vous auriez dû lever les yeux, vous auriez vu que le plafond allait s\'effondrer... Personne ne viendra vous chercher sous les décombres. RIP...</string>
+    <string name="PA_Res_Q3_D_D_RG">Après quelques heures d\'errances, vous trouvez une porte qui vous mène directement à destination. Bien joué !</string>
+    <string name="PA_Res_Q3_D_D_RD">Votre torche a rendu l\'âme alors que vous etiez déjà bien avancé. Vous errez à tâtons dans l\'obscurité jusqu\'à la fin de vos jours. RIP...</string>
+
+</resources>
