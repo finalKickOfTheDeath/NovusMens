@@ -34,4 +34,14 @@
         android:layout_marginBottom="96dp"
         android:id="@+id/typeWriter" />
 
+    <TextView
+        android:text="Toucher pour continuer"
+        android:textColor="@android:color/background_light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="37dp"
+        android:id="@+id/indication" />
+
 </RelativeLayout>

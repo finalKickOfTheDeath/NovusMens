@@ -32,6 +32,6 @@ public class EnigmeSortie extends Enigme {
 
     @Override
     public void resultat() {
-        //on passe au niveau suivant
+
     }
 }

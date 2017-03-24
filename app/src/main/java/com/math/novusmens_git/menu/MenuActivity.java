@@ -58,7 +58,7 @@ public class MenuActivity extends AppCompatActivity {
         });
 
         //Test pour musique
-        player = MediaPlayer.create(this, R.raw.pjs4);
+        player = MediaPlayer.create(this, R.raw.pjs4_menu);
         player.setVolume(100, 100);
     }
 
@@ -139,14 +139,18 @@ public class MenuActivity extends AppCompatActivity {
     @Override
     protected void onResume(){
         super.onResume();
-        if(Joueur.getTimePoint()>-1){
+        if(Joueur.getTimePoint()>0){
             sharedPreferences.edit().putInt(PREF_PTEMPS, Joueur.getTimePoint()).apply();
         }
         if(Joueur.getTimePoint()<=0){
-            sharedPreferences.edit().remove(PREF_PTEMPS).apply();
+            SauvegardeDAO sauvegardeDAO = new SauvegardeDAO(this);
+            sauvegardeDAO.open();
+            sauvegardeDAO.reset();
+            sauvegardeDAO.close();
+            //sharedPreferences.edit().remove(PREF_PTEMPS).apply();
         }
         if(player == null) {
-            player = MediaPlayer.create(this, R.raw.pjs4);
+            player = MediaPlayer.create(this, R.raw.pjs4_menu);
             player.setVolume(100, 100);
         }
         player.start();
