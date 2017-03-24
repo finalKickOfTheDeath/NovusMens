@@ -4,10 +4,11 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
@@ -25,18 +26,15 @@ import com.math.novusmens_git.database.PointDAO;
 import com.math.novusmens_git.database.PossedePointDAO;
 import com.math.novusmens_git.database.Sauvegarde;
 import com.math.novusmens_git.database.SauvegardeDAO;
-import com.math.novusmens_git.niveau.IEnigme;
 import com.math.novusmens_git.niveau.Niveau;
 import com.math.novusmens_git.niveau.Niveau1Activity;
 import com.math.novusmens_git.niveau.Point;
 import com.math.novusmens_git.personnage.Joueur;
 
 
-public class EnigmeOrdiActivity extends AppCompatActivity implements IEnigme {
+public class EnigmeOrdiActivity extends Enigme {
 
     private final static String PASSWORD = "AnimusRoot12";
-    private int numNiveau;
-    private int numEnigme;
     private boolean mdpFind = false;
     final String EXTRA_MUSIQUE = "musique";
     MediaPlayer player;
@@ -44,6 +42,9 @@ public class EnigmeOrdiActivity extends AppCompatActivity implements IEnigme {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // pour mettre l'activité en fullscreen
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_enigme_ordi);
         Intent intent = getIntent();
         if(intent != null){
@@ -58,10 +59,10 @@ public class EnigmeOrdiActivity extends AppCompatActivity implements IEnigme {
         int i = getResources().getConfiguration().orientation;
         Log.d("orientation", "" + i);
 
-        numEnigme= getResources().getInteger(R.integer.level1_enigmeOrdinateur);
-        numNiveau = getResources().getInteger(R.integer.level1);
-        Log.d("data", "num niveau devrait être 1 il est : " + numNiveau);
-        Log.d("data", "num enigme devrait être 5 il est : " + numEnigme);
+        setNumEnigme(getResources().getInteger(R.integer.level1_enigmeOrdinateur));
+        setNumNiveau(getResources().getInteger(R.integer.level1));
+        Log.d("data", "num niveau devrait être 1 il est : " + getNumNiveau());
+        Log.d("data", "num enigme devrait être 5 il est : " + getNumEnigme());
 
         if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             findViewById(R.id.txtPassword).setVisibility(View.INVISIBLE);
@@ -144,7 +145,7 @@ public class EnigmeOrdiActivity extends AppCompatActivity implements IEnigme {
             SimpleDateFormat format = new SimpleDateFormat("dd MMM yyyy", Locale.FRANCE);
             String now = format.format(new Date().getTime());
             //on insert la sauvegarde dans la base
-            sauvegardeDAO.ajouter(new Sauvegarde(now, Joueur.getTimePoint(), numNiveau));
+            sauvegardeDAO.ajouter(new Sauvegarde(now, Joueur.getTimePoint(), getNumNiveau()));
             last = sauvegardeDAO.selectionSave();
             Log.d("data", "ce qu'il y a dans la dernière sauvegarde");
             Log.d("data", "id : " + last.getId());
@@ -176,7 +177,7 @@ public class EnigmeOrdiActivity extends AppCompatActivity implements IEnigme {
         if(estResolue()) {
             PossedePointDAO possedePointDAO = new PossedePointDAO(this);
             possedePointDAO.open();
-            possedePointDAO.ajouter(last.getId(), points.get(numEnigme).getId());
+            possedePointDAO.ajouter(last.getId(), points.get(getNumEnigme()).getId());
             Log.d("data", "liste des points resolus");
             ArrayList<Point> pointsResolus = possedePointDAO.selectionner(last);
             for(int j = 0; j < pointsResolus.size(); j++) {

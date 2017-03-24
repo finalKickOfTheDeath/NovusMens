@@ -1,24 +1,31 @@
 package com.math.novusmens_git.enigme;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.math.novusmens_git.R;
 
-public class EnigmeRacines extends AppCompatActivity {
-
-    private int numNiveau;
-    private int numEnigme;
+public class EnigmeRacines extends Enigme {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_enigme_racines);
+        if(getSupportActionBar() != null)
+            getSupportActionBar().hide();
 
-        numEnigme= getResources().getInteger(R.integer.level1_enigmeRacine);
-        numNiveau = getResources().getInteger(R.integer.level1);
-        Log.d("data", "num niveau devrait être 1 il est : " + numNiveau);
-        Log.d("data", "num enigme devrait être 1 il est : " + numEnigme);
+        setNumEnigme(getResources().getInteger(R.integer.level1_enigmeRacine));
+        setNumNiveau(getResources().getInteger(R.integer.level1));
+        Log.d("data", "num niveau devrait être 1 il est : " + getNumNiveau());
+        Log.d("data", "num enigme devrait être 1 il est : " + getNumEnigme());
+    }
+
+    @Override
+    public boolean estResolue() {
+        return false;
     }
 }
