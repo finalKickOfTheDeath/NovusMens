@@ -2,6 +2,7 @@ package com.math.novusmens_git.enigme;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -37,11 +38,19 @@ public class EnigmeOrdiActivity extends AppCompatActivity implements IEnigme {
     private int numNiveau;
     private int numEnigme;
     private boolean mdpFind = false;
+    final String EXTRA_MUSIQUE = "musique";
+    MediaPlayer player;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enigme_ordi);
+        Intent intent = getIntent();
+        if(intent != null){
+            player = MediaPlayer.create(this, R.raw.pjs4);
+            player.setVolume(100, 100);
+            player.seekTo(intent.getIntExtra(EXTRA_MUSIQUE,0));
+        }
         //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         if(getSupportActionBar() != null) {
             getSupportActionBar().hide();
@@ -106,6 +115,10 @@ public class EnigmeOrdiActivity extends AppCompatActivity implements IEnigme {
     @Override
     protected void onResume() {
         super.onResume();
+        if(player != null) {
+            player.start();
+            player.setLooping(true);
+        }
         // Checks the orientation of the screen
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show();
@@ -118,6 +131,7 @@ public class EnigmeOrdiActivity extends AppCompatActivity implements IEnigme {
     protected void onPause() {
         Log.d("data", "on est dans onPause");
         super.onPause();
+        player.stop();
         //on sauvegarde l'état du jeu
         SauvegardeDAO sauvegardeDAO = new SauvegardeDAO(this);
         sauvegardeDAO.open();
@@ -177,6 +191,16 @@ public class EnigmeOrdiActivity extends AppCompatActivity implements IEnigme {
     protected void onStop() {
         super.onStop();
         Log.d("data", "on est dans onStop");
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        if(player != null){
+            player.release();
+            player=null;
+        }
+        Log.i("iut","je suis dans onDestroy");
     }
 
     @Override

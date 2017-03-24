@@ -2,6 +2,7 @@ package com.math.novusmens_git.niveau;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -26,12 +27,19 @@ import com.math.novusmens_git.personnage.Joueur;
 public class Niveau1Activity extends AppCompatActivity {
     // on met le package d'où provient l'intent
     public final static String EXTRA_MESSAGE = "com.math.novusmens_git.niveau.TOWARDENIGME";
+    final String EXTRA_MUSIQUE = "musique";
+    MediaPlayer player;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // on récupère l'intent qui a lancé l'activité
         Intent intent = getIntent();
+        if(intent != null){
+            player = MediaPlayer.create(this, R.raw.pjs4);
+            player.setVolume(100, 100);
+            player.seekTo(intent.getIntExtra(EXTRA_MUSIQUE,0));
+        }
         // pour mettre l'activité en fullscreen
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -160,7 +168,39 @@ public class Niveau1Activity extends AppCompatActivity {
     @Override
     protected void onResume(){
         super.onResume();
-        Toast.makeText(this, "Vous avez actuellement " + Joueur.getTimePoint() + " points de temps", Toast.LENGTH_SHORT).show();
+        if(Joueur.getTimePoint()<=0){
+            Toast.makeText(this, "Vous avez perdu", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+        else {
+            if (player == null) {
+                player = MediaPlayer.create(this, R.raw.pjs4);
+                player.setVolume(100, 100);
+            }
+            player.start();
+            player.setLooping(true);
+            Toast.makeText(this, "Vous avez actuellement " + Joueur.getTimePoint() + " points de temps", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        if(player != null){
+            player.release();
+            player=null;
+        }
+        Log.i("iut","je suis dans onPause");
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        if(player != null){
+            player.release();
+            player=null;
+        }
+        Log.i("iut","je suis dans onDestroy");
     }
 
     protected void onActivityResult (int requestCode, int resultCode, Intent data) {
