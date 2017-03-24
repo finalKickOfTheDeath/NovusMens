@@ -219,6 +219,11 @@ public class EnigmeJarresActivity extends Enigme {
     }
 
     @Override
+    public void resultat() {
+
+    }
+
+    @Override
     protected void onPause() {
         super.onPause();
         //sauvegarde de l'état du jeu

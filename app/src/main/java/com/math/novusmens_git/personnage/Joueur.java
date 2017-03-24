@@ -36,4 +36,15 @@ public class Joueur {
         if(!object.contains(i))
             object.add(i);
     }
+
+    public void winTimePoint(int quantite) {
+        timePoint += quantite;
+    }
+
+    public void looseTimePoint(int quantite) {
+        timePoint -= quantite;
+        if(timePoint < 0) {
+            timePoint = 0;
+        }
+    }
 }
