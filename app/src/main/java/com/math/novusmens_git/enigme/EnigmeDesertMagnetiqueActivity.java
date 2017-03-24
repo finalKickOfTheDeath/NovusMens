@@ -29,4 +29,9 @@ public class EnigmeDesertMagnetiqueActivity extends Enigme {
     public boolean estResolue() {
         return false;
     }
+
+    @Override
+    public void resultat() {
+
+    }
 }

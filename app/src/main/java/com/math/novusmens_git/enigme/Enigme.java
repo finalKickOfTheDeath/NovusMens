@@ -33,4 +33,10 @@ public abstract class Enigme extends AppCompatActivity implements IEnigme {
 
     public abstract void resultat();
 
+    public int giveRandomPointTemps() {
+        double r = Math.random();
+        r = (r * 10) / 2;
+        return (int) Math.round(r);
+    }
+
 }

@@ -226,4 +226,9 @@ public class EnigmeOrdiActivity extends Enigme {
         }
         pointDAO.close();
     }
+
+    @Override
+    public void resultat() {
+
+    }
 }
