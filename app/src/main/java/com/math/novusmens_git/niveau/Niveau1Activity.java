@@ -26,10 +26,9 @@ import com.math.novusmens_git.menu.NarrationActivity;
 import com.math.novusmens_git.personnage.Joueur;
 
 public class Niveau1Activity extends AppCompatActivity {
-    // on met le package d'où provient l'intent
-    public final static String EXTRA_MESSAGE = "com.math.novusmens_git.niveau.TOWARDENIGME";
-    final String EXTRA_MUSIQUE = "musique";
-    MediaPlayer player;
+    private final String EXTRA_MUSIQUE = "musique";
+    private MediaPlayer player;
+    private Joueur joueur;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +39,8 @@ public class Niveau1Activity extends AppCompatActivity {
             player = MediaPlayer.create(this, R.raw.pjs4_menu);
             player.setVolume(100, 100);
             player.seekTo(intent.getIntExtra(EXTRA_MUSIQUE,0));
+            joueur = intent.getExtras().getParcelable("joueur");
+            Log.d("intent", "joueur point temps : " + joueur.getTimePoint());
         }
         // pour mettre l'activité en fullscreen
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -54,10 +55,10 @@ public class Niveau1Activity extends AppCompatActivity {
         findViewById(R.id.btn1_narrationMaisonAbandonnee).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Joueur.move();
-                Log.i("data", "Vous avez actuellement " + Joueur.getTimePoint() + " points de temps");
+                joueur.move();
+                Log.i("data", "Vous avez actuellement " + joueur.getTimePoint() + " points de temps");
                 Intent intent = new Intent(v.getContext(), EnigmeMaisonAbandonneeActivity.class);
-                intent.putExtra("EXTRA_MESSAGE", "contenu additionnel pour l'énigme maison abandonnee");
+                intent.putExtra("joueur", joueur);
                 startActivity(intent);
             }
         });
@@ -65,10 +66,10 @@ public class Niveau1Activity extends AppCompatActivity {
         findViewById(R.id.btn2_enigmeRacine).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Joueur.move();
-                Log.i("data", "Vous avez actuellement " + Joueur.getTimePoint() + " points de temps");
+                joueur.move();
+                Log.i("data", "Vous avez actuellement " + joueur.getTimePoint() + " points de temps");
                 Intent intent = new Intent(v.getContext(), EnigmeRacines.class);
-                intent.putExtra("EXTRA_MESSAGE", "contenu additionnel pour l'énigme des racines");
+                intent.putExtra("joueur", joueur);
                 startActivity(intent);
             }
         });
@@ -76,10 +77,10 @@ public class Niveau1Activity extends AppCompatActivity {
         findViewById(R.id.btn3_pnj).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Joueur.move();
-                Log.i("data", "Vous avez actuellement " + Joueur.getTimePoint() + " points de temps");
+                joueur.move();
+                Log.i("data", "Vous avez actuellement " + joueur.getTimePoint() + " points de temps");
                 Intent intent = new Intent(v.getContext(), EnigmePNJActivity.class);
-                intent.putExtra("EXTRA_MESSAGE", "contenu additionnel pour l'énigme pnj");
+                intent.putExtra("joueur", joueur);
                 startActivity(intent);
             }
         });
@@ -88,10 +89,10 @@ public class Niveau1Activity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Joueur.move();
-                Log.i("data", "Vous avez actuellement " + Joueur.getTimePoint() + " points de temps");
+                joueur.move();
+                Log.i("data", "Vous avez actuellement " + joueur.getTimePoint() + " points de temps");
                 Intent intent = new Intent(v.getContext(), EnigmeJarresActivity.class);
-                intent.putExtra("EXTRA_MESSAGE", "contenu additionnel pour l'énigme jarres");
+                intent.putExtra("joueur", joueur);
                 startActivity(intent);
             }
         });
@@ -99,10 +100,10 @@ public class Niveau1Activity extends AppCompatActivity {
         findViewById(R.id.btn5_sortie).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Joueur.move();
-                Log.i("data", "Vous avez actuellement " + Joueur.getTimePoint() + " points de temps");
+                joueur.move();
+                Log.i("data", "Vous avez actuellement " + joueur.getTimePoint() + " points de temps");
                 Intent intent = new Intent(v.getContext(), EnigmeSortie.class);
-                intent.putExtra("EXTRA_MESSAGE", "contenu additionnel pour l'énigme sortie");
+                intent.putExtra("joueur", joueur);
                 startActivity(intent);
             }
         });
@@ -111,10 +112,10 @@ public class Niveau1Activity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Joueur.move();
-                Log.i("data", "Vous avez actuellement " + Joueur.getTimePoint() + " points de temps");
+                joueur.move();
+                Log.i("data", "Vous avez actuellement " + joueur.getTimePoint() + " points de temps");
                 Intent intent = new Intent(v.getContext(), EnigmeOrdiActivity.class);
-                intent.putExtra("EXTRA_MESSAGE", "contenu additionnel pour l'énigme ordi");
+                intent.putExtra("joueur", joueur);
                 startActivity(intent);
             }
         });
@@ -122,10 +123,10 @@ public class Niveau1Activity extends AppCompatActivity {
         findViewById(R.id.btn7_narrationDesertMagnetique).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Joueur.move();
-                Log.i("data", "Vous avez actuellement " + Joueur.getTimePoint() + " points de temps");
+                joueur.move();
+                Log.i("data", "Vous avez actuellement " + joueur.getTimePoint() + " points de temps");
                 Intent intent = new Intent(v.getContext(), EnigmeDesertMagnetiqueActivity.class);
-                intent.putExtra("EXTRA_MESSAGE", "contenu additionnel pour l'énigme desert magnetique");
+                intent.putExtra("joueur", joueur);
                 startActivity(intent);
             }
         });
@@ -133,10 +134,10 @@ public class Niveau1Activity extends AppCompatActivity {
         findViewById(R.id.btn8_pointBloqué).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Joueur.move();
-                Log.i("data", "Vous avez actuellement " + Joueur.getTimePoint() + " points de temps");
+                joueur.move();
+                Log.i("data", "Vous avez actuellement " + joueur.getTimePoint() + " points de temps");
                 Intent intent = new Intent(v.getContext(), EnigmePointBloqueActivity.class);
-                intent.putExtra("EXTRA_MESSAGE", "contenu additionnel pour l'énigme point bloqué");
+                intent.putExtra("joueur", joueur);
                 startActivity(intent);
             }
         });
@@ -144,10 +145,10 @@ public class Niveau1Activity extends AppCompatActivity {
         findViewById(R.id.btn9_enigmeBloc).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Joueur.move();
-                Log.i("data", "Vous avez actuellement " + Joueur.getTimePoint() + " points de temps");
+                joueur.move();
+                Log.i("data", "Vous avez actuellement " + joueur.getTimePoint() + " points de temps");
                 Intent intent = new Intent(v.getContext(), EnigmeBlocsActivity.class);
-                intent.putExtra("EXTRA_MESSAGE", "contenu additionnel pour l'énigme blocs");
+                intent.putExtra("joueur", joueur);
                 startActivity(intent);
             }
         });
@@ -155,21 +156,21 @@ public class Niveau1Activity extends AppCompatActivity {
         findViewById(R.id.btn10_narrationPluiesAcides).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Joueur.move();
-                Log.i("data", "Vous avez actuellement " + Joueur.getTimePoint() + " points de temps");
+                joueur.move();
+                Log.i("data", "Vous avez actuellement " + joueur.getTimePoint() + " points de temps");
                 Intent intent = new Intent(v.getContext(), EnigmePluiesAcidesActivity.class);
-                intent.putExtra("EXTRA_MESSAGE", "contenu additionnel pour l'énigme pluies acides");
+                intent.putExtra("joueur", joueur);
                 startActivity(intent);
             }
         });
 
-        Toast.makeText(this, "Vous avez actuellement " + Joueur.getTimePoint() + " points de temps", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Vous avez actuellement " + joueur.getTimePoint() + " points de temps", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     protected void onResume(){
         super.onResume();
-        if(Joueur.getTimePoint()<=0){
+        if(joueur.getTimePoint()<=0){
             Toast.makeText(this, "Vous avez perdu", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, NarrationActivity.class);
             startActivity(intent);
@@ -182,18 +183,21 @@ public class Niveau1Activity extends AppCompatActivity {
             }
             player.start();
             player.setLooping(true);
-            Toast.makeText(this, "Vous avez actuellement " + Joueur.getTimePoint() + " points de temps", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Vous avez actuellement " + joueur.getTimePoint() + " points de temps", Toast.LENGTH_SHORT).show();
         }
     }
 
     @Override
     protected void onPause(){
         super.onPause();
+        Log.i("iut","je suis dans onPause");
         if(player != null){
             player.release();
             player=null;
         }
-        Log.i("iut","je suis dans onPause");
+        Intent intent = getIntent();
+        intent.putExtra("joueur", joueur);
+        setResult(RESULT_OK, intent);
     }
 
     @Override
@@ -206,8 +210,7 @@ public class Niveau1Activity extends AppCompatActivity {
         Log.i("iut","je suis dans onDestroy");
     }
 
-    protected void onActivityResult (int requestCode, int resultCode, Intent data) {
-
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.i("iut","Je suis dans onActivityResult ");
         // on récupère le statut de retour de l'activité 2 c'est à dire l'activité numéro 1000
         //if(requestCode==1000){
@@ -216,7 +219,7 @@ public class Niveau1Activity extends AppCompatActivity {
                 finish();
             }
        // }
-        super.onActivityResult (requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
 

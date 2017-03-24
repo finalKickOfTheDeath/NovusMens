@@ -23,8 +23,9 @@ public class NarrationActivity extends AppCompatActivity {
     private int[] imageOver = new int[4];
     private int numero;
     private TypeWriter intro;
-    final String EXTRA_MUSIQUE = "musique";
-    MediaPlayer player;
+    private final String EXTRA_MUSIQUE = "musique";
+    private MediaPlayer player;
+    private Joueur joueur;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,15 @@ public class NarrationActivity extends AppCompatActivity {
             player = MediaPlayer.create(this, R.raw.pjs4_menu);
             player.setVolume(100, 100);
             player.seekTo(intent.getIntExtra(EXTRA_MUSIQUE,0));
+            Bundle bundle = intent.getExtras();
+            if(bundle != null && bundle.containsKey("joueur")) {
+                joueur = intent.getExtras().getParcelable("joueur");
+                Log.d("intent", "joueur point temps : " + joueur.getTimePoint());
+            }
+            else {
+                Log.d("intent", "le joueur est null narration");
+            }
+
         }
         getSupportActionBar().hide();
         text[0]="N'entre pas docilement dans cette douce nuit";//"A l'aube de ce nouveau siècle, le monde que nous connaissons à disparu...";
@@ -59,7 +69,7 @@ public class NarrationActivity extends AppCompatActivity {
         numero = 0;
         intro = (TypeWriter) findViewById(R.id.typeWriter);
         ImageView img = (ImageView) findViewById(R.id.imageView);
-        if(Joueur.getTimePoint()>0) {
+        if(joueur != null && joueur.getTimePoint() > 0) {
             img.setImageResource(image[numero]);
             intro.setCharacterDelay(100);
             intro.animateText(text[0]);
@@ -114,17 +124,18 @@ public class NarrationActivity extends AppCompatActivity {
             //getRessource.getString
             ImageView img = (ImageView) findViewById(R.id.imageView);
             //img.setImageResource(R.drawable.desert);
-            if(numero>3) {
+            if(numero > 3) {
                 //Intent intent = new Intent(this, Niveau1Activity.class);
-                if(Joueur.getTimePoint()>0) {
+                if(joueur != null && joueur.getTimePoint() > 0) {
                     Intent intent = new Intent(this, EnigmeOrdiActivity.class);
                     intent.putExtra(EXTRA_MUSIQUE, player.getCurrentPosition()); //sauvegarde la position courrante de la musique
+                    intent.putExtra("joueur", joueur);
                     startActivity(intent);
                 }
                 finish();
             }
             else {
-                if(Joueur.getTimePoint()>0) {
+                if(joueur != null && joueur.getTimePoint() > 0) {
                     img.setImageResource(image[numero]);
                     intro.setCharacterDelay(100);
                     intro.animateText(text[numero]);

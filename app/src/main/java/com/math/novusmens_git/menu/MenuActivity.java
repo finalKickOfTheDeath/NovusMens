@@ -22,13 +22,14 @@ import java.io.IOException;
 
 
 public class MenuActivity extends AppCompatActivity {
-    SharedPreferences sharedPreferences;
+    private SharedPreferences sharedPreferences;
     private static final String JOUEUR = "JOUEUR";
     private static final String PREF_PTEMPS = "PREFS_TEMSP";
-    private static final String PREFS_NAME = "PREFS_NAME";
+    //private static final String PREFS_NAME = "PREFS_NAME";
     private static final int POINT_TEMPS_START = 12;
-    final String EXTRA_MUSIQUE = "musique";
-    MediaPlayer player;
+    private final String EXTRA_MUSIQUE = "musique";
+    private MediaPlayer player;
+    private static final int RESULT_RETOUR = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,21 +76,23 @@ public class MenuActivity extends AppCompatActivity {
             //pas de sauvegarde existante
             Log.d("data", "pas de sauvegarde recuperee --> nouvelle partie");
             //creation du joueur
-            Joueur j = new Joueur(POINT_TEMPS_START);
+            Joueur joueur = new Joueur(POINT_TEMPS_START);
             sauvegardeDAO.close();
             Intent intent = new Intent(this, NarrationActivity.class);
             intent.putExtra(EXTRA_MUSIQUE,player.getCurrentPosition()); //sauvegarde la position courrante de la musique
+            intent.putExtra("joueur", joueur);
             startActivity(intent);
         }
         else {
             //on a recuperer la derniere sauvegarde
             Log.d("data", "derniere sauvegarde recuperee --> reprendre partie");
             //creation du joueur
-            Joueur j = new Joueur(s.getPointTemps());
+            Joueur joueur = new Joueur(s.getPointTemps());
             Toast.makeText(this, "Une partie à déja été commencé. Nous sommes toujours en développement", Toast.LENGTH_SHORT).show();
             sauvegardeDAO.close();
             Intent intent = new Intent(this, Niveau1Activity.class);
             intent.putExtra(EXTRA_MUSIQUE,player.getCurrentPosition()); //sauvegarde la position courrante de la musique
+            intent.putExtra("joueur", joueur);
             startActivity(intent);
         }
         /*
@@ -139,29 +142,38 @@ public class MenuActivity extends AppCompatActivity {
     @Override
     protected void onResume(){
         super.onResume();
+        /*
         if(Joueur.getTimePoint()>0){
             sharedPreferences.edit().putInt(PREF_PTEMPS, Joueur.getTimePoint()).apply();
         }
-        if(Joueur.getTimePoint()<=0){
-            SauvegardeDAO sauvegardeDAO = new SauvegardeDAO(this);
-            sauvegardeDAO.open();
-            sauvegardeDAO.reset();
-            sauvegardeDAO.close();
-            //sharedPreferences.edit().remove(PREF_PTEMPS).apply();
+        */
+        //gestion du game over ?
+        SauvegardeDAO sauvegardeDAO = new SauvegardeDAO(this);
+        sauvegardeDAO.open();
+        Sauvegarde s = sauvegardeDAO.selectionSave();
+        if(s != null) {
+            if(/*Joueur.getTimePoint()*/s.getPointTemps() <= 0){
+                //SauvegardeDAO sauvegardeDAO = new SauvegardeDAO(this);
+                //sauvegardeDAO.open();
+                sauvegardeDAO.reset();
+                //sauvegardeDAO.close();
+                //sharedPreferences.edit().remove(PREF_PTEMPS).apply();
+            }
         }
+        sauvegardeDAO.close();
         if(player == null) {
             player = MediaPlayer.create(this, R.raw.pjs4_menu);
             player.setVolume(100, 100);
         }
         player.start();
         player.setLooping(true);
-        Log.i("iut","je suis dans onResume");
+        Log.i("intent", "je suis dans onResume menu");
     }
 
     @Override
     protected void onStop(){
         super.onStop();
-        Log.i("iut","je suis dans onStop");
+        Log.i("intent", "je suis dans onStop menu");
     }
 
     @Override
@@ -171,10 +183,22 @@ public class MenuActivity extends AppCompatActivity {
             player.release();
             player=null;
         }
-        Log.i("iut","je suis dans onDestroy");
+        Log.i("intent", "je suis dans onDestroy menu");
     }
 
-    private void initBase() {
-
+    /*
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d("intent", "on est dans onActivityResult menu");
+        Log.d("intent", "requestCode = " + requestCode);
+        Log.d("intent", "resultCode = " + resultCode);
+        Log.d("intent", "RESULT_OK = " + RESULT_OK);
+        if(resultCode == RESULT_OK && requestCode == RESULT_RETOUR) {
+            Log.d("intent", "on est dans le if");
+            Joueur j = data.getExtras().getParcelable("joueur");
+            Log.d("intent", "point de temps : " + j.getPointTemps());
+        }
     }
+    */
 }

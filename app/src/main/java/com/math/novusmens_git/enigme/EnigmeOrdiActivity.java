@@ -36,8 +36,9 @@ public class EnigmeOrdiActivity extends Enigme {
 
     private final static String PASSWORD = "AnimusRoot12";
     private boolean mdpFind = false;
-    final String EXTRA_MUSIQUE = "musique";
-    MediaPlayer player;
+    private final String EXTRA_MUSIQUE = "musique";
+    private MediaPlayer player;
+    private Joueur joueur;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +52,8 @@ public class EnigmeOrdiActivity extends Enigme {
             player = MediaPlayer.create(this, R.raw.pjs4);
             player.setVolume(100, 100);
             player.seekTo(intent.getIntExtra(EXTRA_MUSIQUE,0));
+            joueur = intent.getExtras().getParcelable("joueur");
+            Log.d("intent", "joueur point temps : " + joueur.getTimePoint());
         }
         //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         if(getSupportActionBar() != null) {
@@ -97,6 +100,7 @@ public class EnigmeOrdiActivity extends Enigme {
                         mdpFind = true;
                         Toast.makeText(getApplicationContext(), "Enigme résolue !", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(v.getContext(), Niveau1Activity.class);
+                        intent.putExtra("joueur", joueur);
                         startActivity(intent);
                         finish();
                     }
@@ -145,7 +149,7 @@ public class EnigmeOrdiActivity extends Enigme {
             SimpleDateFormat format = new SimpleDateFormat("dd MMM yyyy", Locale.FRANCE);
             String now = format.format(new Date().getTime());
             //on insert la sauvegarde dans la base
-            sauvegardeDAO.ajouter(new Sauvegarde(now, Joueur.getTimePoint(), getNumNiveau()));
+            sauvegardeDAO.ajouter(new Sauvegarde(now, joueur.getTimePoint(), getNumNiveau()));
             last = sauvegardeDAO.selectionSave();
             Log.d("data", "ce qu'il y a dans la dernière sauvegarde");
             Log.d("data", "id : " + last.getId());
@@ -157,7 +161,7 @@ public class EnigmeOrdiActivity extends Enigme {
         SimpleDateFormat format = new SimpleDateFormat("dd MMM yyyy", Locale.FRANCE);
         String now = format.format(new Date().getTime());
         last.setDate(now);
-        last.setPointTemps(Joueur.getTimePoint());
+        last.setPointTemps(joueur.getTimePoint());
         sauvegardeDAO.update(last);
         Log.d("data", "ce qu'il y a dans la sauvegarde update");
         Log.d("data", "id : " + last.getId());

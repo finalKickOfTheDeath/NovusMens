@@ -11,8 +11,8 @@ import java.util.ArrayList;
 
 public class Joueur implements Parcelable {
 
-    private static int timePoint; // number of time points of the player
-    private static ItemList object; // List of player's object
+    private int timePoint; // number of time points of the player
+    private ItemList object; // List of player's object
 
     public Joueur(int timePoint){
         this.timePoint = timePoint;
@@ -35,20 +35,26 @@ public class Joueur implements Parcelable {
         }
     };
 
-    public static int getTimePoint() {
+    public int getTimePoint() {
         return timePoint;
-    }
-
-    public static void move() {
-        timePoint--;
-    }
-
-    public static void endLevel() {
-        timePoint = timePoint/2;
     }
 
     public ArrayList<Item> getItems() {
         return object;
+    }
+
+    /*
+    public int getPointTemps() {
+        return timePoint;
+    }
+    */
+
+    public void move() {
+        timePoint--;
+    }
+
+    public void endLevel() {
+        timePoint = timePoint/2;
     }
 
     public void win(Item i) {
@@ -56,11 +62,11 @@ public class Joueur implements Parcelable {
             object.add(i);
     }
 
-    public static void winTimePoint(int quantite) {
+    public void winTimePoint(int quantite) {
         timePoint += quantite;
     }
 
-    public static void looseTimePoint(int quantite) {
+    public void looseTimePoint(int quantite) {
         timePoint -= quantite;
         if(timePoint < 0) {
             timePoint = 0;

@@ -1,6 +1,8 @@
 package com.math.novusmens_git.enigme;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -160,6 +162,10 @@ public class EnigmeJarresActivity extends Enigme {
     private Vase donneur;
     private Vase receveur;
 
+    private final String EXTRA_MUSIQUE = "musique";
+    private MediaPlayer player;
+    private Joueur joueur;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -167,6 +173,14 @@ public class EnigmeJarresActivity extends Enigme {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_enigme_jarres);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        Intent intent = getIntent();
+        if(intent != null){
+            player = MediaPlayer.create(this, R.raw.pjs4);
+            player.setVolume(100, 100);
+            player.seekTo(intent.getIntExtra(EXTRA_MUSIQUE,0));
+            joueur = intent.getExtras().getParcelable("joueur");
+            Log.d("intent", "joueur point temps : " + joueur.getTimePoint());
+        }
         if(getSupportActionBar() != null)
             getSupportActionBar().hide();
 
@@ -240,7 +254,7 @@ public class EnigmeJarresActivity extends Enigme {
         SimpleDateFormat format = new SimpleDateFormat("dd MMM yyyy", Locale.FRANCE);
         String now = format.format(new Date().getTime());
         last.setDate(now);
-        last.setPointTemps(Joueur.getTimePoint());
+        last.setPointTemps(joueur.getTimePoint());
         sauvegardeDAO.update(last);
         Log.d("data", "ce qu'il y a dans la sauvegarde update");
         Log.d("data", "id : " + last.getId());
