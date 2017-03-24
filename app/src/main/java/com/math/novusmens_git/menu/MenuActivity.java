@@ -13,13 +13,13 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.math.novusmens_git.R;
+import com.math.novusmens_git.database.Sauvegarde;
+import com.math.novusmens_git.database.SauvegardeDAO;
+import com.math.novusmens_git.niveau.Niveau1Activity;
+import com.math.novusmens_git.personnage.Joueur;
 
 import java.io.IOException;
 
-import database.Sauvegarde;
-import database.SauvegardeDAO;
-import niveau.Niveau1Activity;
-import personnage.Joueur;
 
 public class MenuActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;

@@ -12,8 +12,8 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.math.novusmens_git.R;
+import com.math.novusmens_git.enigme.EnigmeOrdiActivity;
 
-import enigme.EnigmeOrdiActivity;
 
 public class NarrationActivity extends AppCompatActivity {
     private String[] text = new String[4];
@@ -41,12 +41,14 @@ public class NarrationActivity extends AppCompatActivity {
         text[1]="Le vieil âge doit gronder, tempêter, au déclin du jour";//"L'Homme, en se développant, est devenu avide de pouvoir et à précipiter le monde dans une période de guerre...";
         text[2]="Hurler, s'enrager, à l'agonie de la lumière";//"Les Etats se montant les uns contre les autres, on finit par comettre l'irréparable...";
         text[3]="Le temps t'es compté, ne l'oublie pas !";//"Causant la fin de la civilisation humaine.";
-        image[0] = R.drawable.desert;
-        image[1] = R.drawable.desert;
+        image[0] = R.drawable.tube_dimension;
+        image[1] = R.drawable.cote_devaste;
         image[2] = R.drawable.bombe_h;
         image[3] = R.drawable.bombe_h;
         numero = 0;
         intro = (TypeWriter) findViewById(R.id.typeWriter);
+        ImageView img = (ImageView) findViewById(R.id.imageView);
+        img.setImageResource(image[numero]);
         /*RelativeLayout r = (RelativeLayout) findViewById(R.id.activity_narration);
         r.setOnLongClickListener(new View.OnLongClickListener(){
             public boolean onLongClick(View v) {
