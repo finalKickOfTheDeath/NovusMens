@@ -168,13 +168,19 @@ public class Niveau1Activity extends AppCompatActivity {
     @Override
     protected void onResume(){
         super.onResume();
-        if(player == null){
-            player = MediaPlayer.create(this, R.raw.pjs4);
-            player.setVolume(100, 100);
+        if(Joueur.getTimePoint()<=0){
+            Toast.makeText(this, "Vous avez perdu", Toast.LENGTH_SHORT).show();
+            finish();
         }
-        player.start();
-        player.setLooping(true);
-        Toast.makeText(this, "Vous avez actuellement " + Joueur.getTimePoint() + " points de temps", Toast.LENGTH_SHORT).show();
+        else {
+            if (player == null) {
+                player = MediaPlayer.create(this, R.raw.pjs4);
+                player.setVolume(100, 100);
+            }
+            player.start();
+            player.setLooping(true);
+            Toast.makeText(this, "Vous avez actuellement " + Joueur.getTimePoint() + " points de temps", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
