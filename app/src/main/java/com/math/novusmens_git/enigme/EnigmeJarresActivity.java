@@ -2,9 +2,10 @@ package com.math.novusmens_git.enigme;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,7 +16,6 @@ import com.math.novusmens_git.database.Sauvegarde;
 import com.math.novusmens_git.database.SauvegardeDAO;
 import com.math.novusmens_git.exceptionEnigme.VaseDéjàPleinException;
 import com.math.novusmens_git.exceptionEnigme.VaseVideException;
-import com.math.novusmens_git.niveau.IEnigme;
 import com.math.novusmens_git.niveau.Point;
 import com.math.novusmens_git.personnage.Joueur;
 
@@ -142,9 +142,6 @@ public class EnigmeJarresActivity extends Enigme {
 
     private final static int CONTENANCE_FINALE = 5;
 
-    //private int numNiveau;
-    //private int numEnigme;
-
     // déclaré ici pour les tests
     private TextView text10l;
     private TextView text7l;
@@ -165,6 +162,8 @@ public class EnigmeJarresActivity extends Enigme {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_enigme_jarres);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         if(getSupportActionBar() != null)

@@ -14,10 +14,8 @@ import com.math.novusmens_git.R;
 import com.math.novusmens_git.niveau.IEnigme;
 import com.math.novusmens_git.personnage.Item;
 
-public class EnigmePNJActivity extends AppCompatActivity implements IEnigme {
+public class EnigmePNJActivity extends Enigme {
 
-    private int numNiveau;
-    private int numEnigme;
     private int etape = 1;
     private Item ame1;
     private Item ame2;
@@ -25,21 +23,18 @@ public class EnigmePNJActivity extends AppCompatActivity implements IEnigme {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // pour mettre l'activité en fullscreen
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_niveau1);
-        //forcer l'orientation en mode paysage
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        // cacher l'action bar
         if(getSupportActionBar() != null)
             getSupportActionBar().hide();
         setContentView(R.layout.activity_point_pnj);
 
-        numEnigme= getResources().getInteger(R.integer.level1_enigmePNJ);
-        numNiveau = getResources().getInteger(R.integer.level1);
-        Log.d("data", "num niveau devrait être 1 il est : " + numNiveau);
-        Log.d("data", "num enigme devrait être 2 il est : " + numEnigme);
+        setNumEnigme(getResources().getInteger(R.integer.level1_enigmePNJ));
+        setNumNiveau(getResources().getInteger(R.integer.level1));
+        Log.d("data", "num niveau devrait être 1 il est : " + getNumNiveau());
+        Log.d("data", "num enigme devrait être 2 il est : " + getNumEnigme());
 
 
         findViewById(R.id.btnAgree).setOnClickListener(new View.OnClickListener() {
