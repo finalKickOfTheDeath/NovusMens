@@ -58,7 +58,7 @@ public class MenuActivity extends AppCompatActivity {
         });
 
         //Test pour musique
-        player = MediaPlayer.create(this, R.raw.pjs4);
+        player = MediaPlayer.create(this, R.raw.pjs4_menu);
         player.setVolume(100, 100);
     }
 
@@ -150,7 +150,7 @@ public class MenuActivity extends AppCompatActivity {
             //sharedPreferences.edit().remove(PREF_PTEMPS).apply();
         }
         if(player == null) {
-            player = MediaPlayer.create(this, R.raw.pjs4);
+            player = MediaPlayer.create(this, R.raw.pjs4_menu);
             player.setVolume(100, 100);
         }
         player.start();

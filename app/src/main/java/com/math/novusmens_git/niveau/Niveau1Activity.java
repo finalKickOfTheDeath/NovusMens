@@ -22,6 +22,7 @@ import com.math.novusmens_git.enigme.EnigmePluiesAcidesActivity;
 import com.math.novusmens_git.enigme.EnigmeRacines;
 import com.math.novusmens_git.enigme.EnigmePointBloqueActivity;
 import com.math.novusmens_git.enigme.EnigmeSortie;
+import com.math.novusmens_git.menu.NarrationActivity;
 import com.math.novusmens_git.personnage.Joueur;
 
 public class Niveau1Activity extends AppCompatActivity {
@@ -36,7 +37,7 @@ public class Niveau1Activity extends AppCompatActivity {
         // on récupère l'intent qui a lancé l'activité
         Intent intent = getIntent();
         if(intent != null){
-            player = MediaPlayer.create(this, R.raw.pjs4);
+            player = MediaPlayer.create(this, R.raw.pjs4_menu);
             player.setVolume(100, 100);
             player.seekTo(intent.getIntExtra(EXTRA_MUSIQUE,0));
         }
@@ -170,11 +171,13 @@ public class Niveau1Activity extends AppCompatActivity {
         super.onResume();
         if(Joueur.getTimePoint()<=0){
             Toast.makeText(this, "Vous avez perdu", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, NarrationActivity.class);
+            startActivity(intent);
             finish();
         }
         else {
             if (player == null) {
-                player = MediaPlayer.create(this, R.raw.pjs4);
+                player = MediaPlayer.create(this, R.raw.pjs4_menu);
                 player.setVolume(100, 100);
             }
             player.start();

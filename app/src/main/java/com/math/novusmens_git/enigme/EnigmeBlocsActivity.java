@@ -30,4 +30,9 @@ public class EnigmeBlocsActivity extends Enigme {
     public boolean estResolue() {
         return false;
     }
+
+    @Override
+    public void resultat() {
+
+    }
 }

@@ -29,4 +29,9 @@ public class EnigmeSortie extends Enigme {
     public boolean estResolue() {
         return false;
     }
+
+    @Override
+    public void resultat() {
+
+    }
 }

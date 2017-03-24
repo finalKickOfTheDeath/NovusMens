@@ -72,4 +72,9 @@ public class EnigmePNJActivity extends Enigme {
     public boolean estResolue() {
         return (ame1 != null && ame2 != null);
     }
+
+    @Override
+    public void resultat() {
+
+    }
 }

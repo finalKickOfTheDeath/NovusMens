@@ -29,4 +29,9 @@ public class EnigmePointBloqueActivity extends Enigme {
     public boolean estResolue() {
         return false;
     }
+
+    @Override
+    public void resultat() {
+        
+    }
 }
