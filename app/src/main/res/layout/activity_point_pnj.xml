@@ -10,7 +10,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@drawable/backgroundl1"
-    tools:context="com.math.novusmens_git.niveau.PointPNJActivity">
+    tools:context="com.math.novusmens_git.enigme.EnigmePNJActivity">
 
     <TextView
         android:text="@string/pointPNJ_dialogStart"

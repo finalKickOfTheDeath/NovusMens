@@ -35,8 +35,8 @@ import com.math.novusmens_git.personnage.Joueur;
 public class EnigmeOrdiActivity extends AppCompatActivity implements IEnigme {
 
     private final static String PASSWORD = "AnimusRoot12";
-    private final static int NUM_NIVEAU = R.integer.level1;
-    private final static int NUM_ENGME = R.integer.level1_enigmeOrdinateur;
+    private int numNiveau;
+    private int numEnigme;
     private boolean mdpFind = false;
     final String EXTRA_MUSIQUE = "musique";
     MediaPlayer player;
@@ -57,6 +57,11 @@ public class EnigmeOrdiActivity extends AppCompatActivity implements IEnigme {
         }
         int i = getResources().getConfiguration().orientation;
         Log.d("orientation", "" + i);
+
+        numEnigme= getResources().getInteger(R.integer.level1_enigmeOrdinateur);
+        numNiveau = getResources().getInteger(R.integer.level1);
+        Log.d("data", "num niveau devrait être 1 il est : " + numNiveau);
+        Log.d("data", "num enigme devrait être 5 il est : " + numEnigme);
 
         if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             findViewById(R.id.txtPassword).setVisibility(View.INVISIBLE);
@@ -139,7 +144,7 @@ public class EnigmeOrdiActivity extends AppCompatActivity implements IEnigme {
             SimpleDateFormat format = new SimpleDateFormat("dd MMM yyyy", Locale.FRANCE);
             String now = format.format(new Date().getTime());
             //on insert la sauvegarde dans la base
-            sauvegardeDAO.ajouter(new Sauvegarde(now, Joueur.getTimePoint(), NUM_NIVEAU));
+            sauvegardeDAO.ajouter(new Sauvegarde(now, Joueur.getTimePoint(), numNiveau));
             last = sauvegardeDAO.selectionSave();
             Log.d("data", "ce qu'il y a dans la dernière sauvegarde");
             Log.d("data", "id : " + last.getId());
@@ -171,7 +176,7 @@ public class EnigmeOrdiActivity extends AppCompatActivity implements IEnigme {
         if(estResolue()) {
             PossedePointDAO possedePointDAO = new PossedePointDAO(this);
             possedePointDAO.open();
-            possedePointDAO.ajouter(last.getId(), points.get(NUM_ENGME).getId());
+            possedePointDAO.ajouter(last.getId(), points.get(numEnigme).getId());
             Log.d("data", "liste des points resolus");
             ArrayList<Point> pointsResolus = possedePointDAO.selectionner(last);
             for(int j = 0; j < pointsResolus.size(); j++) {

@@ -29,9 +29,6 @@ import java.util.Locale;
 
 public class EnigmeJarresActivity extends AppCompatActivity implements IEnigme {
 
-    private final static int NUM_NIVEAU = 1;
-    private final static int NUM_ENGME = R.integer.level1_enigmeJarre;
-
     private View.OnClickListener onClickListenerButton10l = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -145,6 +142,9 @@ public class EnigmeJarresActivity extends AppCompatActivity implements IEnigme {
 
     private final static int CONTENANCE_FINALE = 5;
 
+    private int numNiveau;
+    private int numEnigme;
+
     // déclaré ici pour les tests
     private TextView text10l;
     private TextView text7l;
@@ -169,6 +169,11 @@ public class EnigmeJarresActivity extends AppCompatActivity implements IEnigme {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         if(getSupportActionBar() != null)
             getSupportActionBar().hide();
+
+        numEnigme= getResources().getInteger(R.integer.level1_enigmeJarre);
+        numNiveau = getResources().getInteger(R.integer.level1);
+        Log.d("data", "num niveau devrait être 1 il est : " + numNiveau);
+        Log.d("data", "num enigme devrait être 3 il est : " + numEnigme);
 
         text10l = (TextView)findViewById(R.id.textViewcontenance10l);
         text7l = (TextView)findViewById(R.id.textViewcontenance7l);
@@ -251,7 +256,7 @@ public class EnigmeJarresActivity extends AppCompatActivity implements IEnigme {
         if(estResolue()) {
             PossedePointDAO possedePointDAO = new PossedePointDAO(this);
             possedePointDAO.open();
-            possedePointDAO.ajouter(last.getId(), points.get(NUM_ENGME).getId());
+            possedePointDAO.ajouter(last.getId(), points.get(numEnigme).getId());
             Log.d("data", "liste des points resolus");
             ArrayList<Point> pointsResolus = possedePointDAO.selectionner(last);
             for (int j = 0; j < pointsResolus.size(); j++) {

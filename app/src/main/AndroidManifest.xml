@@ -17,9 +17,16 @@
         </activity>
         <activity android:name=".menu.NarrationActivity" />
         <activity android:name=".niveau.Niveau1Activity" />
-        <activity android:name="com.math.novusmens_git.enigme.EnigmeOrdiActivity" />
-        <activity android:name="com.math.novusmens_git.enigme.EnigmeJarresActivity" />
-        <activity android:name=".niveau.PointPNJActivity"></activity>
+        <activity android:name=".enigme.EnigmeOrdiActivity" />
+        <activity android:name=".enigme.EnigmeJarresActivity" />
+        <activity android:name=".enigme.EnigmePNJActivity" />
+        <activity android:name=".enigme.EnigmePluiesAcidesActivity" />
+        <activity android:name=".enigme.EnigmeDesertMagnetiqueActivity" />
+        <activity android:name=".enigme.EnigmeRacines" />
+        <activity android:name=".enigme.EnigmePointBloqueActivity" />
+        <activity android:name=".enigme.EnigmeSortie" />
+        <activity android:name=".enigme.EnigmeBlocsActivity" />
+        <activity android:name=".enigme.EnigmeMaisonAbandonneeActivity"></activity>
     </application>
 
 </manifest>

@@ -1,16 +1,16 @@
 <resources>
     <string name="app_name">NovusMens_Git</string>
 
-    <string name="level1_btn1">Enigme narrative 1</string>
+    <string name="level1_btn1">Enigme narrative maison abandonnée</string>
     <string name="level1_btn2">Enigme racine</string>
     <string name="level1_btn3">PNJ besoin deux objets</string>
     <string name="level1_btn4">Enigme Jarres</string>
     <string name="level1_btn5">Sortie</string>
     <string name="level1_btn6">Enigme Ordinateur Mdp</string>
-    <string name="level1_btn7">Enigme narrative 2</string>
+    <string name="level1_btn7">Enigme narrative desert magnetique</string>
     <string name="level1_btn8">Point bloqué</string>
     <string name="level1_btn9">Enigme blocs</string>
-    <string name="level1_btn10">Enigme narrative 3</string>
+    <string name="level1_btn10">Enigme narrative pluies acides</string>
 
     <string name="descEnigmeOrdi">Veuillez entrer le mot de passe : </string>
     <string name="inputEnigmeOrdi"> > </string>
