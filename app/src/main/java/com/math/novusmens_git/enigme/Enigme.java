@@ -30,4 +30,7 @@ public abstract class Enigme extends AppCompatActivity implements IEnigme {
     public void setNumEnigme(int numEnigme) {
         this.numEnigme = numEnigme;
     }
+
+    public abstract void resultat();
+
 }
