@@ -1,6 +1,7 @@
 package com.math.novusmens_git.enigme;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -49,6 +50,7 @@ public class EnigmeDesertMagnetiqueActivity extends Enigme {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_enigme_desert_magnetique);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         Intent intent = getIntent();
         if(intent != null){
             setJoueur((Joueur) intent.getExtras().getParcelable("joueur"));
@@ -81,6 +83,7 @@ public class EnigmeDesertMagnetiqueActivity extends Enigme {
         bTreeREP_D_G_D = new BTree(getString(R.string.DM_Res_Q3_D_G_RD));
         bTreeREP_D_D_G = new BTree(getString(R.string.DM_Res_Q3_D_D_RG));
         bTreeREP_D_D_D = new BTree(getString(R.string.DM_Res_Q3_D_D_RD));
+
         //binding des btree
         try {
             bTreeNiv1.setLeftTree(bTreeNiv2_G);
@@ -123,11 +126,7 @@ public class EnigmeDesertMagnetiqueActivity extends Enigme {
                 ((Button)findViewById(R.id.btnDesertRG)).setText(bTreeCourant.getReponseGauche());
                 ((Button)findViewById(R.id.btnDesertRD)).setText(bTreeCourant.getReponseDroite());
                 stepCourant++;
-                if(stepCourant == FINAL_STEP) {
-                    Log.d("btree", "on est arrivé au dernier niveau");
-                    findViewById(R.id.txtViewDesertMag).setVisibility(View.INVISIBLE);
-                    findViewById(R.id.btnDesertRG).setVisibility(View.INVISIBLE);
-                    findViewById(R.id.btnDesertRD).setVisibility(View.INVISIBLE);
+                if(estResolue()) {
                     resultat();
                 }
             }
@@ -145,11 +144,7 @@ public class EnigmeDesertMagnetiqueActivity extends Enigme {
                 ((Button)findViewById(R.id.btnDesertRG)).setText(bTreeCourant.getReponseGauche());
                 ((Button)findViewById(R.id.btnDesertRD)).setText(bTreeCourant.getReponseDroite());
                 stepCourant++;
-                if(stepCourant == FINAL_STEP) {
-                    Log.d("btree", "on est arrivé au dernier niveau");
-                    findViewById(R.id.txtViewDesertMag).setVisibility(View.INVISIBLE);
-                    findViewById(R.id.btnDesertRG).setVisibility(View.INVISIBLE);
-                    findViewById(R.id.btnDesertRD).setVisibility(View.INVISIBLE);
+                if(estResolue()) {
                     resultat();
                 }
             }
@@ -158,11 +153,14 @@ public class EnigmeDesertMagnetiqueActivity extends Enigme {
 
     @Override
     public boolean estResolue() {
-        return false;
+        return (stepCourant == FINAL_STEP);
     }
 
     @Override
     public void resultat() {
+        findViewById(R.id.txtViewDesertMag).setVisibility(View.INVISIBLE);
+        findViewById(R.id.btnDesertRG).setVisibility(View.INVISIBLE);
+        findViewById(R.id.btnDesertRD).setVisibility(View.INVISIBLE);
         int pt = 0;
         Item item = null;
         if(bTreeCourant.getQuestion() == getString(R.string.DM_Res_Q3_G_G_RG)) {
@@ -170,15 +168,12 @@ public class EnigmeDesertMagnetiqueActivity extends Enigme {
             pt = giveRandomPointTemps();
             Log.d("btree", "gain de point de temps : " + pt);
             getJoueur().winTimePoint(pt);
-            //showResult(pt, null, bTreeCourant.getQuestion());
         }
         else if(bTreeCourant.getQuestion() == getString(R.string.DM_Res_Q3_G_G_RD)) {
             //rien de special
-            //showResult(0, null, bTreeCourant.getQuestion());
         }
         else if(bTreeCourant.getQuestion() == getString(R.string.DM_Res_Q3_G_D_RG)) {
             //rien de special
-           // showResult(0, null, bTreeCourant.getQuestion());
         }
         else if(bTreeCourant.getQuestion() == getString(R.string.DM_Res_Q3_G_D_RD)) {
             //gain d'item = pierre ambre
@@ -190,16 +185,13 @@ public class EnigmeDesertMagnetiqueActivity extends Enigme {
             getJoueur().looseTimePoint(pt);
             pt = pt*(-1);
             Log.d("btree", "perte de point de temps : " + pt);
-            //showResult(opp, null, bTreeCourant.getQuestion());
         }
         else if(bTreeCourant.getQuestion() == getString(R.string.DM_Res_Q3_D_G_RD)) {
             //game over
             getJoueur().gameOver();
-            //showResult(0, null, bTreeCourant.getQuestion());
         }
         else if(bTreeCourant.getQuestion() == getString(R.string.DM_Res_Q3_D_D_RG)) {
             //enigme des blocs débloquée (lol)
-            //showResult(0, null, bTreeCourant.getQuestion());
         }
         else if(bTreeCourant.getQuestion() == getString(R.string.DM_Res_Q3_D_D_RD)) {
             //perte de points de temps
@@ -207,7 +199,6 @@ public class EnigmeDesertMagnetiqueActivity extends Enigme {
             getJoueur().looseTimePoint(pt);
             pt = pt*(-1);
             Log.d("btree", "perte de point de temps : " + pt);
-            //showResult(opp, null, bTreeCourant.getQuestion());
         }
         else {
             Log.d("btree", "erreur dans resultat");

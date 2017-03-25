@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="DM_Q1">De vastes plaines s’étendent jusqu\’à l\’horizon. Je sens comme une aura mystérieuse m\’appeler au loin.</string>
+    <string name="DM_Q1">De vastes plaines s\'étendent jusqu\'à l\'horizon. Je sens comme une aura mystérieuse m\'appeler au loin.</string>
     <string name="DM_Q1_RG">Je me laisse guider par cette sensation</string>
     <string name="DM_Q1_RD">Je risque de me perdre, mais…</string>
 
-    <string name="DM_Q2_G">Plus j\’avance, plus mon esprit s\’égare. “Les vérités sont des illusions dont on a oublié qu\’elles le sont”. Qui disait ça déjà ?</string>
-    <string name="DM_Q2_G_RG">Nietzsche </string>
+    <string name="DM_Q2_G">Plus j\'avance, plus mon esprit s\'égare. \"Les vérités sont des illusions dont on a oublié qu\'elles le sont\". Qui disait ça déjà ?</string>
+    <string name="DM_Q2_G_RG">Nietzsche</string>
     <string name="DM_Q2_G_RD">Kant</string>
 
-    <string name="DM_Q2_D">Le sol s\’effrite sous mes pieds jusqu\’à disparaître complètement. Je dois devenir fou. Je tente de m\’enfuir mais je n’arrive pas à courir</string>
+    <string name="DM_Q2_D">Le sol s\'effrite sous mes pieds jusqu\'à disparaître complètement. Je dois devenir fou. Je tente de m\'enfuir mais je n’arrive pas à courir</string>
     <string name="DM_Q2_D_RG">Je crie de toute mes forces !</string>
-    <string name="DM_Q2_D_RD">J\’essaye de me calmer...ça va aller…</string>
+    <string name="DM_Q2_D_RD">J\'essaye de me calmer...ça va aller…</string>
 
 
-    <string name="DM_Q3_G_G">Oui, ça doit être lui. L\’aura est de plus en plus forte, presque palpable. Il devient presque impossible de résister à cette force. Je me sens m\’évanouir.</string>
+    <string name="DM_Q3_G_G">Oui, ça doit être lui. L\'aura est de plus en plus forte, presque palpable. Il devient presque impossible de résister à cette force. Je me sens m\'évanouir.</string>
     <string name="DM_Q3_G_G_RG">Je me laisse partir</string>
     <string name="DM_Q3_G_G_RD">Je tente de résister encore un peu</string>
 
-    <string name="DM_Q3_G_D">Je n\’ai pas le souvenir d\’avoir déjà lu du Kant pourtant. L\’aura se fait moins présente, pourtant j\’ai le coeur lourd. </string>
-    <string name="DM_Q3_G_D_RG">J\’ai l\’impression de passer à côté de quelque chose, j\’essaye de la retrouver</string>
+    <string name="DM_Q3_G_D">Je n\'ai pas le souvenir d\'avoir déjà lu du Kant pourtant. L\'aura se fait moins présente, pourtant j\'ai le coeur lourd. </string>
+    <string name="DM_Q3_G_D_RG">J\'ai l\'impression de passer à côté de quelque chose, j\'essaye de la retrouver</string>
     <string name="DM_Q3_G_D_RD">Tant pis, je rebrousse chemin</string>
 
-    <string name="DM_Q3_D_G">Il n\’y a personne, pourquoi vouloir crier ? Des ombres visqueuses commencent à m\’enserrer.</string>
-    <string name="DM_Q3_D_G_RG">Je me débat de toutes mes forces, je ne les laisserais pas m\’avoir!</string>
-    <string name="DM_Q3_D_G_RD">Je les laisse s\’emparer de moi. A quoi bon se battre, il n\’y a plus d\’espoir.</string>
+    <string name="DM_Q3_D_G">Il n\'y a personne, pourquoi vouloir crier ? Des ombres visqueuses commencent à m\'enserrer.</string>
+    <string name="DM_Q3_D_G_RG">Je me débat de toutes mes forces, je ne les laisserais pas m\'avoir!</string>
+    <string name="DM_Q3_D_G_RD">Je les laisse s\'emparer de moi. A quoi bon se battre, il n\'y a plus d\'espoir.</string>
 
     <string name="DM_Q3_D_D">Dans la pénombre ambiante et entre deux respirations saccadé, j\'aperçois au loin une porte.</string>
-    <string name="DM_Q3_D_D_RG">J\’avance vers la porte, inspire un bon coup et tourne la poignée…</string>
+    <string name="DM_Q3_D_D_RG">J\'avance vers la porte, inspire un bon coup et tourne la poignée…</string>
     <string name="DM_Q3_D_D_RD">Cela doit être une illusion de plus...mieux vaut attendre là…</string>
 
-    <string name="DM_Res_Q3_G_G_RG">Je me réveille, revigoré. Quel rêve étrange…(gain de point de temps)</string>
-    <string name="DM_Res_Q3_G_G_RD">La tension est insoutenable. Au loin j\’entrevois une forme étrange. On dirait un humain. C\’est moi? Je fini par perdre connaissance.</string>
-    <string name="DM_Res_Q3_G_D_RG">Impossible de retrouver sa trace. Elle s\’est évanouie. Certaines choses restent perdues à jamais, je devrais le savoir.</string>
-    <string name="DM_Res_Q3_G_D_RD">Je trébuche et m\'étale lamentablement. Devant mon regard dépité, une petite pierre ambrée semble me regarder. Ce n\’est qu\’un cailloux mais je l\’emporte avec moi. (gain d\’item) </string>
-    <string name="DM_Res_Q3_D_G_RG">J\’ai beau tout essayer, mes forces me quittent. Je sombre. (perte de point de temps)</string>
-    <string name="DM_Res_Q3_D_G_RD">Je me laisse disparaître avec elles. Ces ténèbres m’appartiennent. (GAME OVER)</string>
-    <string name="DM_Res_Q3_D_D_RG">Quel surprise ! C’est un tout autre paysage qui se dessine ici. Il va tout de même falloir faire un peu de place pour avancer (on arrive sur l\’énigme des blocs)</string>
-    <string name="DM_Res_Q3_D_D_RD">Je perds la notion du temps, je ne sais plus depuis quand je suis prostré là. Les ténèbres se dissipent peu à peu.(perte de point de temps)</string>
+    <string name="DM_Res_Q3_G_G_RG">Je me réveille, revigoré. Quel rêve étrange…</string>
+    <string name="DM_Res_Q3_G_G_RD">La tension est insoutenable. Au loin j\'entrevois une forme étrange. On dirait un humain. C\'est moi? Je fini par perdre connaissance.</string>
+    <string name="DM_Res_Q3_G_D_RG">Impossible de retrouver sa trace. Elle s\'est évanouie. Certaines choses restent perdues à jamais, je devrais le savoir.</string>
+    <string name="DM_Res_Q3_G_D_RD">Je trébuche et m\'étale lamentablement. Devant mon regard dépité, une petite pierre ambrée semble me regarder. Ce n\'est qu\'un cailloux mais je l\'emporte avec moi.</string>
+    <string name="DM_Res_Q3_D_G_RG">J\'ai beau tout essayer, mes forces me quittent. Je sombre.</string>
+    <string name="DM_Res_Q3_D_G_RD">Je me laisse disparaître avec elles. Ces ténèbres m’appartiennent.</string>
+    <string name="DM_Res_Q3_D_D_RG">Quel surprise ! C\'est un tout autre paysage qui se dessine ici. Il va tout de même falloir faire un peu de place pour avancer</string>
+    <string name="DM_Res_Q3_D_D_RD">Je perds la notion du temps, je ne sais plus depuis quand je suis prostré là. Les ténèbres se dissipent peu à peu.</string>
 
 </resources>

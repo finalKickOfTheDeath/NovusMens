@@ -74,7 +74,7 @@ public abstract class Enigme extends AppCompatActivity implements IEnigme {
         if(point > 1) {
             linePointTemps = "Points de temps gagnés : " + point;
         }
-        else if(point < 1) {
+        else if(point < -1) {
             linePointTemps = "Points de temps perdus : " + point;
         }
         else if(point == 1) {

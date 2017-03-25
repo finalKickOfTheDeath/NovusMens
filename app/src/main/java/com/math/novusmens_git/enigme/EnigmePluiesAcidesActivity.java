@@ -1,32 +1,50 @@
 package com.math.novusmens_git.enigme;
 
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.math.novusmens_git.R;
+import com.math.novusmens_git.personnage.Item;
+import com.math.novusmens_git.personnage.Joueur;
+
+import org.w3c.dom.Text;
 
 public class EnigmePluiesAcidesActivity extends Enigme {
 
-    private BTree Niveau1;
-    private BTree Niveau2_G;
-    private BTree Niveau2_D;
-    private BTree Niveau3_G_G;
-    private BTree Niveau3_G_D;
-    private BTree Niveau3_D_G;
-    private BTree Niveau3_D_D;
+    //niveau 1
+    private BTree bTreeNiv1;
 
-    private BTree Resultat_Q3_G_G_RG;
-    private BTree Resultat_Q3_G_G_RD;
-    private BTree Resultat_Q3_G_D_RG;
-    private BTree Resultat_Q3_G_D_RD;
-    private BTree Resultat_Q3_D_G_RG;
-    private BTree Resultat_Q3_D_G_RD;
-    private BTree Resultat_Q3_D_D_RG;
-    private BTree Resultat_Q3_D_D_RD;
+    //niveau 2
+    private BTree bTreeNiv2_G;
+    private BTree bTreeNiv2_D;
+
+    //niveau 3
+    private BTree bTreeNiv3_G_G;
+    private BTree bTreeNiv3_G_D;
+    private BTree bTreeNiv3_D_G;
+    private BTree bTreeNiv3_D_D;
+
+    //reponses
+    private BTree bTreeREP_G_G_G;
+    private BTree bTreeREP_G_G_D;
+    private BTree bTreeREP_G_D_G;
+    private BTree bTreeREP_G_D_D;
+    private BTree bTreeREP_D_G_G;
+    private BTree bTreeREP_D_G_D;
+    private BTree bTreeREP_D_D_G;
+    private BTree bTreeREP_D_D_D;
+
+    //btree en cours d'affichage
+    private static final int FINAL_STEP = 4; //niveau des reponses
+    private BTree bTreeCourant;
+    private int stepCourant;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +52,12 @@ public class EnigmePluiesAcidesActivity extends Enigme {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_enigme_pluies_acides);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        Intent intent = getIntent();
+        if(intent != null){
+            setJoueur((Joueur) intent.getExtras().getParcelable("joueur"));
+            Log.d("intent", "joueur point temps : " + getJoueur().getTimePoint());
+        }
         if(getSupportActionBar() != null)
             getSupportActionBar().hide();
 
@@ -42,133 +66,156 @@ public class EnigmePluiesAcidesActivity extends Enigme {
         Log.d("data", "num niveau devrait être 1 il est : " + getNumNiveau());
         Log.d("data", "num enigme devrait être 9 il est : " + getNumEnigme());
 
-        /*-------------- CREATION DES MODULES DE NIVEAUX --------------*/
-        Niveau1 = new BTree(getString(R.string.PA_Q1));
+        //initialisation des btree
+        bTreeNiv1 = new BTree(getString(R.string.PA_Q1), getString(R.string.PA_Q1_RG), getString(R.string.PA_Q1_RD));
+
+        bTreeNiv2_G = new BTree(getString(R.string.PA_Q2_G), getString(R.string.PA_Q2_G_RG), getString(R.string.PA_Q2_G_RD));
+        bTreeNiv2_D = new BTree(getString(R.string.PA_Q2_D), getString(R.string.PA_Q2_D_RG), getString(R.string.PA_Q2_D_RD));
+
+        bTreeNiv3_G_G = new BTree(getString(R.string.PA_Q3_G_G), getString(R.string.PA_Q3_G_G_RG), getString(R.string.PA_Q3_G_G_RD));
+        bTreeNiv3_G_D = new BTree(getString(R.string.PA_Q3_G_D), getString(R.string.PA_Q3_G_D_RG), getString(R.string.PA_Q3_G_D_RD));
+        bTreeNiv3_D_G = new BTree(getString(R.string.PA_Q3_D_G), getString(R.string.PA_Q3_D_G_RG), getString(R.string.PA_Q3_D_G_RD));
+        bTreeNiv3_D_D = new BTree(getString(R.string.PA_Q3_D_D), getString(R.string.PA_Q3_D_D_RG), getString(R.string.PA_Q3_D_D_RD));
+
+        bTreeREP_G_G_G = new BTree(getString(R.string.PA_Res_Q3_G_G_RG));
+        bTreeREP_G_G_D = new BTree(getString(R.string.PA_Res_Q3_G_G_RD));
+        bTreeREP_G_D_G = new BTree(getString(R.string.PA_Res_Q3_G_D_RG));
+        bTreeREP_G_D_D = new BTree(getString(R.string.PA_Res_Q3_G_D_RD));
+        bTreeREP_D_G_G = new BTree(getString(R.string.PA_Res_Q3_D_G_RG));
+        bTreeREP_D_G_D = new BTree(getString(R.string.PA_Res_Q3_D_G_RD));
+        bTreeREP_D_D_G = new BTree(getString(R.string.PA_Res_Q3_D_D_RG));
+        bTreeREP_D_D_D = new BTree(getString(R.string.PA_Res_Q3_D_D_RD));
+
+        //binding des btree
         try {
-            Niveau1.setReponseGauche(getString(R.string.PA_Q1_RG));
-            Niveau1.setReponseDroite(getString(R.string.PA_Q1_RD));
+            bTreeNiv1.setLeftTree(bTreeNiv2_G);
+            bTreeNiv1.setRightTree(bTreeNiv2_D);
+
+            bTreeNiv2_G.setLeftTree(bTreeNiv3_G_G);
+            bTreeNiv2_G.setRightTree(bTreeNiv3_G_D);
+            bTreeNiv2_D.setLeftTree(bTreeNiv3_D_G);
+            bTreeNiv2_D.setRightTree(bTreeNiv3_D_D);
+
+            bTreeNiv3_G_G.setLeftTree(bTreeREP_G_G_G);
+            bTreeNiv3_G_G.setRightTree(bTreeREP_G_G_D);
+            bTreeNiv3_G_D.setLeftTree(bTreeREP_G_D_G);
+            bTreeNiv3_G_D.setRightTree(bTreeREP_G_D_D);
+            bTreeNiv3_D_G.setLeftTree(bTreeREP_D_G_G);
+            bTreeNiv3_D_G.setRightTree(bTreeREP_D_G_D);
+            bTreeNiv3_D_D.setLeftTree(bTreeREP_D_D_G);
+            bTreeNiv3_D_D.setRightTree(bTreeREP_D_D_D);
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.d("btree", "exception lors du binding : " + e);
         }
 
-        Niveau2_G = new BTree(getString(R.string.PA_Q2_G));
-        try {
-            Niveau2_G.setReponseGauche(getString(R.string.PA_Q2_G_RG));
-            Niveau2_G.setReponseDroite(getString(R.string.PA_Q2_G_RD));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        //initalisation des view
+        ((TextView)findViewById(R.id.txtViewPluiesAcides)).setText(bTreeNiv1.getQuestion());
+        ((TextView)findViewById(R.id.btnPluiesAcidesRG)).setText(bTreeNiv1.getReponseGauche());
+        ((TextView)findViewById(R.id.btnPluiesAcidesRD)).setText(bTreeNiv1.getReponseDroite());
 
-        Niveau2_D = new BTree(getString(R.string.PA_Q2_D));
-        try {
-            Niveau2_D.setReponseGauche(getString(R.string.PA_Q2_D_RG));
-            Niveau2_D.setReponseDroite(getString(R.string.PA_Q2_D_RD));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        bTreeCourant = bTreeNiv1;
+        stepCourant = 1; //on est au bTree niveau 1
 
-        Niveau3_G_G = new BTree(getString(R.string.PA_Q3_G_G));
-        try {
-            Niveau3_G_G.setReponseGauche(getString(R.string.PA_Q3_G_G_RG));
-            Niveau3_G_G.setReponseDroite(getString(R.string.PA_Q3_G_G_RD));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        findViewById(R.id.btnPluiesAcidesRG).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    bTreeCourant = bTreeCourant.getLeftTree();
+                } catch (Exception e) {
+                    Log.d("btree", "exception lors du changement de btreeCourant : " + e);
+                }
+                ((TextView)findViewById(R.id.txtViewPluiesAcides)).setText(bTreeCourant.getQuestion());
+                ((TextView)findViewById(R.id.btnPluiesAcidesRG)).setText(bTreeCourant.getReponseGauche());
+                ((TextView)findViewById(R.id.btnPluiesAcidesRD)).setText(bTreeCourant.getReponseDroite());
+                stepCourant++;
+                if(estResolue()) {
+                    resultat();
+                }
+            }
+        });
 
-        Niveau3_G_D = new BTree(getString(R.string.PA_Q3_G_D));
-        try {
-            Niveau3_G_D.setReponseGauche(getString(R.string.PA_Q3_G_D_RG));
-            Niveau3_G_D.setReponseDroite(getString(R.string.PA_Q3_G_D_RD));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        Niveau3_D_G = new BTree(getString(R.string.PA_Q3_D_G));
-        try {
-            Niveau3_D_G.setReponseGauche(getString(R.string.PA_Q3_D_G_RG));
-            Niveau3_D_G.setReponseDroite(getString(R.string.PA_Q3_D_G_RD));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        Niveau3_D_D = new BTree(getString(R.string.PA_Q3_D_D));
-        try {
-            Niveau3_D_D.setReponseGauche(getString(R.string.PA_Q3_D_D_RG));
-            Niveau3_D_D.setReponseDroite(getString(R.string.PA_Q3_D_D_RD));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        Resultat_Q3_G_G_RG= new BTree(getString(R.string.PA_Res_Q3_G_G_RG));
-        Resultat_Q3_G_G_RD= new BTree(getString(R.string.PA_Res_Q3_G_G_RD));
-        Resultat_Q3_G_D_RG= new BTree(getString(R.string.PA_Res_Q3_G_D_RG));
-        Resultat_Q3_G_D_RD= new BTree(getString(R.string.PA_Res_Q3_G_D_RD));
-        Resultat_Q3_D_G_RG= new BTree(getString(R.string.PA_Res_Q3_D_G_RG));
-        Resultat_Q3_D_G_RD= new BTree(getString(R.string.PA_Res_Q3_D_G_RD));
-        Resultat_Q3_D_D_RG= new BTree(getString(R.string.PA_Res_Q3_D_D_RG));
-        Resultat_Q3_D_D_RD= new BTree(getString(R.string.PA_Res_Q3_D_D_RD));
-
-        /*-------------- FIN DE CREATION DES MODULES DE NIVEAUX --------------*/
-
-        /*-------------- LIAISON DES MODULES --------------*/
-
-        TextView question=(TextView)findViewById(R.id.question);
-        question.setText(Niveau1.getQuestion());
-
-        TextView reponseGauche=(TextView)findViewById(R.id.reponseGauche);
-        reponseGauche.setText(Niveau1.getReponseGauche());
-
-
-        TextView reponseDroite=(TextView)findViewById(R.id.reponseDroite);
-        reponseDroite.setText(Niveau1.getReponseDroite());
-
-        /*-------------- FIN DE LIAISON DES MODULES --------------*/
-
-    }
-
-    public void repondre(View v){
-        int id = v.getId();
-        TextView question=(TextView)findViewById(R.id.question);
-        TextView reponseDroite=(TextView)findViewById(R.id.reponseDroite);
-        TextView reponseGauche=(TextView)findViewById(R.id.reponseGauche);
-
-        /*-------------- NIVEAU 2 --------------*/
-        switch(id){
-            case R.id.reponseGauche :
-                question.setText(Niveau2_G.getQuestion());
-                reponseGauche.setText(Niveau2_G.getReponseGauche());
-                reponseDroite.setText(Niveau2_G.getReponseDroite());
-
-            case R.id.reponseDroite :
-                question.setText(Niveau2_D.getQuestion());
-                reponseGauche.setText(Niveau2_D.getReponseGauche());
-                reponseDroite.setText(Niveau2_D.getReponseDroite());
-        }
-
-        /*-------------- NIVEAU 3 --------------*/
-
-        switch(id){
-            case R.id.reponseGauche :
-                question.setText(Niveau3_G_G.getQuestion());
-                reponseGauche.setText(Niveau3_G_G.getReponseGauche());
-                reponseDroite.setText(Niveau3_G_G.getReponseDroite());
-
-            case R.id.reponseDroite :
-                question.setText(Niveau3_G_D.getQuestion());
-                reponseGauche.setText(Niveau3_G_D.getReponseGauche());
-                reponseDroite.setText(Niveau3_G_D.getReponseDroite());
-        }
-
-
+        findViewById(R.id.btnPluiesAcidesRD).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    bTreeCourant = bTreeCourant.getRightTree();
+                } catch (Exception e) {
+                    Log.d("btree", "exception lors du changement de btreeCourant : " + e);
+                }
+                ((TextView)findViewById(R.id.txtViewPluiesAcides)).setText(bTreeCourant.getQuestion());
+                ((TextView)findViewById(R.id.btnPluiesAcidesRG)).setText(bTreeCourant.getReponseGauche());
+                ((TextView)findViewById(R.id.btnPluiesAcidesRD)).setText(bTreeCourant.getReponseDroite());
+                stepCourant++;
+                if(estResolue()) {
+                    resultat();
+                }
+            }
+        });
     }
 
     @Override
     public boolean estResolue() {
-        return false;
+        return (stepCourant == FINAL_STEP);
     }
 
     @Override
     public void resultat() {
+        findViewById(R.id.txtViewPluiesAcides).setVisibility(View.INVISIBLE);
+        findViewById(R.id.btnPluiesAcidesRG).setVisibility(View.INVISIBLE);
+        findViewById(R.id.btnPluiesAcidesRD).setVisibility(View.INVISIBLE);
+        int pt = 0;
+        Item item = null;
+        if(bTreeCourant.getQuestion() == getString(R.string.PA_Res_Q3_G_G_RG)) {
+            //game over
+            getJoueur().gameOver();
+        }
+        else if(bTreeCourant.getQuestion() == getString(R.string.PA_Res_Q3_G_G_RD)) {
+            //gain d'item = bout d'âme pnj
+            item = new Item("Morceau d'âme");
+        }
+        else if(bTreeCourant.getQuestion() == getString(R.string.PA_Res_Q3_G_D_RG)) {
+            //game over
+            getJoueur().gameOver();
+        }
+        else if(bTreeCourant.getQuestion() == getString(R.string.PA_Res_Q3_G_D_RD)) {
+            //gain d'item = bout d'âme pnj
+            item = new Item("Morceau d'âme");
+        }
+        else if(bTreeCourant.getQuestion() == getString(R.string.PA_Res_Q3_D_G_RG)) {
+            //gain d'item = bout d'âme pnj
+            item = new Item("Morceau d'âme");
+        }
+        else if(bTreeCourant.getQuestion() == getString(R.string.PA_Res_Q3_D_G_RD)) {
+            //perte de points de temps
+            pt = giveRandomPointTemps();
+            getJoueur().looseTimePoint(pt);
+            pt = pt*(-1);
+            Log.d("btree", "perte de point de temps : " + pt);
+        }
+        else if(bTreeCourant.getQuestion() == getString(R.string.PA_Res_Q3_D_D_RG)) {
+            //gain d'item = bout d'âme pnj
+            item = new Item("Morceau d'âme");
+        }
+        else if(bTreeCourant.getQuestion() == getString(R.string.PA_Res_Q3_D_D_RD)) {
+            //perte de points de temps
+            pt = giveRandomPointTemps();
+            getJoueur().looseTimePoint(pt);
+            pt = pt*(-1);
+            Log.d("btree", "perte de point de temps : " + pt);
+        }
+        else {
+            Log.d("btree", "erreur dans resultat");
+        }
+        //on prépare l'intent de reponse
+        Intent intent = getIntent();
+        intent.putExtra("joueur", getJoueur());
+        setResult(RESULT_OK, intent);
+        showResult(pt, item, bTreeCourant.getQuestion());
+    }
 
+    @Override
+    protected void onPause() {
+        saveState();
+        super.onPause();
     }
 }

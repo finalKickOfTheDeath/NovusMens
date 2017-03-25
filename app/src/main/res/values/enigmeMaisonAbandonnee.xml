@@ -1,42 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="MA_Q1">Une petite maison en ruine se trouve devant moi. Elle est l\’air sombre et mystérieuse.</string>
-    <string name="MA_Q1_RG">J’entre</string>
+    <string name="MA_Q1">Une petite maison en ruine se trouve devant moi. Elle a l\'air sombre et mystérieux.</string>
+    <string name="MA_Q1_RG">J\'entre</string>
     <string name="MA_Q1_RD">Je rebrousse chemin</string>
 
-    <string name="MA_Q2_G">A l\'intérieur, il fait sombre et les murs sont fissurés. J\’entends un bruit étrange</string>
+    <string name="MA_Q2_G">A l\'intérieur, il fait sombre et les murs sont fissurés. J\’entends un bruit étrange.</string>
     <string name="MA_Q2_G_RG">Je monte</string>
-    <string name="MA_Q2_G_RD">Je sors, je ne suis pas un héro</string>
+    <string name="MA_Q2_G_RD">je sors, je ne suis pas un héros</string>
 
-    <string name="MA_Q2_D">Je me sens un peu couard mais ce n\’est pas grave. Tout d\’un coup je vois un papier qui vole</string>
-    <string name="MA_Q2_D_RG">Intrigué, je pars à sa poursuite, c\’est peut être important</string>
-    <string name="MA_Q2_D_RD">Ce n\’est qu\’un papier. J\’aurai plutôt suivi un oiseau</string>
+    <string name="MA_Q2_D">Je me sens un peu couard mais ce n\'est pas grave. Tout d\'un coup je vois un papier qui vole.</string>
+    <string name="MA_Q2_D_RG">Intrigué, je pars à sa poursuite, c\'est peut être important</string>
+    <string name="MA_Q2_D_RD">Ce n\'est qu\'un papier, pas un oiseau messager</string>
 
-
-    <string name="MA_Q3_G_G">Alors que je monte les marches, le bruit persiste. Il semble venir d’une chambre</string>
-    <string name="MA_Q3_G_G_RG">J\’avance, bravant le danger</string>
+    <string name="MA_Q3_G_G">Alors que je monte les marches, le bruit persiste. Il semble venir d\'une chambre.</string>
+    <string name="MA_Q3_G_G_RG">J\'avance, bravant le danger</string>
     <string name="MA_Q3_G_G_RD">La peur me gagne, je redescends</string>
 
-    <string name="MA_Q3_G_D">Alors que je me retourne, je vois que la porte est verrouillée. Impossible de l’ouvrir.</string>
-    <string name="MA_Q3_G_D_RG">J\’enfonce la porte, elle va céder</string>
+    <string name="MA_Q3_G_D">Alors que je me retourne, je vois que la porte est verrouillée. Impossible de l\'ouvrir.</string>
+    <string name="MA_Q3_G_D_RG">J\'enfonce la porte, elle va céder</string>
     <string name="MA_Q3_G_D_RD">Il doit bien  y avoir une autre issue</string>
 
-    <string name="MA_Q3_D_G">Alors que je cours derrière le papier, celui ci disparaît derrière un immeuble. Deux choix s\’offrent à moi</string>
+    <string name="MA_Q3_D_G">Alors que je cours derrière le papier, celui ci disparaît derrière un immeuble. Deux choix s\'offrent à moi</string>
     <string name="MA_Q3_D_G_RG">Je prends la ruelle sombre qui traverse les immeubles</string>
     <string name="MA_Q3_D_G_RD">Je prends la route qui contourne les immeubles</string>
 
-    <string name="MA_Q3_D_D">A cette pensée, j\’entends un oiseau. Je tourne la tête mais je ne vois rien dans le ciel</string>
-    <string name="MA_Q3_D_D_RG">C\’est mon imagination</string>
+    <string name="MA_Q3_D_D">A cette pensée, j\'entends un croassement. Je lève la tête, mais je ne vois rien dans le ciel...</string>
+    <string name="MA_Q3_D_D_RG">Mon imagination commencerait-elle à me jouer des tours ? La solitude est un fardeau bien pesant...</string>
     <string name="MA_Q3_D_D_RD">Je continue à chercher</string>
 
-    <string name="MA_Res_Q3_G_G_RG">Dans la chambre, il y a une boite à musique et une carte : “Ne laissons pas ce monde partir en poussière” (pour la petite référence à Interstellar)</string>
-    <string name="MA_Res_Q3_G_G_RD">En descendant, j\’apperçois deux ombres sortir rapidement. Je sors à mon tour mais il n\’y a personne (perte de points de temps).</string>
-    <string name="MA_Res_Q3_G_D_RG">La porte fini par céder mais j’ai perdu beaucoup de temps. J’aurai mieux fait de chercher une autre issue (perte de point de temps)</string>
-    <string name="MA_Res_Q3_G_D_RD">En cherchant une issue, je fini par trouver la clef de la porte. Finalement j\’ai bien fait d\’explorer les lieux.</string>
-    <string name="MA_Res_Q3_D_G_RG">En sortant de la ruelle, je trouve le papier qui est maintenant par terre. Je le prends. C\’est un vieux journal. En titre : “Première pluie acides dues à la pollution atmosphérique aux Etats-Unis. Aurions-nous pu l\’éviter ?”</string>
-    <string name="MA_Res_Q3_D_G_RD">En ayant pris la voie la plus dégagée, j\’ai perdu du temps et je ne retrouve plus ce papier. J\’aurais dû prendre un risque (perte de point de temps)</string>
-    <string name="MA_Res_Q3_D_D_RG"></string>
-    <string name="MA_Res_Q3_D_D_RD"></string>
+    <string name="MA_Res_Q3_G_G_RG">Dans la chambre, il y a une boite à musique et une carte : \"Ne laissons pas ce monde partir en poussière\".</string>
+    <string name="MA_Res_Q3_G_G_RD">En descendant, j\'apperçois deux ombres sortir rapidement. Je sors à mon tour mais il n\'y a personne.</string>
+    <string name="MA_Res_Q3_G_D_RG">La porte finit par céder mais j\'ai perdu beaucoup de temps. J\'aurai mieux fait de chercher une autre issue.</string>
+    <string name="MA_Res_Q3_G_D_RD">En cherchant une issue, je finis par trouver la clef de la porte. Finalement j\'ai bien fait d\'explorer les lieux.</string>
+    <string name="MA_Res_Q3_D_G_RG">En sortant de la ruelle, je trouve le papier qui est maintenant par terre. Je le prends. C\'est un vieux journal. En titre : \"Première pluie acides dues à la pollution atmosphérique aux Etats-Unis. Aurions-nous pu l\'éviter ?\".</string>
+    <string name="MA_Res_Q3_D_G_RD">En ayant pris la voie la plus dégagée, j\'ai perdu du temps et je ne retrouve plus ce papier. J\'aurais dû prendre un risque.</string>
+    <string name="MA_Res_Q3_D_D_RG">Perdu dans mes réflexions, je n\'ai pas vu le temps passer et la nuit tombe déjà ! Je ferais mieux de trouver un abri avant l\'arrivée des ombres.</string>
+    <string name="MA_Res_Q3_D_D_RD">Au hasard de mes recherches, je trouve un chemin dégagé qui mène à une nouvelle zone inexplorée.</string>
 
 </resources>

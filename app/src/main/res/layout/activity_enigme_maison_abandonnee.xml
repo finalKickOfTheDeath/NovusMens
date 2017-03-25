@@ -11,10 +11,29 @@
     tools:context="com.math.novusmens_git.enigme.EnigmeMaisonAbandonneeActivity">
 
     <TextView
-        android:text="Enigme maison abandonnee en cours de construction"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:background="@color/transparentBlack"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/txtViewMaisonAbdn" />
+
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/btnMaisonAbdnRD"
+        android:layout_below="@+id/btnMaisonAbdnRG"
+        android:layout_alignStart="@+id/btnMaisonAbdnRG"
+        android:layout_marginTop="30dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnMaisonAbdnRG"
+        android:layout_marginStart="25dp"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/textView5" />
+        android:layout_alignParentStart="true" />
+
 </RelativeLayout>

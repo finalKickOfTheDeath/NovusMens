@@ -16,7 +16,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:id="@+id/question"
+        android:id="@+id/txtViewPluiesAcides"
         android:gravity="center"
         android:textColor="#000000"
         android:textStyle="bold"
@@ -30,28 +30,26 @@
     <TextView
         android:layout_width="280dp"
         android:layout_height="50dp"
-        android:id="@+id/reponseDroite"
+        android:id="@+id/btnPluiesAcidesRD"
         android:gravity="center"
         android:textColor="#000000"
         android:textStyle="bold"
         android:background="#3BFF00"
-        android:layout_alignBottom="@+id/reponseGauche"
+        android:layout_alignBottom="@+id/btnPluiesAcidesRG"
         android:layout_toEndOf="@+id/hazard"
         android:layout_marginLeft="10dp"
-        android:onClick="repondre"
         android:clickable="true"/>
 
     <TextView
         android:layout_width="280dp"
         android:layout_height="50dp"
-        android:id="@+id/reponseGauche"
+        android:id="@+id/btnPluiesAcidesRG"
         android:gravity="center"
         android:textColor="#000000"
         android:textStyle="bold"
         android:background="#3BFF00"
         android:layout_centerVertical="true"
         android:layout_toStartOf="@+id/hazard"
-        android:onClick="repondre"
         android:clickable="true"
         android:layout_marginRight="10dp"/>
 
@@ -62,6 +60,6 @@
         android:id="@+id/hazard"
         android:gravity="center"
         android:scaleType="fitXY"
-        android:layout_alignTop="@+id/reponseDroite"
+        android:layout_alignTop="@+id/btnPluiesAcidesRD"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>

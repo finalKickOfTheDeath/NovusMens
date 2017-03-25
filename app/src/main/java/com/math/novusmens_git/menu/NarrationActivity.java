@@ -53,7 +53,7 @@ public class NarrationActivity extends AppCompatActivity {
         text[0]="N'entre pas docilement dans cette douce nuit";//"A l'aube de ce nouveau siècle, le monde que nous connaissons à disparu...";
         text[1]="Le vieil âge doit gronder, tempêter, au déclin du jour";//"L'Homme, en se développant, est devenu avide de pouvoir et à précipiter le monde dans une période de guerre...";
         text[2]="Hurler, s'enrager, à l'agonie de la lumière";//"Les Etats se montant les uns contre les autres, on finit par comettre l'irréparable...";
-        text[3]="Ton temps es compté, ne l'oublie pas !";//"Causant la fin de la civilisation humaine.";
+        text[3]="Ton temps est compté, ne l'oublie pas !";//"Causant la fin de la civilisation humaine.";
         image[0] = R.drawable.tube_dimension;
         image[1] = R.drawable.cote_devaste;
         image[2] = R.drawable.bombe_h;
