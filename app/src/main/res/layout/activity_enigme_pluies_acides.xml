@@ -14,32 +14,46 @@
 
 
     <TextView
-        android:text="Je dois me rendre de l'autre côté de ces bâtiments, mais les pluies acides ne semblent pas prêtes à s'arrêter ! Comment faire ?"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:id="@+id/textView1"
+        android:id="@+id/question"
         android:gravity="center"
         android:textColor="#000000"
         android:textStyle="bold"
         android:background="#3BFF00"
         android:layout_marginTop="25dp"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_centerHorizontal="true"/>
+
 
     <TextView
-        android:text="Je cherche un passage à couvert"
         android:layout_width="280dp"
         android:layout_height="50dp"
-        android:id="@+id/textView_Q1_2"
+        android:id="@+id/reponseDroite"
         android:gravity="center"
         android:textColor="#000000"
         android:textStyle="bold"
         android:background="#3BFF00"
-        android:layout_alignBottom="@+id/textView_Q1_1"
+        android:layout_alignBottom="@+id/reponseGauche"
         android:layout_toEndOf="@+id/hazard"
         android:layout_marginLeft="10dp"
         android:onClick="repondre"
         android:clickable="true"/>
+
+    <TextView
+        android:layout_width="280dp"
+        android:layout_height="50dp"
+        android:id="@+id/reponseGauche"
+        android:gravity="center"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:background="#3BFF00"
+        android:layout_centerVertical="true"
+        android:layout_toStartOf="@+id/hazard"
+        android:onClick="repondre"
+        android:clickable="true"
+        android:layout_marginRight="10dp"/>
 
     <ImageView
         android:layout_width="50dp"
@@ -48,22 +62,6 @@
         android:id="@+id/hazard"
         android:gravity="center"
         android:scaleType="fitXY"
-        android:layout_alignTop="@+id/textView_Q1_2"
+        android:layout_alignTop="@+id/reponseDroite"
         android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:text="Je sors quand même, ce parapluie tiendra !"
-        android:layout_width="280dp"
-        android:layout_height="50dp"
-        android:id="@+id/textView_Q1_1"
-        android:gravity="center"
-        android:textColor="#000000"
-        android:textStyle="bold"
-        android:background="#3BFF00"
-        android:onClick="repondre"
-        android:clickable="true"
-        android:layout_marginRight="10dp"
-        android:layout_centerVertical="true"
-        android:layout_alignParentStart="true"
-        android:layout_toStartOf="@+id/hazard" />
 </RelativeLayout>

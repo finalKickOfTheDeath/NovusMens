@@ -1,5 +1,6 @@
 package com.math.novusmens_git.enigme;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.media.MediaPlayer;
@@ -18,6 +19,7 @@ import com.math.novusmens_git.database.Sauvegarde;
 import com.math.novusmens_git.database.SauvegardeDAO;
 import com.math.novusmens_git.exceptionEnigme.VaseDéjàPleinException;
 import com.math.novusmens_git.exceptionEnigme.VaseVideException;
+import com.math.novusmens_git.niveau.Niveau1Activity;
 import com.math.novusmens_git.niveau.Point;
 import com.math.novusmens_git.personnage.Joueur;
 
@@ -50,6 +52,7 @@ public class EnigmeJarresActivity extends Enigme {
                     reset();
                     if(estResolue()){
                         Toast.makeText(getApplicationContext(), "Enigme résolue", Toast.LENGTH_SHORT).show();
+                        resultat();
                         finish();
                     }
                 } catch (VaseVideException e) {
@@ -87,6 +90,7 @@ public class EnigmeJarresActivity extends Enigme {
                     reset();
                     if(estResolue()){
                         Toast.makeText(getApplicationContext(), "Enigme résolue", Toast.LENGTH_SHORT).show();
+                        resultat();
                         finish();
                     }
                 } catch (VaseVideException e) {
@@ -124,6 +128,7 @@ public class EnigmeJarresActivity extends Enigme {
                     reset();
                     if(estResolue()){
                         Toast.makeText(getApplicationContext(), "Enigme résolue", Toast.LENGTH_SHORT).show();
+                        resultat();
                         finish();
                     }
                 } catch (VaseVideException e) {
@@ -235,12 +240,22 @@ public class EnigmeJarresActivity extends Enigme {
 
     @Override
     public void resultat() {
-
+        //on obtient des points de temps
+        int pt = giveRandomPointTemps();
+        Log.d("enigme", "point de temps avant = " + joueur.getTimePoint());
+        Log.d("enigme", "gain point temps : " + pt);
+        //on met les points de temps du joueur à jour
+        joueur.winTimePoint(pt);
+        Log.d("enigme", "point de temps apres = " + joueur.getTimePoint());
+        //on prépare l'intent de reponse
+        Intent intent = getIntent();
+        intent.putExtra("joueur", joueur);
+        setResult(RESULT_OK, intent);
     }
 
     @Override
     protected void onPause() {
-        super.onPause();
+        Log.d("enigme", "on est dans on Pause");
         //sauvegarde de l'état du jeu
         SauvegardeDAO sauvegardeDAO = new SauvegardeDAO(this);
         sauvegardeDAO.open();
@@ -271,17 +286,7 @@ public class EnigmeJarresActivity extends Enigme {
             Log.d("data", "point : " + points.get(i).getId() + " resolu = " + points.get(i).isResolu());
         }
         pointDAO.close();
-        //on insert le point resolu
-        if(estResolue()) {
-            PossedePointDAO possedePointDAO = new PossedePointDAO(this);
-            possedePointDAO.open();
-            possedePointDAO.ajouter(last.getId(), points.get(getNumEnigme()).getId());
-            Log.d("data", "liste des points resolus");
-            ArrayList<Point> pointsResolus = possedePointDAO.selectionner(last);
-            for (int j = 0; j < pointsResolus.size(); j++) {
-                Log.d("data", "point : " + pointsResolus.get(j).getId());
-            }
-        }
+        super.onPause();
     }
 
     //utilisée pour les tests

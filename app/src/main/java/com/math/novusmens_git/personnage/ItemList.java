@@ -13,7 +13,6 @@ public class ItemList extends ArrayList<Item> implements Parcelable {
 
 
     public ItemList() {
-
     }
 
     public ItemList(Parcel in) {

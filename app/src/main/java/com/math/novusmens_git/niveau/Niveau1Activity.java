@@ -26,6 +26,18 @@ import com.math.novusmens_git.menu.NarrationActivity;
 import com.math.novusmens_git.personnage.Joueur;
 
 public class Niveau1Activity extends AppCompatActivity {
+
+    private static  final int REQUEST_MAISON = 1;
+    private static  final int REQUEST_RACINE = 2;
+    private static  final int REQUEST_PNJ = 3;
+    private static  final int REQUEST_JARRE = 4;
+    private static  final int REQUEST_SORTIE = 5;
+    private static  final int REQUEST_ORDI = 6;
+    private static  final int REQUEST_DESERT = 7;
+    private static  final int REQUEST_POINTBLOQUE = 8;
+    private static  final int REQUEST_BLOCS = 9;
+    private static  final int REQUEST_PLUIES = 10;
+
     private final String EXTRA_MUSIQUE = "musique";
     private MediaPlayer player;
     private Joueur joueur;
@@ -59,7 +71,7 @@ public class Niveau1Activity extends AppCompatActivity {
                 Log.i("data", "Vous avez actuellement " + joueur.getTimePoint() + " points de temps");
                 Intent intent = new Intent(v.getContext(), EnigmeMaisonAbandonneeActivity.class);
                 intent.putExtra("joueur", joueur);
-                startActivity(intent);
+                startActivityForResult(intent, REQUEST_MAISON);
             }
         });
 
@@ -70,7 +82,7 @@ public class Niveau1Activity extends AppCompatActivity {
                 Log.i("data", "Vous avez actuellement " + joueur.getTimePoint() + " points de temps");
                 Intent intent = new Intent(v.getContext(), EnigmeRacines.class);
                 intent.putExtra("joueur", joueur);
-                startActivity(intent);
+                startActivityForResult(intent, REQUEST_RACINE);
             }
         });
 
@@ -81,7 +93,7 @@ public class Niveau1Activity extends AppCompatActivity {
                 Log.i("data", "Vous avez actuellement " + joueur.getTimePoint() + " points de temps");
                 Intent intent = new Intent(v.getContext(), EnigmePNJActivity.class);
                 intent.putExtra("joueur", joueur);
-                startActivity(intent);
+                startActivityForResult(intent, REQUEST_PNJ);
             }
         });
 
@@ -93,7 +105,7 @@ public class Niveau1Activity extends AppCompatActivity {
                 Log.i("data", "Vous avez actuellement " + joueur.getTimePoint() + " points de temps");
                 Intent intent = new Intent(v.getContext(), EnigmeJarresActivity.class);
                 intent.putExtra("joueur", joueur);
-                startActivity(intent);
+                startActivityForResult(intent, REQUEST_JARRE);
             }
         });
 
@@ -104,7 +116,7 @@ public class Niveau1Activity extends AppCompatActivity {
                 Log.i("data", "Vous avez actuellement " + joueur.getTimePoint() + " points de temps");
                 Intent intent = new Intent(v.getContext(), EnigmeSortie.class);
                 intent.putExtra("joueur", joueur);
-                startActivity(intent);
+                startActivityForResult(intent, REQUEST_SORTIE);
             }
         });
 
@@ -116,7 +128,7 @@ public class Niveau1Activity extends AppCompatActivity {
                 Log.i("data", "Vous avez actuellement " + joueur.getTimePoint() + " points de temps");
                 Intent intent = new Intent(v.getContext(), EnigmeOrdiActivity.class);
                 intent.putExtra("joueur", joueur);
-                startActivity(intent);
+                startActivityForResult(intent, REQUEST_ORDI);
             }
         });
 
@@ -127,7 +139,7 @@ public class Niveau1Activity extends AppCompatActivity {
                 Log.i("data", "Vous avez actuellement " + joueur.getTimePoint() + " points de temps");
                 Intent intent = new Intent(v.getContext(), EnigmeDesertMagnetiqueActivity.class);
                 intent.putExtra("joueur", joueur);
-                startActivity(intent);
+                startActivityForResult(intent, REQUEST_DESERT);
             }
         });
 
@@ -138,7 +150,7 @@ public class Niveau1Activity extends AppCompatActivity {
                 Log.i("data", "Vous avez actuellement " + joueur.getTimePoint() + " points de temps");
                 Intent intent = new Intent(v.getContext(), EnigmePointBloqueActivity.class);
                 intent.putExtra("joueur", joueur);
-                startActivity(intent);
+                startActivityForResult(intent, REQUEST_POINTBLOQUE);
             }
         });
 
@@ -149,7 +161,7 @@ public class Niveau1Activity extends AppCompatActivity {
                 Log.i("data", "Vous avez actuellement " + joueur.getTimePoint() + " points de temps");
                 Intent intent = new Intent(v.getContext(), EnigmeBlocsActivity.class);
                 intent.putExtra("joueur", joueur);
-                startActivity(intent);
+                startActivityForResult(intent, REQUEST_BLOCS);
             }
         });
 
@@ -160,7 +172,7 @@ public class Niveau1Activity extends AppCompatActivity {
                 Log.i("data", "Vous avez actuellement " + joueur.getTimePoint() + " points de temps");
                 Intent intent = new Intent(v.getContext(), EnigmePluiesAcidesActivity.class);
                 intent.putExtra("joueur", joueur);
-                startActivity(intent);
+                startActivityForResult(intent, REQUEST_PLUIES);
             }
         });
 
@@ -211,15 +223,31 @@ public class Niveau1Activity extends AppCompatActivity {
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.i("iut","Je suis dans onActivityResult ");
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d("enimge", "on est dans onActivityResult niveau 1");
+        Log.d("enigme", "resultCode = " + resultCode);
+        Log.d("enigme", "RESULT_OK = " + RESULT_OK);
+        Log.d("enigme", "requestCode = " + requestCode);
         // on récupère le statut de retour de l'activité 2 c'est à dire l'activité numéro 1000
         //if(requestCode==1000){
-            // si le code de retour est égal à 1 on stoppe l'activité 1
-            if(resultCode==1){
-                finish();
+        if(resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case REQUEST_MAISON :
+                    joueur = data.getExtras().getParcelable("joueur");
+                    Log.d("intent", "joueur point temps revenu de maison : " + joueur.getTimePoint());
+                    break;
+                case REQUEST_JARRE :
+                    joueur = data.getExtras().getParcelable("joueur");
+                    Log.d("intent", "joueur point temps revenu de jarre : " + joueur.getTimePoint());
+                    break;
             }
+        }
+        // si le code de retour est égal à 1 on stoppe l'activité 1
+        if(resultCode == 1){
+            finish();
+        }
        // }
-        super.onActivityResult(requestCode, resultCode, data);
+
     }
 
 

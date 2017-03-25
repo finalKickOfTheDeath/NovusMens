@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -113,6 +114,7 @@ public class EnigmeOrdiActivity extends Enigme {
         TextView password = (TextView) findViewById(R.id.txtPassword);
         password.setText(PASSWORD);
         password.setTextSize(45);
+        password.setTextColor(ContextCompat.getColor(this, R.color.white));
         password.setGravity(Gravity.CENTER);
         password.setVisibility(View.VISIBLE);
     }
