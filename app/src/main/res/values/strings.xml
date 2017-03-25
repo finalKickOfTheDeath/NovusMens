@@ -12,7 +12,7 @@
     <string name="level1_btn9">Enigme blocs</string>
     <string name="level1_btn10">Enigme narrative pluies acides</string>
 
-    <string name="descEnigmeOrdi">Veuillez entrer le mot de passe : </string>
+    <string name="descEnigmeOrdi">Une inscription étrange se trouve sur la mur : "Persevez le monde sous un autre angle et suivez le lapin blanc. Ainsi vous trouverez le mot de passe"</string>
     <string name="inputEnigmeOrdi"> > </string>
     <string name="level1_enigmeOrdi_imgBtn">Image bouton flèche retour</string>
 
