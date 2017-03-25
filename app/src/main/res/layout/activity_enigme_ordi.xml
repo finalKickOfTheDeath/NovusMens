@@ -27,7 +27,7 @@
     <ImageButton
         android:layout_width="223dp"
         android:layout_height="226dp"
-        app:srcCompat="@drawable/lapin_blanc"
+        app:srcCompat="@drawable/lapin_tribal"
         android:layout_marginTop="50dp"
         android:id="@+id/imgBtnCrane"
         android:scaleType="fitXY"
