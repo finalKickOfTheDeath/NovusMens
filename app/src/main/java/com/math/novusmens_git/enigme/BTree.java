@@ -12,7 +12,10 @@ public class BTree implements IBTree {
     private BTree leftTree;
     private BTree rightTree;
 
-    public BTree(String Q, String rG, String rS,BTree g, BTree d) {
+
+
+
+    public BTree(String Q, String rG, String rS, BTree g, BTree d) {
         question = Q;
         reponseGauche=rG;
         reponseDroite=rS;
@@ -22,28 +25,27 @@ public class BTree implements IBTree {
 
     public BTree(String Q, String rG, String rS) {
         question = Q;
-        reponseGauche=rG;
-        reponseDroite=rS;
+        reponseGauche= rG;
+        reponseDroite= rS;
         leftTree = new BTree();
         rightTree = new BTree();
     }
 
     public BTree(String Q) {
         question = Q;
-        reponseGauche=null;
-        reponseDroite=null;
+        reponseGauche= null;
+        reponseDroite= null;
         leftTree = null;
         rightTree = null;
     }
 
     public BTree() {
         question = null;
-        reponseGauche=null;
-        reponseDroite=null;
+        reponseGauche= null;
+        reponseDroite= null;
         leftTree = null;
         rightTree = null;
     }
-
 
     public String toString() {
         if (isEmpty()) {
@@ -54,7 +56,6 @@ public class BTree implements IBTree {
 
     @Override
     public boolean isEmpty() {
-
         return question == null;
     }
 
@@ -111,15 +112,15 @@ public class BTree implements IBTree {
 
     @Override
     public void setReponseGauche(String v)  {
-        reponseGauche=v;
+        reponseGauche = v;
     }
 
     private void setQuestion(String v) {
-        question=v;
+        question = v;
     }
 
     @Override
     public void setReponseDroite(String v) {
-        reponseDroite=v;
+        reponseDroite = v;
     }
 }

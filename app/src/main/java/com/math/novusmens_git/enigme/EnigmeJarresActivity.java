@@ -12,7 +12,6 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.github.javiersantos.bottomdialogs.BottomDialog;
 import com.math.novusmens_git.R;
 import com.math.novusmens_git.exceptionEnigme.VaseDéjàPleinException;
 import com.math.novusmens_git.exceptionEnigme.VaseVideException;
@@ -237,26 +236,7 @@ public class EnigmeJarresActivity extends Enigme {
         Intent intent = getIntent();
         intent.putExtra("joueur", getJoueur());
         setResult(RESULT_OK, intent);
-        showResult(pt);
-    }
-
-    private void showResult(int point) {
-        BottomDialog bottomDialog = new BottomDialog.Builder(this)
-                .setTitle("Resultats")
-                .setContent("Point(s) de temps gagné(s) : " + point)
-                .setIcon(R.drawable.wolf_head)
-                .setPositiveText("Continuer")
-                .setPositiveBackgroundColorResource(R.color.back)
-                .setPositiveTextColorResource(R.color.white)
-                .onPositive(new BottomDialog.ButtonCallback() {
-                    @Override
-                    public void onClick(BottomDialog dialog) {
-                        Log.d("enigme", "on va finish");
-                        finish();
-                    }
-                })
-                .build();
-        bottomDialog.show();
+        showResult(pt, null, null);
     }
 
     @Override

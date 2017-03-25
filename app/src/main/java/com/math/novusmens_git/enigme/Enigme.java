@@ -3,12 +3,15 @@ package com.math.novusmens_git.enigme;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import com.github.javiersantos.bottomdialogs.BottomDialog;
+import com.math.novusmens_git.R;
 import com.math.novusmens_git.database.PointDAO;
 import com.math.novusmens_git.database.PossedePointDAO;
 import com.math.novusmens_git.database.Sauvegarde;
 import com.math.novusmens_git.database.SauvegardeDAO;
 import com.math.novusmens_git.niveau.IEnigme;
 import com.math.novusmens_git.niveau.Point;
+import com.math.novusmens_git.personnage.Item;
 import com.math.novusmens_git.personnage.Joueur;
 
 import java.text.SimpleDateFormat;
@@ -58,6 +61,30 @@ public abstract class Enigme extends AppCompatActivity implements IEnigme {
         double r = Math.random();
         r = (r * 10) / 2;
         return (int) Math.round(r);
+    }
+
+    public void showResult(int point, Item item, String other) {
+        String nom = "aucun";
+        if(item != null) {
+            nom = item.getNom();
+        }
+        BottomDialog bottomDialog = new BottomDialog.Builder(this)
+                .setTitle("Resultats")
+                .setContent("Point(s) de temps gagné(s) : " + point + "\n" + "Item gagné : " + nom + "\n" + other)
+                .setIcon(R.drawable.wolf_head)
+                .setPositiveText("Continuer")
+                .setPositiveBackgroundColorResource(R.color.back)
+                .setPositiveTextColorResource(R.color.white)
+                .onPositive(new BottomDialog.ButtonCallback() {
+                    @Override
+                    public void onClick(BottomDialog dialog) {
+                        Log.d("enigme", "on va finish");
+                        finish();
+                    }
+                })
+                .setCancelable(false) //empeche de faire disparaitre la fenetre quand on tap en dehors
+                .build();
+        bottomDialog.show();
     }
 
     public void saveState() {

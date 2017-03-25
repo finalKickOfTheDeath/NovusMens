@@ -14,7 +14,6 @@
 
 
     <TextView
-        android:text="TextView"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:textColor="@color/white"
@@ -25,21 +24,18 @@
         android:id="@+id/txtViewDesertMag" />
 
     <Button
-        android:text="Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btnDesertRD"
-        android:layout_marginEnd="114dp"
-        android:layout_alignBaseline="@+id/btnDesertRG"
-        android:layout_alignBottom="@+id/btnDesertRG"
-        android:layout_alignParentEnd="true" />
+        android:layout_below="@+id/btnDesertRG"
+        android:layout_alignStart="@+id/btnDesertRG"
+        android:layout_marginTop="30dp" />
 
     <Button
-        android:text="Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btnDesertRG"
-        android:layout_marginStart="93dp"
+        android:layout_marginStart="25dp"
         android:layout_centerVertical="true"
         android:layout_alignParentStart="true" />
 

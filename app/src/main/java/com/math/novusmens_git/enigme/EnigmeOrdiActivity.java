@@ -16,6 +16,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.javiersantos.bottomdialogs.BottomDialog;
 import com.math.novusmens_git.R;
 
 import java.text.SimpleDateFormat;
@@ -30,6 +31,7 @@ import com.math.novusmens_git.database.SauvegardeDAO;
 import com.math.novusmens_git.niveau.Niveau;
 import com.math.novusmens_git.niveau.Niveau1Activity;
 import com.math.novusmens_git.niveau.Point;
+import com.math.novusmens_git.personnage.Item;
 import com.math.novusmens_git.personnage.Joueur;
 
 
@@ -99,10 +101,7 @@ public class EnigmeOrdiActivity extends Enigme {
                         Log.d("text", "On est là dans le if");
                         mdpFind = true;
                         Toast.makeText(getApplicationContext(), "Enigme résolue !", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(v.getContext(), Niveau1Activity.class);
-                        intent.putExtra("joueur", getJoueur());
-                        startActivity(intent);
-                        finish();
+                        resultat();
                     }
                 }
             });
@@ -177,7 +176,6 @@ public class EnigmeOrdiActivity extends Enigme {
         for(int i = 0; i < points.size(); i++) {
             Log.d("data", "point : " + points.get(i).getId() + " resolu = " + points.get(i).isResolu());
         }
-
         //on insert le point resolu
         if(estResolue()) {
             //on upadate le point resolu
@@ -242,6 +240,35 @@ public class EnigmeOrdiActivity extends Enigme {
 
     @Override
     public void resultat() {
-
+        showResult(0, null, "Dehors, tout n'est que désolation. Saurez-vous trouver la source de la vie ?");
     }
+
+    @Override
+    public void showResult(int point, Item item, String other) {
+        String nom = "aucun";
+        if(item != null) {
+            nom = item.getNom();
+        }
+        BottomDialog bottomDialog = new BottomDialog.Builder(this)
+                .setTitle("Resultats")
+                .setContent(other)
+                .setIcon(R.drawable.wolf_head)
+                .setPositiveText("Continuer")
+                .setPositiveBackgroundColorResource(R.color.back)
+                .setPositiveTextColorResource(R.color.white)
+                .onPositive(new BottomDialog.ButtonCallback() {
+                    @Override
+                    public void onClick(BottomDialog dialog) {
+                        Log.d("enigme", "on va finish");
+                        Intent intent = new Intent(getApplicationContext(), Niveau1Activity.class);
+                        intent.putExtra("joueur", getJoueur());
+                        startActivity(intent);
+                        finish();
+                    }
+                })
+                .setCancelable(false) //empeche de faire disparaitre la fenetre quand on tap en dehors
+                .build();
+        bottomDialog.show();
+    }
+
 }
