@@ -39,4 +39,8 @@ public abstract class Enigme extends AppCompatActivity implements IEnigme {
         return (int) Math.round(r);
     }
 
+    public void saveState() {
+
+    }
+
 }

@@ -13,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.javiersantos.bottomdialogs.BottomDialog;
 import com.math.novusmens_git.database.PointDAO;
 import com.math.novusmens_git.database.PossedePointDAO;
 import com.math.novusmens_git.database.Sauvegarde;
@@ -53,7 +54,7 @@ public class EnigmeJarresActivity extends Enigme {
                     if(estResolue()){
                         Toast.makeText(getApplicationContext(), "Enigme résolue", Toast.LENGTH_SHORT).show();
                         resultat();
-                        finish();
+                        //finish();
                     }
                 } catch (VaseVideException e) {
                     Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
@@ -91,7 +92,7 @@ public class EnigmeJarresActivity extends Enigme {
                     if(estResolue()){
                         Toast.makeText(getApplicationContext(), "Enigme résolue", Toast.LENGTH_SHORT).show();
                         resultat();
-                        finish();
+                        //finish();
                     }
                 } catch (VaseVideException e) {
                     Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
@@ -129,7 +130,7 @@ public class EnigmeJarresActivity extends Enigme {
                     if(estResolue()){
                         Toast.makeText(getApplicationContext(), "Enigme résolue", Toast.LENGTH_SHORT).show();
                         resultat();
-                        finish();
+                        //finish();
                     }
                 } catch (VaseVideException e) {
                     Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
@@ -251,6 +252,26 @@ public class EnigmeJarresActivity extends Enigme {
         Intent intent = getIntent();
         intent.putExtra("joueur", joueur);
         setResult(RESULT_OK, intent);
+        showResult(pt);
+    }
+
+    private void showResult(int point) {
+        BottomDialog bottomDialog = new BottomDialog.Builder(this)
+                .setTitle("Resultats")
+                .setContent("Point(s) de temps gagné(s) : " + point)
+                .setIcon(R.drawable.wolf_head)
+                .setPositiveText("Continuer")
+                .setPositiveBackgroundColorResource(R.color.back)
+                .setPositiveTextColorResource(R.color.white)
+                .onPositive(new BottomDialog.ButtonCallback() {
+                    @Override
+                    public void onClick(BottomDialog dialog) {
+                        Log.d("enigme", "on va finish");
+                        finish();
+                    }
+                })
+                .build();
+        bottomDialog.show();
     }
 
     @Override

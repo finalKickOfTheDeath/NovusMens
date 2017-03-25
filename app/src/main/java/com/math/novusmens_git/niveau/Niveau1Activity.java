@@ -27,16 +27,7 @@ import com.math.novusmens_git.personnage.Joueur;
 
 public class Niveau1Activity extends AppCompatActivity {
 
-    private static  final int REQUEST_MAISON = 1;
-    private static  final int REQUEST_RACINE = 2;
-    private static  final int REQUEST_PNJ = 3;
-    private static  final int REQUEST_JARRE = 4;
-    private static  final int REQUEST_SORTIE = 5;
-    private static  final int REQUEST_ORDI = 6;
-    private static  final int REQUEST_DESERT = 7;
-    private static  final int REQUEST_POINTBLOQUE = 8;
-    private static  final int REQUEST_BLOCS = 9;
-    private static  final int REQUEST_PLUIES = 10;
+    private static  final int REQUEST_RETOURJOUEUR = 100;
 
     private final String EXTRA_MUSIQUE = "musique";
     private MediaPlayer player;
@@ -45,7 +36,7 @@ public class Niveau1Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // on récupère l'intent qui a lancé l'activité
+        //on récupère l'intent qui a lancé l'activité
         Intent intent = getIntent();
         if(intent != null){
             player = MediaPlayer.create(this, R.raw.pjs4_menu);
@@ -60,7 +51,7 @@ public class Niveau1Activity extends AppCompatActivity {
         setContentView(R.layout.activity_niveau1);
         //forcer l'orientation en mode paysage
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        // cacher l'action bar
+        //cacher l'action bar
         if(getSupportActionBar() != null)
             getSupportActionBar().hide();
 
@@ -71,7 +62,7 @@ public class Niveau1Activity extends AppCompatActivity {
                 Log.i("data", "Vous avez actuellement " + joueur.getTimePoint() + " points de temps");
                 Intent intent = new Intent(v.getContext(), EnigmeMaisonAbandonneeActivity.class);
                 intent.putExtra("joueur", joueur);
-                startActivityForResult(intent, REQUEST_MAISON);
+                startActivityForResult(intent, REQUEST_RETOURJOUEUR);
             }
         });
 
@@ -82,7 +73,7 @@ public class Niveau1Activity extends AppCompatActivity {
                 Log.i("data", "Vous avez actuellement " + joueur.getTimePoint() + " points de temps");
                 Intent intent = new Intent(v.getContext(), EnigmeRacines.class);
                 intent.putExtra("joueur", joueur);
-                startActivityForResult(intent, REQUEST_RACINE);
+                startActivityForResult(intent, REQUEST_RETOURJOUEUR);
             }
         });
 
@@ -93,7 +84,7 @@ public class Niveau1Activity extends AppCompatActivity {
                 Log.i("data", "Vous avez actuellement " + joueur.getTimePoint() + " points de temps");
                 Intent intent = new Intent(v.getContext(), EnigmePNJActivity.class);
                 intent.putExtra("joueur", joueur);
-                startActivityForResult(intent, REQUEST_PNJ);
+                startActivityForResult(intent, REQUEST_RETOURJOUEUR);
             }
         });
 
@@ -105,7 +96,7 @@ public class Niveau1Activity extends AppCompatActivity {
                 Log.i("data", "Vous avez actuellement " + joueur.getTimePoint() + " points de temps");
                 Intent intent = new Intent(v.getContext(), EnigmeJarresActivity.class);
                 intent.putExtra("joueur", joueur);
-                startActivityForResult(intent, REQUEST_JARRE);
+                startActivityForResult(intent, REQUEST_RETOURJOUEUR);
             }
         });
 
@@ -116,7 +107,7 @@ public class Niveau1Activity extends AppCompatActivity {
                 Log.i("data", "Vous avez actuellement " + joueur.getTimePoint() + " points de temps");
                 Intent intent = new Intent(v.getContext(), EnigmeSortie.class);
                 intent.putExtra("joueur", joueur);
-                startActivityForResult(intent, REQUEST_SORTIE);
+                startActivityForResult(intent, REQUEST_RETOURJOUEUR);
             }
         });
 
@@ -128,7 +119,7 @@ public class Niveau1Activity extends AppCompatActivity {
                 Log.i("data", "Vous avez actuellement " + joueur.getTimePoint() + " points de temps");
                 Intent intent = new Intent(v.getContext(), EnigmeOrdiActivity.class);
                 intent.putExtra("joueur", joueur);
-                startActivityForResult(intent, REQUEST_ORDI);
+                startActivityForResult(intent, REQUEST_RETOURJOUEUR);
             }
         });
 
@@ -139,7 +130,7 @@ public class Niveau1Activity extends AppCompatActivity {
                 Log.i("data", "Vous avez actuellement " + joueur.getTimePoint() + " points de temps");
                 Intent intent = new Intent(v.getContext(), EnigmeDesertMagnetiqueActivity.class);
                 intent.putExtra("joueur", joueur);
-                startActivityForResult(intent, REQUEST_DESERT);
+                startActivityForResult(intent, REQUEST_RETOURJOUEUR);
             }
         });
 
@@ -150,7 +141,7 @@ public class Niveau1Activity extends AppCompatActivity {
                 Log.i("data", "Vous avez actuellement " + joueur.getTimePoint() + " points de temps");
                 Intent intent = new Intent(v.getContext(), EnigmePointBloqueActivity.class);
                 intent.putExtra("joueur", joueur);
-                startActivityForResult(intent, REQUEST_POINTBLOQUE);
+                startActivityForResult(intent, REQUEST_RETOURJOUEUR);
             }
         });
 
@@ -161,7 +152,7 @@ public class Niveau1Activity extends AppCompatActivity {
                 Log.i("data", "Vous avez actuellement " + joueur.getTimePoint() + " points de temps");
                 Intent intent = new Intent(v.getContext(), EnigmeBlocsActivity.class);
                 intent.putExtra("joueur", joueur);
-                startActivityForResult(intent, REQUEST_BLOCS);
+                startActivityForResult(intent, REQUEST_RETOURJOUEUR);
             }
         });
 
@@ -172,7 +163,7 @@ public class Niveau1Activity extends AppCompatActivity {
                 Log.i("data", "Vous avez actuellement " + joueur.getTimePoint() + " points de temps");
                 Intent intent = new Intent(v.getContext(), EnigmePluiesAcidesActivity.class);
                 intent.putExtra("joueur", joueur);
-                startActivityForResult(intent, REQUEST_PLUIES);
+                startActivityForResult(intent, REQUEST_RETOURJOUEUR);
             }
         });
 
@@ -207,9 +198,6 @@ public class Niveau1Activity extends AppCompatActivity {
             player.release();
             player=null;
         }
-        Intent intent = getIntent();
-        intent.putExtra("joueur", joueur);
-        setResult(RESULT_OK, intent);
     }
 
     @Override
@@ -230,16 +218,13 @@ public class Niveau1Activity extends AppCompatActivity {
         Log.d("enigme", "requestCode = " + requestCode);
         // on récupère le statut de retour de l'activité 2 c'est à dire l'activité numéro 1000
         //if(requestCode==1000){
-        if(resultCode == RESULT_OK) {
-            switch (requestCode) {
-                case REQUEST_MAISON :
-                    joueur = data.getExtras().getParcelable("joueur");
-                    Log.d("intent", "joueur point temps revenu de maison : " + joueur.getTimePoint());
-                    break;
-                case REQUEST_JARRE :
-                    joueur = data.getExtras().getParcelable("joueur");
-                    Log.d("intent", "joueur point temps revenu de jarre : " + joueur.getTimePoint());
-                    break;
+        if(requestCode == REQUEST_RETOURJOUEUR) {
+            if(resultCode == RESULT_OK) {
+                joueur = data.getExtras().getParcelable("joueur");
+                Log.d("intent", "joueur point temps revenu de maison : " + joueur.getTimePoint());
+            }
+            else if(resultCode == RESULT_CANCELED) {
+                Log.d("intent", "RESULT_CANCELED = " + RESULT_CANCELED + " && resultCode = " + resultCode);
             }
         }
         // si le code de retour est égal à 1 on stoppe l'activité 1
