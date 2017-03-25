@@ -1,6 +1,5 @@
 package com.math.novusmens_git.enigme;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.media.MediaPlayer;
@@ -14,23 +13,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.javiersantos.bottomdialogs.BottomDialog;
-import com.math.novusmens_git.database.PointDAO;
-import com.math.novusmens_git.database.PossedePointDAO;
-import com.math.novusmens_git.database.Sauvegarde;
-import com.math.novusmens_git.database.SauvegardeDAO;
+import com.math.novusmens_git.R;
 import com.math.novusmens_git.exceptionEnigme.VaseDéjàPleinException;
 import com.math.novusmens_git.exceptionEnigme.VaseVideException;
-import com.math.novusmens_git.niveau.Niveau1Activity;
-import com.math.novusmens_git.niveau.Point;
 import com.math.novusmens_git.personnage.Joueur;
-
-import com.math.novusmens_git.R;
-
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
-import java.util.Random;
 
 
 public class EnigmeJarresActivity extends Enigme {
@@ -170,7 +156,6 @@ public class EnigmeJarresActivity extends Enigme {
 
     private final String EXTRA_MUSIQUE = "musique";
     private MediaPlayer player;
-    private Joueur joueur;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -184,8 +169,8 @@ public class EnigmeJarresActivity extends Enigme {
             player = MediaPlayer.create(this, R.raw.pjs4);
             player.setVolume(100, 100);
             player.seekTo(intent.getIntExtra(EXTRA_MUSIQUE,0));
-            joueur = intent.getExtras().getParcelable("joueur");
-            Log.d("intent", "joueur point temps : " + joueur.getTimePoint());
+            setJoueur((Joueur) intent.getExtras().getParcelable("joueur"));
+            Log.d("intent", "joueur point temps : " + getJoueur().getTimePoint());
         }
         if(getSupportActionBar() != null)
             getSupportActionBar().hide();
@@ -243,14 +228,14 @@ public class EnigmeJarresActivity extends Enigme {
     public void resultat() {
         //on obtient des points de temps
         int pt = giveRandomPointTemps();
-        Log.d("enigme", "point de temps avant = " + joueur.getTimePoint());
+        Log.d("enigme", "point de temps avant = " + getJoueur().getTimePoint());
         Log.d("enigme", "gain point temps : " + pt);
         //on met les points de temps du joueur à jour
-        joueur.winTimePoint(pt);
-        Log.d("enigme", "point de temps apres = " + joueur.getTimePoint());
+        getJoueur().winTimePoint(pt);
+        Log.d("enigme", "point de temps apres = " + getJoueur().getTimePoint());
         //on prépare l'intent de reponse
         Intent intent = getIntent();
-        intent.putExtra("joueur", joueur);
+        intent.putExtra("joueur", getJoueur());
         setResult(RESULT_OK, intent);
         showResult(pt);
     }
@@ -276,37 +261,7 @@ public class EnigmeJarresActivity extends Enigme {
 
     @Override
     protected void onPause() {
-        Log.d("enigme", "on est dans on Pause");
-        //sauvegarde de l'état du jeu
-        SauvegardeDAO sauvegardeDAO = new SauvegardeDAO(this);
-        sauvegardeDAO.open();
-        Sauvegarde last = sauvegardeDAO.selectionSave();
-        Log.d("data", "ce qu'il y a dans la dernière sauvegarde");
-        Log.d("data", "id : " + last.getId());
-        Log.d("data", "date : " + last.getDate());
-        Log.d("data", "point de temps : " + last.getPointTemps());
-        Log.d("data", "numNiveau : " + last.getNumNiveau());
-        //on met a jour cette sauvegarde
-        SimpleDateFormat format = new SimpleDateFormat("dd MMM yyyy", Locale.FRANCE);
-        String now = format.format(new Date().getTime());
-        last.setDate(now);
-        last.setPointTemps(joueur.getTimePoint());
-        sauvegardeDAO.update(last);
-        Log.d("data", "ce qu'il y a dans la sauvegarde update");
-        Log.d("data", "id : " + last.getId());
-        Log.d("data", "date : " + last.getDate());
-        Log.d("data", "point de temps : " + last.getPointTemps());
-        Log.d("data", "numNiveau : " + last.getNumNiveau());
-        sauvegardeDAO.close();
-        //on recupere la liste de point
-        PointDAO pointDAO = new PointDAO(this);
-        pointDAO.open();
-        ArrayList<Point> points = pointDAO.selectionner();
-        Log.d("data", "ce qu'il y a dans la liste de point");
-        for(int i = 0; i < points.size(); i++) {
-            Log.d("data", "point : " + points.get(i).getId() + " resolu = " + points.get(i).isResolu());
-        }
-        pointDAO.close();
+        saveState();
         super.onPause();
     }
 

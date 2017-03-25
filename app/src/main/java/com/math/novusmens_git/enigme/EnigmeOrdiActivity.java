@@ -39,7 +39,6 @@ public class EnigmeOrdiActivity extends Enigme {
     private boolean mdpFind = false;
     private final String EXTRA_MUSIQUE = "musique";
     private MediaPlayer player;
-    private Joueur joueur;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +52,8 @@ public class EnigmeOrdiActivity extends Enigme {
             player = MediaPlayer.create(this, R.raw.pjs4);
             player.setVolume(100, 100);
             player.seekTo(intent.getIntExtra(EXTRA_MUSIQUE,0));
-            joueur = intent.getExtras().getParcelable("joueur");
-            Log.d("intent", "joueur point temps : " + joueur.getTimePoint());
+            setJoueur((Joueur) intent.getExtras().getParcelable("joueur"));
+            Log.d("intent", "joueur point temps : " + getJoueur().getTimePoint());
         }
         //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         if(getSupportActionBar() != null) {
@@ -101,7 +100,7 @@ public class EnigmeOrdiActivity extends Enigme {
                         mdpFind = true;
                         Toast.makeText(getApplicationContext(), "Enigme résolue !", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(v.getContext(), Niveau1Activity.class);
-                        intent.putExtra("joueur", joueur);
+                        intent.putExtra("joueur", getJoueur());
                         startActivity(intent);
                         finish();
                     }
@@ -151,7 +150,7 @@ public class EnigmeOrdiActivity extends Enigme {
             SimpleDateFormat format = new SimpleDateFormat("dd MMM yyyy", Locale.FRANCE);
             String now = format.format(new Date().getTime());
             //on insert la sauvegarde dans la base
-            sauvegardeDAO.ajouter(new Sauvegarde(now, joueur.getTimePoint(), getNumNiveau()));
+            sauvegardeDAO.ajouter(new Sauvegarde(now, getJoueur().getTimePoint(), getNumNiveau()));
             last = sauvegardeDAO.selectionSave();
             Log.d("data", "ce qu'il y a dans la dernière sauvegarde");
             Log.d("data", "id : " + last.getId());
@@ -159,13 +158,13 @@ public class EnigmeOrdiActivity extends Enigme {
             Log.d("data", "point de temps : " + last.getPointTemps());
             Log.d("data", "numNiveau : " + last.getNumNiveau());
         }
-        //on update la sauvegarde
+        //on updateSetResolu la sauvegarde
         SimpleDateFormat format = new SimpleDateFormat("dd MMM yyyy", Locale.FRANCE);
         String now = format.format(new Date().getTime());
         last.setDate(now);
-        last.setPointTemps(joueur.getTimePoint());
+        last.setPointTemps(getJoueur().getTimePoint());
         sauvegardeDAO.update(last);
-        Log.d("data", "ce qu'il y a dans la sauvegarde update");
+        Log.d("data", "ce qu'il y a dans la sauvegarde updateSetResolu");
         Log.d("data", "id : " + last.getId());
         Log.d("data", "date : " + last.getDate());
         Log.d("data", "point de temps : " + last.getPointTemps());
@@ -178,9 +177,16 @@ public class EnigmeOrdiActivity extends Enigme {
         for(int i = 0; i < points.size(); i++) {
             Log.d("data", "point : " + points.get(i).getId() + " resolu = " + points.get(i).isResolu());
         }
-        pointDAO.close();
+
         //on insert le point resolu
         if(estResolue()) {
+            //on upadate le point resolu
+            Log.d("data", "point to be updateSetResolu : " + points.get(getNumEnigme()).getId() + " " + points.get(getNumEnigme()).isResolu());
+            pointDAO.updateSetResolu(points.get(getNumEnigme()));
+            Log.d("data", "liste de point apres l'updateSetResolu");
+            for(int i = 0; i < points.size(); i++) {
+                Log.d("data", "point : " + points.get(i).getId() + " resolu = " + points.get(i).isResolu());
+            }
             PossedePointDAO possedePointDAO = new PossedePointDAO(this);
             possedePointDAO.open();
             possedePointDAO.ajouter(last.getId(), points.get(getNumEnigme()).getId());
@@ -191,6 +197,7 @@ public class EnigmeOrdiActivity extends Enigme {
             }
             possedePointDAO.close();
         }
+        pointDAO.close();
         sauvegardeDAO.close();
     }
 

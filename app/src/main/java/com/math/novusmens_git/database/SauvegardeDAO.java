@@ -38,7 +38,6 @@ public class SauvegardeDAO extends DAOBase {
         value.put(DatabaseHandler.SAVE_DATE, s.getDate());
         value.put(DatabaseHandler.SAVE_PT, s.getPointTemps());
         getDatabase().update(DatabaseHandler.TABLE_NAME_SAVE, value, DatabaseHandler.SAVE_ID  + " = ?", new String[] {String.valueOf(s.getId())});
-
     }
 
     public Sauvegarde selectionSave() {

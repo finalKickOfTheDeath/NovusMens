@@ -38,6 +38,14 @@ public class PointDAO extends DAOBase {
         Log.d("data", "insersion dans la table point");
     }
 
+    public void updateSetResolu(Point p) {
+        ContentValues value = new ContentValues();
+        p.setResolu(true);
+        int resolu = 1; //true
+        value.put(DatabaseHandler.POINT_RESOLU, resolu);
+        getDatabase().update(DatabaseHandler.TABLE_NAME_POINT, value, DatabaseHandler.POINT_ID  + " = ?", new String[] {String.valueOf(p.getId())});
+    }
+
     public ArrayList<Point> selectionner() {
         //obtenir la liste de point d'une sauvegarde
         Cursor cursor = getDatabase().rawQuery("SELECT " + DatabaseHandler.POINT_ID + " AS _id, "
