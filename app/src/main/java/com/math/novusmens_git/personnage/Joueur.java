@@ -43,12 +43,6 @@ public class Joueur implements Parcelable {
         return object;
     }
 
-    /*
-    public int getPointTemps() {
-        return timePoint;
-    }
-    */
-
     public void move() {
         timePoint--;
     }
@@ -71,6 +65,10 @@ public class Joueur implements Parcelable {
         if(timePoint < 0) {
             timePoint = 0;
         }
+    }
+
+    public void gameOver() {
+        timePoint = 0;
     }
 
     @Override

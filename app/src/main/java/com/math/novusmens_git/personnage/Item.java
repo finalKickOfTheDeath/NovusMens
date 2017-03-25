@@ -20,6 +20,10 @@ public class Item implements Parcelable {
         this.nom = nom;
     }
 
+    public Item(String nom) {
+        this.nom = nom;
+    }
+
     public Item(Parcel in) {
         getFromParcel(in);
     }

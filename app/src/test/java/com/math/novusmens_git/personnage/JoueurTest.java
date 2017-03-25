@@ -63,4 +63,11 @@ public class JoueurTest {
         assertEquals(j.getTimePoint(), 6);
     }
 
+    @Test
+    public void gameOverTest() {
+        Joueur jover = new Joueur(5);
+        j.gameOver();
+        assertEquals(j.getTimePoint(), 0);
+    }
+
 }

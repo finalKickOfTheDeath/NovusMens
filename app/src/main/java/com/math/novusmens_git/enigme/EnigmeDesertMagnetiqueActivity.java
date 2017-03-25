@@ -1,5 +1,6 @@
 package com.math.novusmens_git.enigme;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -9,6 +10,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.math.novusmens_git.R;
+import com.math.novusmens_git.personnage.Item;
+import com.math.novusmens_git.personnage.Joueur;
 
 public class EnigmeDesertMagnetiqueActivity extends Enigme {
 
@@ -36,7 +39,9 @@ public class EnigmeDesertMagnetiqueActivity extends Enigme {
     private BTree bTreeREP_D_D_D;
 
     //btree en cours d'affichage
+    private static final int FINAL_STEP = 4; //niveau des reponses
     private BTree bTreeCourant;
+    private int stepCourant;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +49,11 @@ public class EnigmeDesertMagnetiqueActivity extends Enigme {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_enigme_desert_magnetique);
+        Intent intent = getIntent();
+        if(intent != null){
+            setJoueur((Joueur) intent.getExtras().getParcelable("joueur"));
+            Log.d("intent", "joueur point temps : " + getJoueur().getTimePoint());
+        }
         if(getSupportActionBar() != null)
             getSupportActionBar().hide();
 
@@ -99,6 +109,7 @@ public class EnigmeDesertMagnetiqueActivity extends Enigme {
         ((Button)findViewById(R.id.btnDesertRD)).setText(bTreeNiv1.getReponseDroite());
 
         bTreeCourant = bTreeNiv1;
+        stepCourant = 1; //on est au bTree niveau 1
 
         findViewById(R.id.btnDesertRG).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,6 +122,14 @@ public class EnigmeDesertMagnetiqueActivity extends Enigme {
                 ((TextView)findViewById(R.id.txtViewDesertMag)).setText(bTreeCourant.getQuestion());
                 ((Button)findViewById(R.id.btnDesertRG)).setText(bTreeCourant.getReponseGauche());
                 ((Button)findViewById(R.id.btnDesertRD)).setText(bTreeCourant.getReponseDroite());
+                stepCourant++;
+                if(stepCourant == FINAL_STEP) {
+                    Log.d("btree", "on est arrivé au dernier niveau");
+                    findViewById(R.id.txtViewDesertMag).setVisibility(View.INVISIBLE);
+                    findViewById(R.id.btnDesertRG).setVisibility(View.INVISIBLE);
+                    findViewById(R.id.btnDesertRD).setVisibility(View.INVISIBLE);
+                    resultat();
+                }
             }
         });
 
@@ -125,9 +144,16 @@ public class EnigmeDesertMagnetiqueActivity extends Enigme {
                 ((TextView)findViewById(R.id.txtViewDesertMag)).setText(bTreeCourant.getQuestion());
                 ((Button)findViewById(R.id.btnDesertRG)).setText(bTreeCourant.getReponseGauche());
                 ((Button)findViewById(R.id.btnDesertRD)).setText(bTreeCourant.getReponseDroite());
+                stepCourant++;
+                if(stepCourant == FINAL_STEP) {
+                    Log.d("btree", "on est arrivé au dernier niveau");
+                    findViewById(R.id.txtViewDesertMag).setVisibility(View.INVISIBLE);
+                    findViewById(R.id.btnDesertRG).setVisibility(View.INVISIBLE);
+                    findViewById(R.id.btnDesertRD).setVisibility(View.INVISIBLE);
+                    resultat();
+                }
             }
         });
-
     }
 
     @Override
@@ -137,6 +163,65 @@ public class EnigmeDesertMagnetiqueActivity extends Enigme {
 
     @Override
     public void resultat() {
+        int pt = 0;
+        Item item = null;
+        if(bTreeCourant.getQuestion() == getString(R.string.DM_Res_Q3_G_G_RG)) {
+            //gain de points de temps
+            pt = giveRandomPointTemps();
+            Log.d("btree", "gain de point de temps : " + pt);
+            getJoueur().winTimePoint(pt);
+            //showResult(pt, null, bTreeCourant.getQuestion());
+        }
+        else if(bTreeCourant.getQuestion() == getString(R.string.DM_Res_Q3_G_G_RD)) {
+            //rien de special
+            //showResult(0, null, bTreeCourant.getQuestion());
+        }
+        else if(bTreeCourant.getQuestion() == getString(R.string.DM_Res_Q3_G_D_RG)) {
+            //rien de special
+           // showResult(0, null, bTreeCourant.getQuestion());
+        }
+        else if(bTreeCourant.getQuestion() == getString(R.string.DM_Res_Q3_G_D_RD)) {
+            //gain d'item = pierre ambre
+            item = new Item("Cailloux Mystique");
+        }
+        else if(bTreeCourant.getQuestion() == getString(R.string.DM_Res_Q3_D_G_RG)) {
+            //perte de points de temps
+            pt = giveRandomPointTemps();
+            getJoueur().looseTimePoint(pt);
+            pt = pt*(-1);
+            Log.d("btree", "perte de point de temps : " + pt);
+            //showResult(opp, null, bTreeCourant.getQuestion());
+        }
+        else if(bTreeCourant.getQuestion() == getString(R.string.DM_Res_Q3_D_G_RD)) {
+            //game over
+            getJoueur().gameOver();
+            //showResult(0, null, bTreeCourant.getQuestion());
+        }
+        else if(bTreeCourant.getQuestion() == getString(R.string.DM_Res_Q3_D_D_RG)) {
+            //enigme des blocs débloquée (lol)
+            //showResult(0, null, bTreeCourant.getQuestion());
+        }
+        else if(bTreeCourant.getQuestion() == getString(R.string.DM_Res_Q3_D_D_RD)) {
+            //perte de points de temps
+            pt = giveRandomPointTemps();
+            getJoueur().looseTimePoint(pt);
+            pt = pt*(-1);
+            Log.d("btree", "perte de point de temps : " + pt);
+            //showResult(opp, null, bTreeCourant.getQuestion());
+        }
+        else {
+            Log.d("btree", "erreur dans resultat");
+        }
+        //on prépare l'intent de reponse
+        Intent intent = getIntent();
+        intent.putExtra("joueur", getJoueur());
+        setResult(RESULT_OK, intent);
+        showResult(pt, item, bTreeCourant.getQuestion());
+    }
 
+    @Override
+    protected void onPause() {
+        saveState();
+        super.onPause();
     }
 }

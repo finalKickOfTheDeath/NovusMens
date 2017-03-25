@@ -64,13 +64,34 @@ public abstract class Enigme extends AppCompatActivity implements IEnigme {
     }
 
     public void showResult(int point, Item item, String other) {
-        String nom = "aucun";
+        Log.d("btree", "point : " + point);
+        if(item != null)
+            Log.d("btree", "item : " + item.getNom());
+        Log.d("btree", "other : " + other);
+        String linePointTemps = "";
+        String lineItem = "";
+        String lineOther= "";
+        if(point > 1) {
+            linePointTemps = "Points de temps gagnés : " + point;
+        }
+        else if(point < 1) {
+            linePointTemps = "Points de temps perdus : " + point;
+        }
+        else if(point == 1) {
+            linePointTemps = "Point de temps gagné : " + point;
+        }
+        else if(point == -1) {
+            linePointTemps = "Point de temps perdu : " + point;
+        }
         if(item != null) {
-            nom = item.getNom();
+            lineItem = "Item gagné : " + item.getNom();
+        }
+        if(lineOther != null) {
+            lineOther = other;
         }
         BottomDialog bottomDialog = new BottomDialog.Builder(this)
                 .setTitle("Resultats")
-                .setContent("Point(s) de temps gagné(s) : " + point + "\n" + "Item gagné : " + nom + "\n" + other)
+                .setContent(lineOther + "\n\n" + linePointTemps + "\n\n" + lineItem)
                 .setIcon(R.drawable.wolf_head)
                 .setPositiveText("Continuer")
                 .setPositiveBackgroundColorResource(R.color.back)
