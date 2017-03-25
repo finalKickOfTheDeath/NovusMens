@@ -18,6 +18,8 @@
 
     <TextView
         android:text="TextView"
+
+        android:textColor="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/txtPassword" />
@@ -25,7 +27,7 @@
     <ImageButton
         android:layout_width="223dp"
         android:layout_height="226dp"
-        app:srcCompat="@drawable/clickerordi"
+        app:srcCompat="@drawable/lapin_blanc"
         android:layout_marginTop="50dp"
         android:id="@+id/imgBtnCrane"
         android:scaleType="fitXY"
