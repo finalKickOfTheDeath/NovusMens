@@ -2,6 +2,7 @@ package com.math.novusmens_git.enigme;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -64,6 +65,17 @@ public class EnigmeDesertMagnetiqueActivity extends Enigme {
         Log.d("data", "num niveau devrait être 1 il est : " + getNumNiveau());
         Log.d("data", "num enigme devrait être 6 il est : " + getNumEnigme());
 
+        Typeface typeFaceSav = Typeface.createFromAsset(getAssets(),"fonts/savior1.ttf");
+        TextView question = (TextView) findViewById(R.id.txtViewDesertMag);
+        TextView repG = (TextView) findViewById(R.id.btnDesertRG);
+        TextView repD = (TextView) findViewById(R.id.btnDesertRD);
+        question.setTypeface(typeFaceSav);
+        repG.setTypeface(typeFaceSav);
+        repD.setTypeface(typeFaceSav);
+        question.setTextSize(20);
+        repG.setTextSize(20);
+        repD.setTextSize(20);
+
         //initialisation des btree
         bTreeNiv1 = new BTree(getString(R.string.DM_Q1), getString(R.string.DM_Q1_RG), getString(R.string.DM_Q1_RD));
 
@@ -108,8 +120,8 @@ public class EnigmeDesertMagnetiqueActivity extends Enigme {
 
         //initalisation des view
         ((TextView)findViewById(R.id.txtViewDesertMag)).setText(bTreeNiv1.getQuestion());
-        ((Button)findViewById(R.id.btnDesertRG)).setText(bTreeNiv1.getReponseGauche());
-        ((Button)findViewById(R.id.btnDesertRD)).setText(bTreeNiv1.getReponseDroite());
+        ((TextView)findViewById(R.id.btnDesertRG)).setText(bTreeNiv1.getReponseGauche());
+        ((TextView)findViewById(R.id.btnDesertRD)).setText(bTreeNiv1.getReponseDroite());
 
         bTreeCourant = bTreeNiv1;
         stepCourant = 1; //on est au bTree niveau 1
@@ -123,8 +135,8 @@ public class EnigmeDesertMagnetiqueActivity extends Enigme {
                     Log.d("btree", "exception lors du changement de btreeCourant : " + e);
                 }
                 ((TextView)findViewById(R.id.txtViewDesertMag)).setText(bTreeCourant.getQuestion());
-                ((Button)findViewById(R.id.btnDesertRG)).setText(bTreeCourant.getReponseGauche());
-                ((Button)findViewById(R.id.btnDesertRD)).setText(bTreeCourant.getReponseDroite());
+                ((TextView)findViewById(R.id.btnDesertRG)).setText(bTreeCourant.getReponseGauche());
+                ((TextView)findViewById(R.id.btnDesertRD)).setText(bTreeCourant.getReponseDroite());
                 stepCourant++;
                 if(estResolue()) {
                     resultat();
@@ -141,8 +153,8 @@ public class EnigmeDesertMagnetiqueActivity extends Enigme {
                     Log.d("btree", "exception lors du changement de btreeCourant : " + e);
                 }
                 ((TextView)findViewById(R.id.txtViewDesertMag)).setText(bTreeCourant.getQuestion());
-                ((Button)findViewById(R.id.btnDesertRG)).setText(bTreeCourant.getReponseGauche());
-                ((Button)findViewById(R.id.btnDesertRD)).setText(bTreeCourant.getReponseDroite());
+                ((TextView)findViewById(R.id.btnDesertRG)).setText(bTreeCourant.getReponseGauche());
+                ((TextView)findViewById(R.id.btnDesertRD)).setText(bTreeCourant.getReponseDroite());
                 stepCourant++;
                 if(estResolue()) {
                     resultat();

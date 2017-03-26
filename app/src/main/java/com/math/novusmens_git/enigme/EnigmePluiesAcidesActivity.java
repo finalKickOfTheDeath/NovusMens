@@ -2,6 +2,7 @@ package com.math.novusmens_git.enigme;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -65,6 +66,18 @@ public class EnigmePluiesAcidesActivity extends Enigme {
         setNumNiveau(getResources().getInteger(R.integer.level1));
         Log.d("data", "num niveau devrait être 1 il est : " + getNumNiveau());
         Log.d("data", "num enigme devrait être 9 il est : " + getNumEnigme());
+
+        //font perso
+        Typeface typeFaceSav = Typeface.createFromAsset(getAssets(),"fonts/savior1.ttf");
+        TextView question = (TextView) findViewById(R.id.txtViewPluiesAcides);
+        TextView repG = (TextView) findViewById(R.id.btnPluiesAcidesRG);
+        TextView repD = (TextView) findViewById(R.id.btnPluiesAcidesRD);
+        question.setTypeface(typeFaceSav);
+        repG.setTypeface(typeFaceSav);
+        repD.setTypeface(typeFaceSav);
+        question.setTextSize(20);
+        repG.setTextSize(20);
+        repD.setTextSize(20);
 
         //initialisation des btree
         bTreeNiv1 = new BTree(getString(R.string.PA_Q1), getString(R.string.PA_Q1_RG), getString(R.string.PA_Q1_RD));
