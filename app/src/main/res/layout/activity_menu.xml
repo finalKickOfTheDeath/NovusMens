@@ -12,49 +12,42 @@
     tools:context="com.math.novusmens_git.menu.MenuActivity"
     android:background="@drawable/cote_devaste">
 
-    <!--<TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />-->
-    <TextView
-        android:text="Novus Mens"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/txtTitre"
-        android:textColor="@color/white"
-        android:textSize="25sp"
-        android:textAlignment="center"
-        android:layout_marginRight="28dp"
-        android:layout_marginEnd="28dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/btnJouer"
-        android:layout_alignEnd="@+id/btnJouer"/>
-
-    <Button
-        android:text="Reset"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:id="@+id/btnReset"
-        android:layout_below="@+id/btnJouer"
-        android:layout_alignLeft="@+id/btnJouer"
-        android:layout_alignStart="@+id/btnJouer" />
-
     <Button
         android:text="Jouer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btnJouer"
-        android:elevation="0dp"
-        android:background="@android:color/background_light"
-        android:layout_marginRight="13dp"
+        android:layout_above="@+id/btnReset"
+        android:layout_alignStart="@+id/btnReset"
+        android:layout_marginBottom="27dp"
+        android:textColor="@color/white"
+        android:background="@drawable/border"
+        android:width="110dp" />
+
+    <Button
+        android:text="Reset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnReset"
+        android:layout_alignParentBottom="true"
+        android:layout_alignEnd="@+id/txtEnigmeOrdi"
+        android:layout_marginEnd="23dp"
+        android:layout_marginBottom="53dp"
+        android:textColor="@color/white"
+        android:background="@drawable/border"
+        android:width="110dp" />
+
+    <TextView
+        android:text="Novus Mens"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtEnigmeOrdi"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:textAlignment="center"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="13dp"
-        android:layout_marginTop="43dp"
-        android:layout_below="@+id/txtTitre"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:scaleX="1"
-        android:scaleY="1"
-        android:cursorVisible="false" />
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

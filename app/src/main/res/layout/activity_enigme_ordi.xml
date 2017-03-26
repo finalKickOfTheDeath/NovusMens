@@ -17,19 +17,19 @@
         android:scaleY="5" />
 
     <TextView
-        android:text="TextView"
-
         android:textColor="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/txtPassword" />
+        android:id="@+id/txtPassword"
+        android:layout_weight="0.27"
+        android:layout_marginTop="20dp"/>
 
     <ImageButton
-        android:layout_width="223dp"
+        android:layout_width="212dp"
         android:layout_height="226dp"
         app:srcCompat="@drawable/lapin_tribal"
-        android:layout_marginTop="50dp"
-        android:id="@+id/imgBtnCrane"
+        android:layout_marginTop="20dp"
+        android:id="@+id/imgBtnLapin"
         android:scaleType="fitXY"
         android:layout_gravity="center"
         android:background="@android:color/transparent"/>

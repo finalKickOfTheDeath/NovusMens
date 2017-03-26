@@ -11,19 +11,17 @@
     android:orientation="vertical">
 
 
-    <ScrollView
+    <TextView
+        android:text="@string/descEnigmeOrdi"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.38">
-
-        <TextView
-            android:text="@string/descEnigmeOrdi"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/txtTitre" />
-    </ScrollView>
+        android:layout_height="wrap_content"
+        android:id="@+id/txtEnigmeOrdi"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:padding="10dp"
+        android:background="@drawable/border"/>
 
     <LinearLayout
         android:orientation="horizontal"
@@ -32,23 +30,22 @@
 
         <TextView
             android:text="@string/inputEnigmeOrdi"
-            android:textSize="50sp"
-            android:textColor="@color/back"
+            android:textColor="@color/black"
             android:layout_gravity="center_vertical"
             android:textAlignment="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/TextViewInput"
+            android:layout_width="50dp"
+            android:layout_height="60dp"
+            android:id="@+id/txtViewInput"
             android:layout_weight="0.85" />
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="77dp"
             android:inputType="textPersonName"
-            android:textSize="35sp"
             android:ems="10"
             android:id="@+id/editTextClavier"
-            android:layout_weight="0.85" />
+            android:layout_weight="10.01"
+            android:layout_gravity="center_vertical" />
 
         <ImageButton
             android:layout_width="67dp"
@@ -58,7 +55,8 @@
             app:srcCompat="@drawable/enterarrow"
             android:id="@+id/imgBtnEnter"
             android:contentDescription="@string/level1_enigmeOrdi_imgBtn"
-            android:layout_weight="0.01" />
+            android:layout_weight="0.01"
+            android:padding="10dp"/>
 
     </LinearLayout>
 

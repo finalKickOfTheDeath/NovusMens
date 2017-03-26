@@ -3,13 +3,17 @@ package com.math.novusmens_git.menu;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.graphics.Typeface;
 import android.media.MediaPlayer;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.math.novusmens_git.R;
@@ -17,8 +21,7 @@ import com.math.novusmens_git.database.Sauvegarde;
 import com.math.novusmens_git.database.SauvegardeDAO;
 import com.math.novusmens_git.niveau.Niveau1Activity;
 import com.math.novusmens_git.personnage.Joueur;
-
-import java.io.IOException;
+import com.merkmod.achievementtoastlibrary.AchievementToast;
 
 
 public class MenuActivity extends AppCompatActivity {
@@ -29,7 +32,7 @@ public class MenuActivity extends AppCompatActivity {
     private static final int POINT_TEMPS_START = 12;
     private final String EXTRA_MUSIQUE = "musique";
     private MediaPlayer player;
-    private static final int RESULT_RETOUR = 1;
+    //private static final int RESULT_RETOUR = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +46,16 @@ public class MenuActivity extends AppCompatActivity {
         getSupportActionBar().hide(); // cache la barre de menu
 
         sharedPreferences = getBaseContext().getSharedPreferences(JOUEUR,MODE_PRIVATE);
+
+        //definir les polices personnalisees
+        TextView title =(TextView)findViewById(R.id.txtEnigmeOrdi);
+        Button btnJouer = (Button)findViewById(R.id.btnJouer);
+        Button btnReset = (Button) findViewById(R.id.btnReset);
+        Typeface typeFaceAngel = Typeface.createFromAsset(getAssets(),"fonts/angel.ttf");
+        Typeface typeFacePix = Typeface.createFromAsset(getAssets(),"fonts/pixelmix.ttf");
+        title.setTypeface(typeFaceAngel);
+        btnJouer.setTypeface(typeFacePix);
+        btnReset.setTypeface(typeFacePix);
 
         findViewById(R.id.btnJouer).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,7 +139,8 @@ public class MenuActivity extends AppCompatActivity {
         sauvegardeDAO.reset();
         sauvegardeDAO.close();
         //sharedPreferences.edit().remove(PREF_PTEMPS).apply(); //.remove(PREFS_NAME)
-        Toast.makeText(this, "Vous avez réinitialisé votre partie. Amusez-vous bien !", Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, "Vous avez réinitialisé votre partie. Amusez-vous bien !", Toast.LENGTH_LONG).show();
+        AchievementToast.makeAchievement(this, "Partie réinitialisée", AchievementToast.LENGTH_SHORT, ContextCompat.getDrawable(this, R.drawable.clickerordi)).show();
     }
 
     @Override

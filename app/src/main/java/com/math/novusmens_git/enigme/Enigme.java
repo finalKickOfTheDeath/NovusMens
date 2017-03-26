@@ -90,11 +90,11 @@ public abstract class Enigme extends AppCompatActivity implements IEnigme {
             lineOther = other;
         }
         BottomDialog bottomDialog = new BottomDialog.Builder(this)
-                .setTitle("Resultats")
+                .setTitle("Enigme resolue!")
                 .setContent(lineOther + "\n\n" + linePointTemps + "\n\n" + lineItem)
                 .setIcon(R.drawable.wolf_head)
                 .setPositiveText("Continuer")
-                .setPositiveBackgroundColorResource(R.color.back)
+                .setPositiveBackgroundColorResource(R.color.black)
                 .setPositiveTextColorResource(R.color.white)
                 .onPositive(new BottomDialog.ButtonCallback() {
                     @Override

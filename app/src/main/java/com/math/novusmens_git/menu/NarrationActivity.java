@@ -2,6 +2,7 @@ package com.math.novusmens_git.menu;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.math.novusmens_git.R;
 import com.math.novusmens_git.enigme.EnigmeOrdiActivity;
@@ -50,6 +52,17 @@ public class NarrationActivity extends AppCompatActivity {
 
         }
         getSupportActionBar().hide();
+
+        //font perso
+        TextView narration = (TextView) findViewById(R.id.typeWriter);
+        TextView tapToContinue = (TextView) findViewById(R.id.indication);
+        Typeface typeFaceSav1 = Typeface.createFromAsset(getAssets(),"fonts/savior1.ttf");
+        Typeface typeFaceSav2 = Typeface.createFromAsset(getAssets(),"fonts/savior2.ttf");
+        narration.setTypeface(typeFaceSav1);
+        narration.setTextSize(25);
+        tapToContinue.setTypeface(typeFaceSav2);
+        tapToContinue.setTextSize(20);
+
         text[0]="N'entre pas docilement dans cette douce nuit";//"A l'aube de ce nouveau siècle, le monde que nous connaissons à disparu...";
         text[1]="Le vieil âge doit gronder, tempêter, au déclin du jour";//"L'Homme, en se développant, est devenu avide de pouvoir et à précipiter le monde dans une période de guerre...";
         text[2]="Hurler, s'enrager, à l'agonie de la lumière";//"Les Etats se montant les uns contre les autres, on finit par comettre l'irréparable...";

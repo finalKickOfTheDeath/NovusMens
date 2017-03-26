@@ -2,8 +2,10 @@ package com.math.novusmens_git.enigme;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -16,6 +18,7 @@ import com.math.novusmens_git.R;
 import com.math.novusmens_git.exceptionEnigme.VaseDéjàPleinException;
 import com.math.novusmens_git.exceptionEnigme.VaseVideException;
 import com.math.novusmens_git.personnage.Joueur;
+import com.merkmod.achievementtoastlibrary.AchievementToast;
 
 
 public class EnigmeJarresActivity extends Enigme {
@@ -37,16 +40,15 @@ public class EnigmeJarresActivity extends Enigme {
                     receveur.getTextView().setText(receveur.toString());
                     reset();
                     if(estResolue()){
-                        Toast.makeText(getApplicationContext(), "Enigme résolue", Toast.LENGTH_SHORT).show();
                         resultat();
                         //finish();
                     }
                 } catch (VaseVideException e) {
-                    Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
+                    AchievementToast.makeAchievement(EnigmeJarresActivity.this, e.toString(), AchievementToast.LENGTH_MEDIUM, ContextCompat.getDrawable(getApplicationContext(), R.drawable.clickerordi)).show();
                     Log.d("toast", "toastvide");
                     reset();
                 } catch (VaseDéjàPleinException e) {
-                    Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
+                    AchievementToast.makeAchievement(EnigmeJarresActivity.this, e.toString(), AchievementToast.LENGTH_MEDIUM, ContextCompat.getDrawable(getApplicationContext(), R.drawable.clickerordi)).show();
                     Log.d("toast", "toastplein");
                     reset();
                 } finally {
@@ -75,16 +77,15 @@ public class EnigmeJarresActivity extends Enigme {
                     receveur.getTextView().setText(receveur.toString());
                     reset();
                     if(estResolue()){
-                        Toast.makeText(getApplicationContext(), "Enigme résolue", Toast.LENGTH_SHORT).show();
                         resultat();
                         //finish();
                     }
                 } catch (VaseVideException e) {
-                    Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
+                    AchievementToast.makeAchievement(EnigmeJarresActivity.this, e.toString(), AchievementToast.LENGTH_MEDIUM, ContextCompat.getDrawable(getApplicationContext(), R.drawable.clickerordi)).show();
                     Log.d("toast", "toastvide");
                     reset();
                 } catch (VaseDéjàPleinException e) {
-                    Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
+                    AchievementToast.makeAchievement(EnigmeJarresActivity.this, e.toString(), AchievementToast.LENGTH_MEDIUM, ContextCompat.getDrawable(getApplicationContext(), R.drawable.clickerordi)).show();
                     Log.d("toast", "toastplein");
                     reset();
                 } finally {
@@ -113,16 +114,15 @@ public class EnigmeJarresActivity extends Enigme {
                     receveur.getTextView().setText(receveur.toString());
                     reset();
                     if(estResolue()){
-                        Toast.makeText(getApplicationContext(), "Enigme résolue", Toast.LENGTH_SHORT).show();
                         resultat();
                         //finish();
                     }
                 } catch (VaseVideException e) {
-                    Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
+                    AchievementToast.makeAchievement(EnigmeJarresActivity.this, e.toString(), AchievementToast.LENGTH_MEDIUM, ContextCompat.getDrawable(getApplicationContext(), R.drawable.clickerordi)).show();
                     Log.d("toast", "toastvide");
                     reset();
                 } catch (VaseDéjàPleinException e) {
-                    Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
+                    AchievementToast.makeAchievement(EnigmeJarresActivity.this, e.toString(), AchievementToast.LENGTH_MEDIUM, ContextCompat.getDrawable(getApplicationContext(), R.drawable.clickerordi)).show();
                     Log.d("toast", "toastplein");
                     reset();
                 } finally {
@@ -187,6 +187,27 @@ public class EnigmeJarresActivity extends Enigme {
         arrow7l = (ImageButton) findViewById(R.id.imgBnt7l);
         arrow3l = (ImageButton) findViewById(R.id.imgBtn3l);
 
+        //font perso
+        Typeface typeFaceSav = Typeface.createFromAsset(getAssets(),"fonts/savior1.ttf");
+        TextView txtEnigme = (TextView) findViewById(R.id.textViewDescriptionJarre);
+        TextView txtcapa10 = (TextView) findViewById(R.id.textViewcapacite10l);
+        TextView txtcapa7 = (TextView) findViewById(R.id.textViewcapacite7l);
+        TextView txtcapa3 = (TextView) findViewById(R.id.textViewcapacite3l);
+        txtEnigme.setTypeface(typeFaceSav);
+        text10l.setTypeface(typeFaceSav);
+        text7l.setTypeface(typeFaceSav);
+        text3l.setTypeface(typeFaceSav);
+        txtcapa10.setTypeface(typeFaceSav);
+        txtcapa7.setTypeface(typeFaceSav);
+        txtcapa3.setTypeface(typeFaceSav);
+        txtEnigme.setTextSize(20);
+        text10l.setTextSize(25);
+        text7l.setTextSize(25);
+        text3l.setTextSize(25);
+        txtcapa10.setTextSize(25);
+        txtcapa7.setTextSize(25);
+        txtcapa3.setTextSize(25);
+
         findViewById(R.id.imgBtn10l).setOnClickListener(onClickListenerButton10l);
         findViewById(R.id.imgBnt7l).setOnClickListener(onClickListenerBtn7l);
         findViewById(R.id.imgBtn3l).setOnClickListener(onClickListenerBtn3l);
@@ -197,7 +218,6 @@ public class EnigmeJarresActivity extends Enigme {
         arrow10l.setRotation(180);
         donneur = null;
         receveur = null;
-
     }
 
     //utilisé pour les tests
@@ -236,7 +256,7 @@ public class EnigmeJarresActivity extends Enigme {
         Intent intent = getIntent();
         intent.putExtra("joueur", getJoueur());
         setResult(RESULT_OK, intent);
-        showResult(pt, null, null);
+        showResult(pt, null, "Bravo!");
     }
 
     @Override

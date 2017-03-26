@@ -2,6 +2,7 @@ package com.math.novusmens_git.enigme;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -14,16 +15,9 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.github.javiersantos.bottomdialogs.BottomDialog;
 import com.math.novusmens_git.R;
-
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
-
 import com.math.novusmens_git.database.PointDAO;
 import com.math.novusmens_git.database.PossedePointDAO;
 import com.math.novusmens_git.database.Sauvegarde;
@@ -33,6 +27,12 @@ import com.math.novusmens_git.niveau.Niveau1Activity;
 import com.math.novusmens_git.niveau.Point;
 import com.math.novusmens_git.personnage.Item;
 import com.math.novusmens_git.personnage.Joueur;
+import com.merkmod.achievementtoastlibrary.AchievementToast;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 
 public class EnigmeOrdiActivity extends Enigme {
@@ -69,11 +69,19 @@ public class EnigmeOrdiActivity extends Enigme {
         Log.d("data", "num niveau devrait être 1 il est : " + getNumNiveau());
         Log.d("data", "num enigme devrait être 5 il est : " + getNumEnigme());
 
+        Typeface typeFaceSav = Typeface.createFromAsset(getAssets(),"fonts/savior1.ttf");
+
         if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+
+            //font perso
+            TextView txtMdp = (TextView) findViewById(R.id.txtPassword);
+            txtMdp.setTypeface(typeFaceSav);
+            txtMdp.setTextSize(60);
+
             findViewById(R.id.txtPassword).setVisibility(View.INVISIBLE);
             final ProgressBar barDegat = (ProgressBar) findViewById(R.id.progressBarDegat);
             barDegat.setMax(100);
-            final ImageButton imgBtnCrane = (ImageButton) findViewById(R.id.imgBtnCrane);
+            final ImageButton imgBtnCrane = (ImageButton) findViewById(R.id.imgBtnLapin);
 
             imgBtnCrane.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -91,6 +99,17 @@ public class EnigmeOrdiActivity extends Enigme {
         }
         else {
             Log.d("text", "On est là dans le else");
+
+            TextView txtEnigme = (TextView) findViewById(R.id.txtEnigmeOrdi);
+            TextView input = (TextView) findViewById(R.id.txtViewInput);
+            EditText edit = (EditText) findViewById(R.id.editTextClavier);
+            txtEnigme.setTypeface(typeFaceSav);
+            txtEnigme.setTextSize(25);
+            input.setTypeface(typeFaceSav);
+            input.setTextSize(70);
+            edit.setTypeface(typeFaceSav);
+            edit.setTextSize(70);
+
             findViewById(R.id.imgBtnEnter).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -100,7 +119,6 @@ public class EnigmeOrdiActivity extends Enigme {
                     if(String.valueOf(editText.getText()).equals(PASSWORD)) {
                         Log.d("text", "On est là dans le if");
                         mdpFind = true;
-                        Toast.makeText(getApplicationContext(), "Enigme résolue !", Toast.LENGTH_LONG).show();
                         resultat();
                     }
                 }
@@ -123,12 +141,6 @@ public class EnigmeOrdiActivity extends Enigme {
         if(player != null) {
             player.start();
             player.setLooping(true);
-        }
-        // Checks the orientation of the screen
-        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show();
-        } else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
-            Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -250,11 +262,11 @@ public class EnigmeOrdiActivity extends Enigme {
             nom = item.getNom();
         }
         BottomDialog bottomDialog = new BottomDialog.Builder(this)
-                .setTitle("Resultats")
+                .setTitle("Enigme resolue!")
                 .setContent(other)
                 .setIcon(R.drawable.wolf_head)
                 .setPositiveText("Continuer")
-                .setPositiveBackgroundColorResource(R.color.back)
+                .setPositiveBackgroundColorResource(R.color.black)
                 .setPositiveTextColorResource(R.color.white)
                 .onPositive(new BottomDialog.ButtonCallback() {
                     @Override
