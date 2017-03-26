@@ -1,6 +1,7 @@
 package com.math.novusmens_git.enigme;
 
 import android.content.pm.ActivityInfo;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -35,6 +36,19 @@ public class EnigmePNJActivity extends Enigme {
         setNumNiveau(getResources().getInteger(R.integer.level1));
         Log.d("data", "num niveau devrait être 1 il est : " + getNumNiveau());
         Log.d("data", "num enigme devrait être 2 il est : " + getNumEnigme());
+
+        //font perso
+        Typeface typeFaceSav1 = Typeface.createFromAsset(getAssets(),"fonts/savior1.ttf");
+        Typeface typeFaceSav3 = Typeface.createFromAsset(getAssets(),"fonts/savior3.ttf");
+        TextView pnj = (TextView) findViewById(R.id.txtViewPNJ);
+        TextView repG = (TextView) findViewById(R.id.btnAgree);
+        TextView repD = (TextView) findViewById(R.id.btnDisagree);
+        pnj.setTypeface(typeFaceSav3);
+        repG.setTypeface(typeFaceSav1);
+        repD.setTypeface(typeFaceSav1);
+        pnj.setTextSize(25);
+        repG.setTextSize(22);
+        repD.setTextSize(22);
 
 
         findViewById(R.id.btnAgree).setOnClickListener(new View.OnClickListener() {

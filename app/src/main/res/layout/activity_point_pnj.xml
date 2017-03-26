@@ -12,58 +12,73 @@
     android:background="@drawable/backgroundl1"
     tools:context="com.math.novusmens_git.enigme.EnigmePNJActivity">
 
-    <TextView
-        android:text="@string/pointPNJ_dialogStart"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:layout_width="400dp"
-        android:layout_height="100dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:id="@+id/txtViewPNJ" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        app:srcCompat="@drawable/fox_head"
-        android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/txtViewPNJ"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:id="@+id/imgViewPNJ" />
 
     <ImageView
         android:layout_width="150dp"
         android:layout_height="100dp"
         app:srcCompat="@drawable/wolf_head"
         android:id="@+id/imgViewPlayer"
-        android:layout_below="@+id/txtViewPNJ"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="24dp" />
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout"
+        android:layout_alignBottom="@+id/imgViewPlayer"
         android:layout_alignParentEnd="true"
-        android:layout_below="@+id/txtViewPNJ"
         android:layout_toEndOf="@+id/imgViewPlayer"
-        android:layout_alignBottom="@+id/imgViewPlayer">
+        android:layout_alignTop="@+id/imgViewPlayer">
 
         <Button
             android:text="@string/pointPNJ_btnAgree1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
             android:layout_gravity="center_vertical"
+            android:padding="10dp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:background="@drawable/border"
+            android:layout_weight="0.5"
             android:id="@+id/btnAgree" />
 
         <Button
             android:text="@string/pointPNJ_btnDisagree1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
             android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:gravity="center"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:layout_weight="0.5"
+            android:background="@drawable/border"
             android:id="@+id/btnDisagree" />
     </LinearLayout>
+
+    <TextView
+        android:layout_width="400dp"
+        android:height="80dp"
+        android:text="@string/pointPNJ_dialogStart"
+        android:textColor="@color/white"
+        android:layout_height="100dp"
+        android:padding="10dp"
+        android:gravity="center"
+        android:background="@drawable/border"
+        android:id="@+id/txtViewPNJ"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="22dp" />
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:srcCompat="@drawable/fox_head"
+        android:id="@+id/imgViewPNJ"
+        android:layout_marginStart="28dp"
+        android:layout_alignTop="@+id/txtViewPNJ"
+        android:layout_toEndOf="@+id/txtViewPNJ" />
 
 </RelativeLayout>
