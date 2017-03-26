@@ -2,6 +2,8 @@ package com.math.novusmens_git.niveau;
 
 import android.util.Log;
 
+import com.math.novusmens_git.personnage.Item;
+
 import java.util.ArrayList;
 
 /**
@@ -13,6 +15,7 @@ public class Niveau {
 
     int numNiveau;
     ArrayList<Point> points;
+    ArrayList<Item> items;
 
     public Niveau(int numNiveau) {
         this.numNiveau = numNiveau;

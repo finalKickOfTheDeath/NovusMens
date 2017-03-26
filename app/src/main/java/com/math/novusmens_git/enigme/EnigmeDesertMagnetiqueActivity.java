@@ -190,6 +190,7 @@ public class EnigmeDesertMagnetiqueActivity extends Enigme {
         else if(bTreeCourant.getQuestion() == getString(R.string.DM_Res_Q3_G_D_RD)) {
             //gain d'item = pierre ambre
             item = new Item("Cailloux Mystique");
+            getJoueur().win(item);
         }
         else if(bTreeCourant.getQuestion() == getString(R.string.DM_Res_Q3_D_G_RG)) {
             //perte de points de temps

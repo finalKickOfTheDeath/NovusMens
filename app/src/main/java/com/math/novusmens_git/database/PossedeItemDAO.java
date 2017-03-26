@@ -10,6 +10,7 @@ import android.util.Log;
  */
 
 public class PossedeItemDAO extends DAOBase {
+    //donne la liste des items possedes pour une sauvegarde
 
     public PossedeItemDAO(Context pContext) {
         super(pContext);

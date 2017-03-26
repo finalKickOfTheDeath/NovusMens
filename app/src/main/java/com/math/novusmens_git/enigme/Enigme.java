@@ -112,25 +112,23 @@ public abstract class Enigme extends AppCompatActivity implements IEnigme {
         //sauvegarde de l'état du jeu
         SauvegardeDAO sauvegardeDAO = new SauvegardeDAO(this);
         sauvegardeDAO.open();
-        Sauvegarde last = sauvegardeDAO.selectionSave();
+        Sauvegarde last = sauvegardeDAO.selectionSave(); //on recupere la derniere sauvegarde
         Log.d("data", "ce qu'il y a dans la dernière sauvegarde");
         Log.d("data", "id : " + last.getId());
         Log.d("data", "date : " + last.getDate());
         Log.d("data", "point de temps : " + last.getPointTemps());
         Log.d("data", "numNiveau : " + last.getNumNiveau());
-        //on met a jour cette sauvegarde
         SimpleDateFormat format = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
         String now = format.format(new Date().getTime());
         last.setDate(now);
         last.setPointTemps(getJoueur().getTimePoint());
-        sauvegardeDAO.update(last);
+        sauvegardeDAO.update(last); //on met a jour cette sauvegarde
         Log.d("data", "ce qu'il y a dans la sauvegarde updateSetResolu");
         Log.d("data", "id : " + last.getId());
         Log.d("data", "date : " + last.getDate());
         Log.d("data", "point de temps : " + last.getPointTemps());
         Log.d("data", "numNiveau : " + last.getNumNiveau());
-        //on recupere la liste de point (debug)
-        PointDAO pointDAO = new PointDAO(this);
+        PointDAO pointDAO = new PointDAO(this); //on recupere la liste de point (debug)
         pointDAO.open();
         ArrayList<Point> points = pointDAO.selectionner();
         Log.d("data", "ce qu'il y a dans la liste de point");

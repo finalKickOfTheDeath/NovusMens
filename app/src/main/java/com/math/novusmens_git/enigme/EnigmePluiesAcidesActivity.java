@@ -185,6 +185,7 @@ public class EnigmePluiesAcidesActivity extends Enigme {
         else if(bTreeCourant.getQuestion() == getString(R.string.PA_Res_Q3_G_G_RD)) {
             //gain d'item = bout d'âme pnj
             item = new Item("Morceau d'âme");
+            getJoueur().win(item);
         }
         else if(bTreeCourant.getQuestion() == getString(R.string.PA_Res_Q3_G_D_RG)) {
             //game over

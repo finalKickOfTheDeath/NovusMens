@@ -15,6 +15,7 @@ import com.math.novusmens_git.niveau.Point;
  */
 
 public class PossedePointDAO extends DAOBase{
+    //donne la liste des points resolus pour une sauvegarde
 
     public PossedePointDAO(Context pContext) {
         super(pContext);

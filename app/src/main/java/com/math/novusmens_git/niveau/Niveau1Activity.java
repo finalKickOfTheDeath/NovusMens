@@ -268,7 +268,6 @@ public class Niveau1Activity extends AppCompatActivity {
                         dialog.dismiss();
                     }
                 })
-                .setCancelable(false) //empeche de faire disparaitre la fenetre quand on tap en dehors
                 .build();
         bottomDialog.show();
     }
