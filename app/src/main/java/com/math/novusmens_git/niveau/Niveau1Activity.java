@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.github.javiersantos.bottomdialogs.BottomDialog;
 import com.math.novusmens_git.R;
 import com.math.novusmens_git.enigme.EnigmeBlocsActivity;
 import com.math.novusmens_git.enigme.EnigmeDesertMagnetiqueActivity;
@@ -23,7 +25,9 @@ import com.math.novusmens_git.enigme.EnigmeRacines;
 import com.math.novusmens_git.enigme.EnigmePointBloqueActivity;
 import com.math.novusmens_git.enigme.EnigmeSortie;
 import com.math.novusmens_git.menu.NarrationActivity;
+import com.math.novusmens_git.personnage.Item;
 import com.math.novusmens_git.personnage.Joueur;
+import com.merkmod.achievementtoastlibrary.AchievementToast;
 
 public class Niveau1Activity extends AppCompatActivity {
 
@@ -167,14 +171,23 @@ public class Niveau1Activity extends AppCompatActivity {
             }
         });
 
-        Toast.makeText(this, "Vous avez actuellement " + joueur.getTimePoint() + " points de temps", Toast.LENGTH_SHORT).show();
+        findViewById(R.id.GridLayout).setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Log.d("gesture", "on long click ok");
+                showPlayerMenu();
+                return true;
+            }
+        });
+
+        //Toast.makeText(this, "Vous avez actuellement " + joueur.getTimePoint() + " points de temps", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     protected void onResume(){
         super.onResume();
-        if(joueur.getTimePoint()<=0){
-            Toast.makeText(this, "Vous avez perdu", Toast.LENGTH_SHORT).show();
+        if(joueur.getTimePoint() <= 0){
+            //Toast.makeText(this, "Vous avez perdu", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, NarrationActivity.class);
             startActivity(intent);
             finish();
@@ -186,7 +199,8 @@ public class Niveau1Activity extends AppCompatActivity {
             }
             player.start();
             player.setLooping(true);
-            Toast.makeText(this, "Vous avez actuellement " + joueur.getTimePoint() + " points de temps", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Vous avez actuellement " + joueur.getTimePoint() + " points de temps", Toast.LENGTH_SHORT).show();
+            AchievementToast.makeAchievement(this, "Point de temps : " + joueur.getTimePoint(), AchievementToast.LENGTH_SHORT, ContextCompat.getDrawable(this, R.drawable.clickerordi)).show();
         }
     }
 
@@ -232,7 +246,31 @@ public class Niveau1Activity extends AppCompatActivity {
             finish();
         }
        // }
+    }
 
+    private void showPlayerMenu() {
+        String listeItem = "";
+        for(Item i : joueur.getItems()) {
+            listeItem += i.getNom() + "\n";
+        }
+        final BottomDialog bottomDialog = new BottomDialog.Builder(this)
+                .setTitle("Inventaire")
+                .setContent("Points de temps : " + joueur.getTimePoint() + "\n" + listeItem)
+                .setIcon(R.drawable.wolf_head)
+                .setPositiveText("Fermer")
+                .setCancelable(true)
+                .setPositiveBackgroundColorResource(R.color.black)
+                .setPositiveTextColorResource(R.color.white)
+                .onPositive(new BottomDialog.ButtonCallback() {
+                    @Override
+                    public void onClick(BottomDialog dialog) {
+                        Log.d("enigme", "on va finish");
+                        dialog.dismiss();
+                    }
+                })
+                .setCancelable(false) //empeche de faire disparaitre la fenetre quand on tap en dehors
+                .build();
+        bottomDialog.show();
     }
 
 

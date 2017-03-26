@@ -101,7 +101,7 @@ public class MenuActivity extends AppCompatActivity {
             Log.d("data", "derniere sauvegarde recuperee --> reprendre partie");
             //creation du joueur
             Joueur joueur = new Joueur(s.getPointTemps());
-            Toast.makeText(this, "Une partie à déja été commencé. Nous sommes toujours en développement", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Une partie à déja été commencé. Nous sommes toujours en développement", Toast.LENGTH_SHORT).show();
             sauvegardeDAO.close();
             Intent intent = new Intent(this, Niveau1Activity.class);
             intent.putExtra(EXTRA_MUSIQUE,player.getCurrentPosition()); //sauvegarde la position courrante de la musique
@@ -140,7 +140,7 @@ public class MenuActivity extends AppCompatActivity {
         sauvegardeDAO.close();
         //sharedPreferences.edit().remove(PREF_PTEMPS).apply(); //.remove(PREFS_NAME)
         //Toast.makeText(this, "Vous avez réinitialisé votre partie. Amusez-vous bien !", Toast.LENGTH_LONG).show();
-        AchievementToast.makeAchievement(this, "Partie réinitialisée", AchievementToast.LENGTH_SHORT, ContextCompat.getDrawable(this, R.drawable.clickerordi)).show();
+        AchievementToast.makeAchievement(this, "Vous avez réinitialisé votre partie. Amusez-vous bien !", AchievementToast.LENGTH_MEDIUM, ContextCompat.getDrawable(this, R.drawable.clickerordi)).show();
     }
 
     @Override
