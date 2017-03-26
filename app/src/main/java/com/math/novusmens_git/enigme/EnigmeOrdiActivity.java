@@ -258,6 +258,7 @@ public class EnigmeOrdiActivity extends Enigme {
         showResult(0, null, "Dehors, tout n'est que désolation. Saurez-vous trouver la source de la vie ?");
     }
 
+    /*
     @Override
     public void showResult(int point, Item item, String other) {
         String nom = "aucun";
@@ -284,6 +285,6 @@ public class EnigmeOrdiActivity extends Enigme {
                 .setCancelable(false) //empeche de faire disparaitre la fenetre quand on tap en dehors
                 .build();
         bottomDialog.show();
-    }
+    }*/
 
 }

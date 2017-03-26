@@ -125,4 +125,11 @@ public class EnigmePNJActivity extends Enigme {
         //on ouvre le dialog pour montrer les résultat
         showResult(0, key, "Humain, je t'ai sous-estimé. Cette vieille relique ne me sert plus depuis longtemps, elle pourra peut-être t'être utile");
     }
+
+    @Override
+    protected void onPause() {
+        saveState();
+        super.onPause();
+    }
+
 }
