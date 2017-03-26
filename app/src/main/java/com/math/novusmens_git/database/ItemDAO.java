@@ -21,23 +21,20 @@ public class ItemDAO extends DAOBase {
     }
 
     public void ajouter(Item i) {
-        //ajouter une sauvegarde à la base
+        //ajouter un item à la base
         ContentValues value = new ContentValues();
-        value.put(DatabaseHandler.SAVE_ID, i.getId());
-        value.put(DatabaseHandler.ITEM_ID, i.getNom());
+        value.put(DatabaseHandler.ITEM_NOM, i.getNom());
 
         //on insere une nouvelle entrée dans la base
         getDatabase().insert(DatabaseHandler.TABLE_NAME_ITEM, null, value);
         Log.d("data", "insersion dans la table item");
     }
 
-    public ArrayList<Item> selectionner(Sauvegarde s) {
-        //obtenir la liste d'item de la sauvegarde
-        Cursor cursor = getDatabase().rawQuery("SELECT i1." + DatabaseHandler.ITEM_ID + " AS _id, "
-                                                            + "i1." + DatabaseHandler.ITEM_NOM + " from "
-                                                            + DatabaseHandler.TABLE_NAME_ITEM + " i1 , "
-                                                            + DatabaseHandler.TABLE_NAME_POSSEDEITEM + " i2 "
-                                                            + " WHERE i2." + DatabaseHandler.SAVE_ID + "=?", new String[]{String.valueOf(s.getId())});
+    public ArrayList<Item> selectionner() {
+        //obtenir la liste d'item
+        Cursor cursor = getDatabase().rawQuery("SELECT " + DatabaseHandler.ITEM_ID + " AS _id, "
+                                                         + DatabaseHandler.ITEM_NOM + " from "
+                                                         + DatabaseHandler.TABLE_NAME_ITEM, new String[]{});
 
         ArrayList<Item> items = new ArrayList<Item>();
 

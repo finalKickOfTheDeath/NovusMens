@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/numerique_rain"
+    android:background="@drawable/numerique_rain_resize"
     android:weightSum="1">
 
     <ProgressBar

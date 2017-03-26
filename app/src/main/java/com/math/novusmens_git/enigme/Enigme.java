@@ -110,25 +110,28 @@ public abstract class Enigme extends AppCompatActivity implements IEnigme {
 
     public void saveState() {
         //sauvegarde de l'état du jeu
+        //on récupère la derniere sauvegarde
         SauvegardeDAO sauvegardeDAO = new SauvegardeDAO(this);
         sauvegardeDAO.open();
-        Sauvegarde last = sauvegardeDAO.selectionSave(); //on recupere la derniere sauvegarde
+        Sauvegarde last = sauvegardeDAO.selectionSave();
         Log.d("data", "ce qu'il y a dans la dernière sauvegarde");
         Log.d("data", "id : " + last.getId());
         Log.d("data", "date : " + last.getDate());
         Log.d("data", "point de temps : " + last.getPointTemps());
         Log.d("data", "numNiveau : " + last.getNumNiveau());
+        //on met a jour cette sauvegarde
         SimpleDateFormat format = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
         String now = format.format(new Date().getTime());
         last.setDate(now);
         last.setPointTemps(getJoueur().getTimePoint());
-        sauvegardeDAO.update(last); //on met a jour cette sauvegarde
-        Log.d("data", "ce qu'il y a dans la sauvegarde updateSetResolu");
+        sauvegardeDAO.update(last);
+        Log.d("data", "ce qu'il y a dans la sauvegarde updateResolu");
         Log.d("data", "id : " + last.getId());
         Log.d("data", "date : " + last.getDate());
         Log.d("data", "point de temps : " + last.getPointTemps());
         Log.d("data", "numNiveau : " + last.getNumNiveau());
-        PointDAO pointDAO = new PointDAO(this); //on recupere la liste de point (debug)
+        //on recupere la liste de point (debug)
+        PointDAO pointDAO = new PointDAO(this);
         pointDAO.open();
         ArrayList<Point> points = pointDAO.selectionner();
         Log.d("data", "ce qu'il y a dans la liste de point");
@@ -138,9 +141,9 @@ public abstract class Enigme extends AppCompatActivity implements IEnigme {
         //on insert le point resolu
         if(estResolue()) {
             //on upadate le point resolu
-            Log.d("data", "point to be updateSetResolu : " + points.get(getNumEnigme()).getId() + " " + points.get(getNumEnigme()).isResolu());
-            pointDAO.updateSetResolu(points.get(getNumEnigme()));
-            Log.d("data", "liste de point apres l'updateSetResolu");
+            Log.d("data", "point to be updateResolu : " + points.get(getNumEnigme()).getId() + " " + points.get(getNumEnigme()).isResolu());
+            pointDAO.updateResolu(points.get(getNumEnigme()));
+            Log.d("data", "liste de point après l'updateResolu");
             for(int i = 0; i < points.size(); i++) {
                 Log.d("data", "point : " + points.get(i).getId() + " resolu = " + points.get(i).isResolu());
             }
@@ -148,6 +151,7 @@ public abstract class Enigme extends AppCompatActivity implements IEnigme {
             PossedePointDAO possedePointDAO = new PossedePointDAO(this);
             possedePointDAO.open();
             possedePointDAO.ajouter(last.getId(), points.get(getNumEnigme()).getId());
+            //ce qu'il y a dans le liste de point résolus (debug)
             Log.d("data", "liste des points resolus");
             ArrayList<Point> pointsResolus = possedePointDAO.selectionner(last);
             for(int j = 0; j < pointsResolus.size(); j++) {

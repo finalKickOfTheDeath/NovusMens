@@ -47,7 +47,7 @@ public class MenuActivity extends AppCompatActivity {
 
         sharedPreferences = getBaseContext().getSharedPreferences(JOUEUR,MODE_PRIVATE);
 
-        //definir les polices personnalisees
+        //font perso
         TextView title =(TextView)findViewById(R.id.txtEnigmeOrdi);
         Button btnJouer = (Button)findViewById(R.id.btnJouer);
         Button btnReset = (Button) findViewById(R.id.btnReset);
@@ -140,7 +140,7 @@ public class MenuActivity extends AppCompatActivity {
         sauvegardeDAO.close();
         //sharedPreferences.edit().remove(PREF_PTEMPS).apply(); //.remove(PREFS_NAME)
         //Toast.makeText(this, "Vous avez réinitialisé votre partie. Amusez-vous bien !", Toast.LENGTH_LONG).show();
-        AchievementToast.makeAchievement(this, "Vous avez réinitialisé votre partie. Amusez-vous bien !", AchievementToast.LENGTH_MEDIUM, ContextCompat.getDrawable(this, R.drawable.clickerordi)).show();
+        AchievementToast.makeAchievement(this, "Vous avez réinitialisé votre partie.", AchievementToast.LENGTH_LONG, ContextCompat.getDrawable(this, R.drawable.clickerordi)).show();
     }
 
     @Override

@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.math.novusmens_git.R;
 import com.math.novusmens_git.enigme.EnigmeOrdiActivity;
+import com.math.novusmens_git.niveau.Niveau1Activity;
 import com.math.novusmens_git.personnage.Joueur;
 
 
@@ -140,7 +141,7 @@ public class NarrationActivity extends AppCompatActivity {
             if(numero > 3) {
                 //Intent intent = new Intent(this, Niveau1Activity.class);
                 if(joueur != null && joueur.getTimePoint() > 0) {
-                    Intent intent = new Intent(this, EnigmeOrdiActivity.class);
+                    Intent intent = new Intent(this, Niveau1Activity.class);
                     intent.putExtra(EXTRA_MUSIQUE, player.getCurrentPosition()); //sauvegarde la position courrante de la musique
                     intent.putExtra("joueur", joueur);
                     startActivity(intent);

@@ -21,7 +21,7 @@ public class PointDAO extends DAOBase {
     }
 
     public void ajouter(Point p) {
-        //ajouter une sauvegarde à la base
+        //ajouter un point à la base
         ContentValues value = new ContentValues();
         value.put(DatabaseHandler.POINT_ID, p.getId());
         int resolu;
@@ -38,7 +38,7 @@ public class PointDAO extends DAOBase {
         Log.d("data", "insersion dans la table point");
     }
 
-    public void updateSetResolu(Point p) {
+    public void updateResolu(Point p) {
         ContentValues value = new ContentValues();
         p.setResolu(true);
         int resolu = 1; //true
@@ -47,7 +47,7 @@ public class PointDAO extends DAOBase {
     }
 
     public ArrayList<Point> selectionner() {
-        //obtenir la liste de point d'une sauvegarde
+        //obtenir la liste de point
         Cursor cursor = getDatabase().rawQuery("SELECT " + DatabaseHandler.POINT_ID + " AS _id, "
                                                          + DatabaseHandler.POINT_RESOLU + " from "
                                                          + DatabaseHandler.TABLE_NAME_POINT, new String[]{});
