@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@drawable/desert_magnetique"
+    android:background="@drawable/desert_magnetique_resize"
     tools:context="com.math.novusmens_git.enigme.EnigmeDesertMagnetiqueActivity">
 
 

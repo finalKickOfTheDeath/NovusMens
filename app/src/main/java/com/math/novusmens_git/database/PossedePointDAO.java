@@ -22,7 +22,7 @@ public class PossedePointDAO extends DAOBase{
     }
 
     public void ajouter(long id_sauv, long id_point) {
-        //ajouter une sauvegarde à la base
+        //ajouter un couple sauv-point à la table possèdePoint
         ContentValues value = new ContentValues();
         value.put(DatabaseHandler.SAVE_ID, id_sauv);
         value.put(DatabaseHandler.POINT_ID, id_point);

@@ -5,12 +5,10 @@ import android.content.pm.ActivityInfo;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 import com.github.javiersantos.bottomdialogs.BottomDialog;
 import com.math.novusmens_git.R;
@@ -47,7 +45,7 @@ public class Niveau1Activity extends Niveau {
     private final String EXTRA_MUSIQUE = "musique";
     private MediaPlayer player;
 
-    private String[] nomItems = {"Morceau d'âme 1/2", "Morceau d'âme 1/2", "Caillou mystique", "Heart key", "Pousse d'espoir"};
+    private String[] nomItems = {"Morceau d'âme 1(1/2)", "Morceau d'âme 2(1/2)", "Caillou mystique", "Heart key", "Pousse d'espoir"};
     private Joueur joueur;
 
     @Override

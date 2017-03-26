@@ -62,8 +62,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         + SAVE_ID + " INTEGER, "
         + POINT_ID + " INTEGER, "
         + "PRIMARY KEY(" + SAVE_ID + ", " + POINT_ID + "), "
-        + "FOREIGN KEY(" + SAVE_ID + ") REFERENCES " + TABLE_NAME_SAVE + "(" + SAVE_ID + ") ON DELETE CASCADE, "
-        + "FOREIGN KEY(" + POINT_ID + ") REFERENCES " + TABLE_NAME_POINT + "(" + POINT_ID + ") ON DELETE CASCADE "
+        + "FOREIGN KEY(" + SAVE_ID + ") REFERENCES " + TABLE_NAME_SAVE + "(" + SAVE_ID + "), "
+        + "FOREIGN KEY(" + POINT_ID + ") REFERENCES " + TABLE_NAME_POINT + "(" + POINT_ID + ") "
         + ");";
 
     private static final String CREATE_TABLE_POSSEDEITEM =
@@ -72,8 +72,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         + SAVE_ID + " INTEGER, "
         + ITEM_ID + " INTEGER, "
         + "PRIMARY KEY(" + SAVE_ID + ", " + ITEM_ID + "), "
-        + "FOREIGN KEY(" + SAVE_ID + ") REFERENCES " + TABLE_NAME_SAVE + "(" + SAVE_ID + ") ON DELETE CASCADE, "
-        + "FOREIGN KEY(" + ITEM_ID + ") REFERENCES " + TABLE_NAME_ITEM + "(" + ITEM_ID + ") ON DELETE CASCADE "
+        + "FOREIGN KEY(" + SAVE_ID + ") REFERENCES " + TABLE_NAME_SAVE + "(" + SAVE_ID + "), "
+        + "FOREIGN KEY(" + ITEM_ID + ") REFERENCES " + TABLE_NAME_ITEM + "(" + ITEM_ID + ") "
         + ");";
 
     //drop table

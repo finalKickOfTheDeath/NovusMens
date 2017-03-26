@@ -68,18 +68,18 @@ public class NarrationActivity extends AppCompatActivity {
         text[1]="Le vieil âge doit gronder, tempêter, au déclin du jour";//"L'Homme, en se développant, est devenu avide de pouvoir et à précipiter le monde dans une période de guerre...";
         text[2]="Hurler, s'enrager, à l'agonie de la lumière";//"Les Etats se montant les uns contre les autres, on finit par comettre l'irréparable...";
         text[3]="Ton temps est compté, ne l'oublie pas !";//"Causant la fin de la civilisation humaine.";
-        image[0] = R.drawable.tube_dimension;
-        image[1] = R.drawable.cote_devaste;
-        image[2] = R.drawable.bombe_h;
-        image[3] = R.drawable.bombe_h;
+        image[0] = R.drawable.tube_dimension_resize;
+        image[1] = R.drawable.cote_devaste_resize;
+        image[2] = R.drawable.bombe_h_resize;
+        image[3] = R.drawable.bombe_h_resize;
         gameOver[0]="Alors que tu approchais du but, tu n'as pas été assez fort";
         gameOver[1]="Tu as contemplé le déclin de ce nouveau jour";
         gameOver[2]="Et chassé la lumière pour embrasser les ténèbres";
         gameOver[3]="Game Over";
-        imageOver[0]=R.drawable.vers_lumiere;
-        imageOver[1]=R.drawable.cote_devaste;
-        imageOver[2]=R.drawable.limbes;
-        imageOver[3]=R.drawable.bombe_h;
+        imageOver[0]=R.drawable.vers_lumiere_resize;
+        imageOver[1]=R.drawable.cote_devaste_resize;
+        imageOver[2]=R.drawable.limbes_resize;
+        imageOver[3]=R.drawable.bombe_h_resize;
         numero = 0;
         intro = (TypeWriter) findViewById(R.id.typeWriter);
         ImageView img = (ImageView) findViewById(R.id.imageView);
@@ -133,18 +133,23 @@ public class NarrationActivity extends AppCompatActivity {
 
     protected void suite(View view) throws InterruptedException {
         Log.i("iut","Le texte est fini ? " + intro.isEnded());
-        if(intro.isEnded()){
+        if(intro.isEnded()) {
             numero++;
             //getRessource.getString
             ImageView img = (ImageView) findViewById(R.id.imageView);
             //img.setImageResource(R.drawable.desert);
             if(numero > 3) {
                 //Intent intent = new Intent(this, Niveau1Activity.class);
+                Log.d("intent", "on es a la derniere etape de narration activity");
                 if(joueur != null && joueur.getTimePoint() > 0) {
+                    Log.d("intent", "on commence une partie");
                     Intent intent = new Intent(this, Niveau1Activity.class);
                     intent.putExtra(EXTRA_MUSIQUE, player.getCurrentPosition()); //sauvegarde la position courrante de la musique
                     intent.putExtra("joueur", joueur);
                     startActivity(intent);
+                }
+                else {
+                    Log.d("intent", "est mort");
                 }
                 finish();
             }

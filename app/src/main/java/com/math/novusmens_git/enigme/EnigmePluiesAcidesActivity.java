@@ -19,6 +19,8 @@ import org.w3c.dom.Text;
 
 public class EnigmePluiesAcidesActivity extends Enigme {
 
+    private static final String ITEM_ENIMGE = "Morceau d'âme 2(1/2)";
+
     //niveau 1
     private BTree bTreeNiv1;
 
@@ -184,7 +186,7 @@ public class EnigmePluiesAcidesActivity extends Enigme {
         }
         else if(bTreeCourant.getQuestion() == getString(R.string.PA_Res_Q3_G_G_RD)) {
             //gain d'item = bout d'âme pnj
-            item = new Item("Morceau d'âme");
+            item = getItemByName(ITEM_ENIMGE);
             getJoueur().win(item);
         }
         else if(bTreeCourant.getQuestion() == getString(R.string.PA_Res_Q3_G_D_RG)) {
@@ -193,11 +195,13 @@ public class EnigmePluiesAcidesActivity extends Enigme {
         }
         else if(bTreeCourant.getQuestion() == getString(R.string.PA_Res_Q3_G_D_RD)) {
             //gain d'item = bout d'âme pnj
-            item = new Item("Morceau d'âme");
+            item = getItemByName(ITEM_ENIMGE);
+            getJoueur().win(item);
         }
         else if(bTreeCourant.getQuestion() == getString(R.string.PA_Res_Q3_D_G_RG)) {
             //gain d'item = bout d'âme pnj
-            item = new Item("Morceau d'âme");
+            item = getItemByName(ITEM_ENIMGE);
+            getJoueur().win(item);
         }
         else if(bTreeCourant.getQuestion() == getString(R.string.PA_Res_Q3_D_G_RD)) {
             //perte de points de temps
@@ -208,7 +212,8 @@ public class EnigmePluiesAcidesActivity extends Enigme {
         }
         else if(bTreeCourant.getQuestion() == getString(R.string.PA_Res_Q3_D_D_RG)) {
             //gain d'item = bout d'âme pnj
-            item = new Item("Morceau d'âme");
+            item = getItemByName(ITEM_ENIMGE);
+            getJoueur().win(item);
         }
         else if(bTreeCourant.getQuestion() == getString(R.string.PA_Res_Q3_D_D_RD)) {
             //perte de points de temps

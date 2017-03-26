@@ -17,6 +17,8 @@ import com.math.novusmens_git.personnage.Joueur;
 
 public class EnigmeDesertMagnetiqueActivity extends Enigme {
 
+    private static final String ITEM_ENIMGE = "Caillou mystique";
+
     //niveau 1
     private BTree bTreeNiv1;
 
@@ -189,7 +191,7 @@ public class EnigmeDesertMagnetiqueActivity extends Enigme {
         }
         else if(bTreeCourant.getQuestion() == getString(R.string.DM_Res_Q3_G_D_RD)) {
             //gain d'item = pierre ambre
-            item = new Item("Cailloux Mystique");
+            item = getItemByName(ITEM_ENIMGE);
             getJoueur().win(item);
         }
         else if(bTreeCourant.getQuestion() == getString(R.string.DM_Res_Q3_D_G_RG)) {

@@ -17,11 +17,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.math.novusmens_git.R;
+import com.math.novusmens_git.database.PossedeItemDAO;
 import com.math.novusmens_git.database.Sauvegarde;
 import com.math.novusmens_git.database.SauvegardeDAO;
 import com.math.novusmens_git.niveau.Niveau1Activity;
+import com.math.novusmens_git.personnage.Item;
 import com.math.novusmens_git.personnage.Joueur;
 import com.merkmod.achievementtoastlibrary.AchievementToast;
+
+import java.util.ArrayList;
 
 
 public class MenuActivity extends AppCompatActivity {
@@ -101,6 +105,16 @@ public class MenuActivity extends AppCompatActivity {
             Log.d("data", "derniere sauvegarde recuperee --> reprendre partie");
             //creation du joueur
             Joueur joueur = new Joueur(s.getPointTemps());
+            //on récupère la liste d'item sauvegarde
+            PossedeItemDAO possedeItemDAO = new PossedeItemDAO(this);
+            possedeItemDAO.open();
+            ArrayList<Item> listItem = possedeItemDAO.selectionner(s);
+            possedeItemDAO.close();
+            Log.d("data", "ce que contient la liste d'item dans menu");
+            for(Item item : listItem) {
+                joueur.win(item);
+                Log.d("data", "item : " + item.getId() + " " + item.getNom());
+            }
             //Toast.makeText(this, "Une partie à déja été commencé. Nous sommes toujours en développement", Toast.LENGTH_SHORT).show();
             sauvegardeDAO.close();
             Intent intent = new Intent(this, Niveau1Activity.class);

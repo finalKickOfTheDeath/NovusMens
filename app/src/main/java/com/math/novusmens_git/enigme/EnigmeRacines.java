@@ -14,6 +14,8 @@ import com.math.novusmens_git.personnage.Joueur;
 
 public class EnigmeRacines extends Enigme {
 
+    private static final String ITEM_ENIMGE = "Morceau d'âme 1(1/2)";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,13 +53,22 @@ public class EnigmeRacines extends Enigme {
     @Override
     public void resultat() {
         //le joueur recoit un morceau d'ame = item
-        Item ame = new Item("Morceau d'âme");
-        getJoueur().win(ame);
+        //Item ame = new Item("Morceau d'âme");
+        //on va chercher l'item dans la bd
+        Item item = getItemByName(ITEM_ENIMGE);
+        getJoueur().win(item);
         //on prepare l'intent de retour vers la map du niveau
         Intent intent = getIntent();
         intent.putExtra("joueur", getJoueur());
         setResult(RESULT_OK, intent);
         //on ouvre le dialog pour montrer les résultat
-        showResult(0, ame, "Bravo!");
+        showResult(0, item, "Bravo!");
     }
+
+    @Override
+    protected void onPause() {
+        saveState();
+        super.onPause();
+    }
+
 }

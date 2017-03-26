@@ -5,7 +5,9 @@ import android.util.Log;
 
 import com.github.javiersantos.bottomdialogs.BottomDialog;
 import com.math.novusmens_git.R;
+import com.math.novusmens_git.database.ItemDAO;
 import com.math.novusmens_git.database.PointDAO;
+import com.math.novusmens_git.database.PossedeItemDAO;
 import com.math.novusmens_git.database.PossedePointDAO;
 import com.math.novusmens_git.database.Sauvegarde;
 import com.math.novusmens_git.database.SauvegardeDAO;
@@ -61,6 +63,14 @@ public abstract class Enigme extends AppCompatActivity implements IEnigme {
         double r = Math.random();
         r = (r * 10) / 2;
         return (int) Math.round(r);
+    }
+
+    public Item getItemByName(String name) {
+        ItemDAO itemDAO = new ItemDAO(this);
+        itemDAO.open();
+        Item item = itemDAO.getByName(name);
+        itemDAO.close();
+        return item;
     }
 
     public void showResult(int point, Item item, String other) {
@@ -130,6 +140,21 @@ public abstract class Enigme extends AppCompatActivity implements IEnigme {
         Log.d("data", "date : " + last.getDate());
         Log.d("data", "point de temps : " + last.getPointTemps());
         Log.d("data", "numNiveau : " + last.getNumNiveau());
+        //on recupere la liste d'items du joueur
+        ArrayList<Item> listItem = joueur.getItems();
+        //on insere chaque item dans la table possede point
+        PossedeItemDAO possedeItemDAO = new PossedeItemDAO(this);
+        possedeItemDAO.open();
+        for(Item item : listItem) {
+            possedeItemDAO.ajouter(last.getId(), item.getId());
+            Log.d("data", "item : " + item.getId() + " nom = " + item.getNom() + " ajouté dans la table possedeItem");
+        }
+        //on recupere ce qu'il y a dans la table possedeItem (debug)
+        ArrayList<Item> items = possedeItemDAO.selectionner(last);
+        Log.d("data", "ce qu'il y a dans la table possede item pour la derniere sauvegarde");
+        for(Item item : items) {
+            Log.d("data", "item : " + item.getId() + " nom : " + item.getNom());
+        }
         //on recupere la liste de point (debug)
         PointDAO pointDAO = new PointDAO(this);
         pointDAO.open();
@@ -160,6 +185,7 @@ public abstract class Enigme extends AppCompatActivity implements IEnigme {
             possedePointDAO.close();
         }
         pointDAO.close();
+        possedeItemDAO.close();
         sauvegardeDAO.close();
     }
 

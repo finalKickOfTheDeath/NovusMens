@@ -50,4 +50,22 @@ public class ItemDAO extends DAOBase {
         return items;
     }
 
+    public Item getByName(String n) {
+        //obtenir l'item pour le nom donné
+        Cursor cursor = getDatabase().rawQuery("SELECT " + DatabaseHandler.ITEM_ID + " AS _id, "
+                                                         + DatabaseHandler.ITEM_NOM + " from "
+                                                         + DatabaseHandler.TABLE_NAME_ITEM
+                                                         + " WHERE " + DatabaseHandler.ITEM_NOM + "=?", new String[]{n});
+        Item item = null;
+        while (cursor.moveToNext()) {
+            long id = cursor.getLong(0);
+            String nom = cursor.getString(1);
+
+            item = new Item(id, nom);
+        }
+        cursor.close();
+        Log.d("data", "selection de la liste d'items");
+        return item;
+    }
+
 }
