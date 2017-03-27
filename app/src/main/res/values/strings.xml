@@ -41,8 +41,11 @@
 
     <string name="pointBloque_desc">Elle est là. Devant vous. Celle que vous croyiez avoir oublié. Si fragile et si forte à la fois. Elle n\'a pas de coeur qui bat mais le vôtre resonne à sa vue.</string>
     <string name="pointBloque_btnTake">L\'emmener avec vous</string>
-    <string name="pointBloqye_txtTake">Vous prenez délicatement cette petite pousse de vie.</string>
+    <string name="pointBloque_txtTake">Vous prenez délicatement cette petite pousse de vie.</string>
     <string name="pointBloque_btnLet">La laisser ici</string>
     <string name="pointBloque_txtLet">Vous préférez ne pas y toucher et continuer à explorer les environs.</string>
+
+    <string name="sortie_desc">Vous sentez une forte présence habiter ces lieux. Au pied du totem, une petite engravure semble attendre quelque chose. En vous approchant vous découvrez une inscription : \"Ce rêve n\'est pas le tient, c\'est celui d\'un monde oublié et perdu\".</string>
+    <string name="sortie_put">Déposer la pousse d\'espoir</string>
 
 </resources>

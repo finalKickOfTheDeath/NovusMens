@@ -115,6 +115,7 @@ public class EnigmePNJActivity extends Enigme {
         possedeItemDAO.open();
         possedeItemDAO.supprimer(ame1.getId());
         possedeItemDAO.supprimer(ame2.getId());
+        possedeItemDAO.close();
         //on lui ajoute la heart key
         Item key = getItemByName(ITEM_ENIMGE);
         getJoueur().win(key);
