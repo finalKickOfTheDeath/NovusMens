@@ -51,7 +51,8 @@ public class MenuActivity extends AppCompatActivity {
         TextView title =(TextView)findViewById(R.id.txtEnigmeOrdi);
         Button btnJouer = (Button)findViewById(R.id.btnJouer);
         Button btnReset = (Button) findViewById(R.id.btnReset);
-        Typeface typeFaceAngel = Typeface.createFromAsset(getAssets(),"fonts/angel.ttf");
+        Typeface typeFaceAngel = Typeface.createFromAsset(getAssets(), "fonts/angel.ttf");
+
         Typeface typeFacePix = Typeface.createFromAsset(getAssets(),"fonts/pixelmix.ttf");
         title.setTypeface(typeFaceAngel);
         btnJouer.setTypeface(typeFacePix);
