@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.math.novusmens_git.personnage.Item;
+import com.math.novusmens_git.personnage.ItemList;
 
 import java.util.ArrayList;
 
@@ -13,38 +14,21 @@ import java.util.ArrayList;
 
 public class Niveau extends AppCompatActivity {
 
-    public static final int NB_POINT_NIVEAU1 = 10;
+    //public static final int NB_POINT_NIVEAU1 = 10;
 
     int numNiveau;
-    ArrayList<Point> points;
-    ArrayList<Item> items;
-
-    /*
-    public Niveau(int numNiveau) {
-        this.numNiveau = numNiveau;
-        this.points = new ArrayList<Point>();
-        if(numNiveau == 1) {
-            setArrayListNiveau1();
-        }
-    }*/
-
-    /*
-    private void setArrayListNiveau1() {
-        for(int i = 1; i <= NB_POINT_NIVEAU1; i++) {
-            points.add(new Point(i, false));
-        }
-        Log.d("data", "on a set l'arrayList du niveau 1");
-    }*/
+    PointList points;
+    ItemList items;
 
     public int getNumNiveau() {
         return numNiveau;
     }
 
-    public ArrayList<Point> getPoints() {
+    public PointList getPoints() {
         return points;
     }
 
-    public ArrayList<Item> getItems() {
+    public ItemList getItems() {
         return items;
     }
 
@@ -52,11 +36,11 @@ public class Niveau extends AppCompatActivity {
         this.numNiveau = numNiveau;
     }
 
-    public void setPoints(ArrayList<Point> points) {
+    public void setPoints(PointList points) {
         this.points = points;
     }
 
-    public void setItems(ArrayList<Item> items) {
+    public void setItems(ItemList items) {
         this.items = items;
     }
 }

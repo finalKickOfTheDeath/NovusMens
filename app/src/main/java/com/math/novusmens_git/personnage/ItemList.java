@@ -53,7 +53,7 @@ public class ItemList extends ArrayList<Item> implements Parcelable {
         this.clear();
         //récupération du nombre d'objet
         int size = in.readInt();
-        //on repeuple la liste avec de nouveaux objets
+        //on repeuple la liste avec de nouveaux items
         for(int i = 0; i < size; i++) {
             Item item  = new Item();
             item.setId(in.readLong());
