@@ -51,9 +51,9 @@ public class EnigmeOrdiActivity extends Enigme {
         setContentView(R.layout.activity_enigme_ordi);
         Intent intent = getIntent();
         if(intent != null){
-            player = MediaPlayer.create(this, R.raw.pjs4);
+           /* player = MediaPlayer.create(this, R.raw.pjs4);
             player.setVolume(100, 100);
-            player.seekTo(intent.getIntExtra(EXTRA_MUSIQUE,0));
+            player.seekTo(intent.getIntExtra(EXTRA_MUSIQUE,0));*/
             setJoueur((Joueur) intent.getExtras().getParcelable("joueur"));
             points = intent.getExtras().getParcelable("listePoint");
             Log.d("intent", "joueur point temps : " + getJoueur().getTimePoint());
@@ -143,10 +143,10 @@ public class EnigmeOrdiActivity extends Enigme {
     @Override
     protected void onResume() {
         super.onResume();
-        if(player != null) {
+        /*if(player != null) {
             player.start();
             player.setLooping(true);
-        }
+        }*/
     }
 
     @Override
@@ -155,6 +155,69 @@ public class EnigmeOrdiActivity extends Enigme {
         saveState();
         super.onPause();
         player.stop();
+        //player.stop();
+        /*
+        //on sauvegarde l'état du jeu
+        SauvegardeDAO sauvegardeDAO = new SauvegardeDAO(this);
+        sauvegardeDAO.open();
+        Sauvegarde last = sauvegardeDAO.selectionSave();
+        if(last == null) {
+            Log.d("data", "pas de sauvegarde dans enimge ordi --> on la créée");
+            //initialisation des points dans la base de données
+            initPoint();
+            //creation de la premiere sauvegarde
+            SimpleDateFormat format = new SimpleDateFormat("dd MMM yyyy", Locale.FRANCE);
+            String now = format.format(new Date().getTime());
+            //on insert la sauvegarde dans la base
+            sauvegardeDAO.ajouter(new Sauvegarde(now, getJoueur().getTimePoint(), getNumNiveau()));
+            last = sauvegardeDAO.selectionSave();
+            Log.d("data", "ce qu'il y a dans la dernière sauvegarde");
+            Log.d("data", "id : " + last.getId());
+            Log.d("data", "date : " + last.getDate());
+            Log.d("data", "point de temps : " + last.getPointTemps());
+            Log.d("data", "numNiveau : " + last.getNumNiveau());
+        }
+        //on updateResolu la sauvegarde
+        SimpleDateFormat format = new SimpleDateFormat("dd MMM yyyy", Locale.FRANCE);
+        String now = format.format(new Date().getTime());
+        last.setDate(now);
+        last.setPointTemps(getJoueur().getTimePoint());
+        sauvegardeDAO.update(last);
+        Log.d("data", "ce qu'il y a dans la sauvegarde updateResolu");
+        Log.d("data", "id : " + last.getId());
+        Log.d("data", "date : " + last.getDate());
+        Log.d("data", "point de temps : " + last.getPointTemps());
+        Log.d("data", "numNiveau : " + last.getNumNiveau());
+        //on recupere la liste de point
+        PointDAO pointDAO = new PointDAO(this);
+        pointDAO.open();
+        ArrayList<Point> points = pointDAO.selectionner();
+        Log.d("data", "ce qu'il y a dans la liste de point");
+        for(int i = 0; i < points.size(); i++) {
+            Log.d("data", "point : " + points.get(i).getId() + " resolu = " + points.get(i).isResolu());
+        }
+        //on insert le point resolu
+        if(estResolue()) {
+            //on update le point resolu
+            Log.d("data", "point to be updateResolu : " + points.get(getNumEnigme()).getId() + " " + points.get(getNumEnigme()).isResolu());
+            pointDAO.updateResolu(points.get(getNumEnigme()));
+            Log.d("data", "liste de point apres l'updateResolu");
+            for(int i = 0; i < points.size(); i++) {
+                Log.d("data", "point : " + points.get(i).getId() + " resolu = " + points.get(i).isResolu());
+            }
+            PossedePointDAO possedePointDAO = new PossedePointDAO(this);
+            possedePointDAO.open();
+            possedePointDAO.ajouter(last.getId(), points.get(getNumEnigme()).getId());
+            Log.d("data", "liste des points resolus");
+            ArrayList<Point> pointsResolus = possedePointDAO.selectionner(last);
+            for(int j = 0; j < pointsResolus.size(); j++) {
+                Log.d("data", "point : " + pointsResolus.get(j).getId());
+            }
+            possedePointDAO.close();
+        }
+        pointDAO.close();
+        sauvegardeDAO.close();
+        */
     }
 
     @Override
@@ -166,10 +229,10 @@ public class EnigmeOrdiActivity extends Enigme {
     @Override
     protected void onDestroy(){
         super.onDestroy();
-        if(player != null){
+        /*if(player != null){
             player.release();
             player=null;
-        }
+        }*/
         Log.i("iut","je suis dans onDestroy");
     }
 

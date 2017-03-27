@@ -224,22 +224,45 @@ public class Niveau1Activity extends Niveau {
     protected void onResume() {
         Log.d("niveau", "on est dans onResume");
         super.onResume();
-        //si le joueur n'a plus de points de temps --> game over
-        if(joueur.getTimePoint() <= 0){
-            //Toast.makeText(this, "Vous avez perdu", Toast.LENGTH_SHORT).show();
+        ArrayList<Point> point = null;
+        SauvegardeDAO sauvegardeDAO = new SauvegardeDAO(this);
+        sauvegardeDAO.open();
+        Sauvegarde last = sauvegardeDAO.selectionSave();
+        if(last != null) {
+            PointDAO pointDAO = new PointDAO(this);
+            pointDAO.open();
+            point = pointDAO.selectionner();
+            pointDAO.close();
+            for (int i = 0; i < point.size(); i++) {
+                Log.d("data", "point : " + point.get(i).getId() + "resolu = " + point.get(i).isResolu());
+                Log.d("fin", "point : " + point.get(i).getId() + "resolu = " + point.get(i).isResolu());
+            }
+        }
+        if(point != null && point.get(4).isResolu()){
+            if (joueur.getTimePoint()==0){ // si le joueur gagne mais n'a plus de point de temps, on lui en rajoute un pour qu'il n'est pas un game over
+                //joueur.winTimePoint(1);
+            }
             Intent intent = new Intent(this, NarrationActivity.class);
+            intent.putExtra("joueur", joueur);
             startActivity(intent);
             finish();
         }
         else {
-            if (player == null) {
-                player = MediaPlayer.create(this, R.raw.pjs4_menu);
-                player.setVolume(100, 100);
+            if (joueur.getTimePoint() <= 0) {
+                //Toast.makeText(this, "Vous avez perdu", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, NarrationActivity.class);
+                startActivity(intent);
+                finish();
+            } else {
+                if (player == null) {
+                    player = MediaPlayer.create(this, R.raw.pjs4_menu);
+                    player.setVolume(100, 100);
+                }
+                player.start();
+                player.setLooping(true);
+                //Toast.makeText(this, "Vous avez actuellement " + joueur.getTimePoint() + " points de temps", Toast.LENGTH_SHORT).show();
+                AchievementToast.makeAchievement(this, "Point de temps : " + joueur.getTimePoint(), AchievementToast.LENGTH_SHORT, ContextCompat.getDrawable(this, R.drawable.clickerordi)).show();
             }
-            player.start();
-            player.setLooping(true);
-            //Toast.makeText(this, "Vous avez actuellement " + joueur.getTimePoint() + " points de temps", Toast.LENGTH_SHORT).show();
-            AchievementToast.makeAchievement(this, "Point de temps : " + joueur.getTimePoint(), AchievementToast.LENGTH_SHORT, ContextCompat.getDrawable(this, R.drawable.clickerordi)).show();
         }
     }
 

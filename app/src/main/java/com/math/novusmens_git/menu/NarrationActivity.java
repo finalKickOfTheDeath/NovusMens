@@ -45,6 +45,7 @@ public class NarrationActivity extends AppCompatActivity {
             Bundle bundle = intent.getExtras();
             if(bundle != null && bundle.containsKey("joueur")) {
                 joueur = intent.getExtras().getParcelable("joueur");
+                Log.d("intent", bundle.toString());
                 Log.d("intent", "joueur point temps : " + joueur.getTimePoint());
             }
             else {
@@ -80,6 +81,19 @@ public class NarrationActivity extends AppCompatActivity {
         imageOver[1]=R.drawable.cote_devaste_resize;
         imageOver[2]=R.drawable.limbes_resize;
         imageOver[3]=R.drawable.bombe_h_resize;
+
+        if(joueur.getTimePoint()>0 && joueur.getTimePoint()<12){
+            gameOver[0]="En plaçant la gemme dans le totem, vos souvenir vous reviennent";
+            gameOver[1]="L'image d'une route déserte menant vers un autre monde"; //"L'image d'un homme et d'un enfant, marchant vers l'horizon";
+            gameOver[2]="D'un homme et d'un enfant, marchant vers l'horizon"; //"Cette image devient réalité alors que vous vous reveillez";
+            gameOver[3]="A suivre...";
+            imageOver[0]=R.drawable.totem_resize;
+            imageOver[1]=R.drawable.route;
+            imageOver[2]=R.drawable.homme_enfant;
+            imageOver[3]=R.drawable.homme_enfant;
+            joueur.gameOver();
+        }
+
         numero = 0;
         intro = (TypeWriter) findViewById(R.id.typeWriter);
         ImageView img = (ImageView) findViewById(R.id.imageView);
