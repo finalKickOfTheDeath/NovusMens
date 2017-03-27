@@ -240,6 +240,7 @@ public class Niveau1Activity extends Niveau {
             if (joueur.getTimePoint() <= 0) {
                 //Toast.makeText(this, "Vous avez perdu", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(this, NarrationActivity.class);
+                intent.putExtra("joueur", joueur);
                 startActivity(intent);
                 finish();
             } else {
