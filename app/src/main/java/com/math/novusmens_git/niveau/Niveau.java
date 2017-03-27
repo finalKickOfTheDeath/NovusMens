@@ -27,9 +27,8 @@ public class Niveau extends AppCompatActivity {
     ArrayList<Point> points;
     ArrayList<Item> items;
     private MediaPlayer player;
-    private Joueur joueur;
 
-    protected void onCreate(Bundle savedInstanceState) {
+   /* protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //on récupère l'intent qui a lancé l'activité
         Intent intent = getIntent();
@@ -44,11 +43,12 @@ public class Niveau extends AppCompatActivity {
     @Override
     protected void onResume(){
         super.onResume();
-        if(true){
+        if(joueur.getTimePoint()<12){
             if (joueur.getTimePoint()==0){ // si le joueur gagne mais n'a plus de point de temps, on lui en rajoute un pour qu'il n'est pas un game over
-                joueur.winTimePoint(1);
+                //joueur.winTimePoint(1);
             }
             Intent intent = new Intent(this, NarrationActivity.class);
+            intent.putExtra("joueur", joueur);
             startActivity(intent);
             finish();
         }
@@ -56,6 +56,7 @@ public class Niveau extends AppCompatActivity {
             if (joueur.getTimePoint() <= 0) {
                 //Toast.makeText(this, "Vous avez perdu", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(this, NarrationActivity.class);
+                intent.putExtra("joueur", joueur);
                 startActivity(intent);
                 finish();
             } else {
@@ -69,7 +70,7 @@ public class Niveau extends AppCompatActivity {
                 AchievementToast.makeAchievement(this, "Point de temps : " + joueur.getTimePoint(), AchievementToast.LENGTH_SHORT, ContextCompat.getDrawable(this, R.drawable.clickerordi)).show();
             }
         }
-    }
+    }*/
     /*
     public Niveau(int numNiveau) {
         this.numNiveau = numNiveau;

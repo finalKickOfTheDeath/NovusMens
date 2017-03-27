@@ -36,11 +36,16 @@ public abstract class Enigme extends AppCompatActivity implements IEnigme {
 
     private MediaPlayer player;
 
+    private MediaPlayer resolution;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         player = MediaPlayer.create(this, R.raw.pjs4);
         player.setVolume(100, 100);
+
+        resolution = MediaPlayer.create(this, R.raw.resolution);
+        resolution.setVolume(100, 100);
     }
 
     @Override
@@ -65,6 +70,8 @@ public abstract class Enigme extends AppCompatActivity implements IEnigme {
         if(player != null){
             player.release();
             player=null;
+            resolution.release();
+            resolution=null;
         }
         Log.i("iut","je suis dans onDestroy");
     }
@@ -110,6 +117,7 @@ public abstract class Enigme extends AppCompatActivity implements IEnigme {
     }
 
     public void showResult(int point, Item item, String other) {
+        resolution.start();
         Log.d("btree", "point : " + point);
         if(item != null)
             Log.d("btree", "item : " + item.getNom());

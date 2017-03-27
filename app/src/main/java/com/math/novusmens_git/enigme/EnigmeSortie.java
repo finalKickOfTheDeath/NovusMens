@@ -49,6 +49,7 @@ public class EnigmeSortie extends Enigme {
         put.setTextSize(25);
 
         if(estResolue()) {
+            saveState();
             Log.d("enigme", "sortie resolue");
             findViewById(R.id.btnPutSortie).setVisibility(View.VISIBLE);
 
