@@ -60,10 +60,7 @@ public class EnigmePNJActivity extends Enigme {
         repG.setTextSize(22);
         repD.setTextSize(22);
 
-
-        Item ame1 = getItemByName(ITEM_NEEDED_1);
-        Item ame2 = getItemByName(ITEM_NEEDED_2);
-        if(getJoueur().has(ame1) && getJoueur().has(ame2)) {
+        if(getJoueur().has(getItemByName(ITEM_NEEDED_1)) && getJoueur().has(getItemByName(ITEM_NEEDED_2))) {
             //on change les textes
             ((TextView)findViewById(R.id.txtViewPNJ)).setText(R.string.pointPNJ_txtResolu);
             ((Button)findViewById(R.id.btnAgree)).setText(R.string.pointPNJ_btnRendre);
@@ -97,9 +94,7 @@ public class EnigmePNJActivity extends Enigme {
         findViewById(R.id.btnDisagree).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Item ame1 = getItemByName(ITEM_NEEDED_1);
-                Item ame2 = getItemByName(ITEM_NEEDED_2);
-                if(getJoueur().has(ame1) && getJoueur().has(ame2)) {
+                if(getJoueur().has(getItemByName(ITEM_NEEDED_1)) && getJoueur().has(getItemByName(ITEM_NEEDED_2))) {
                     showResult(0, null, "Tu n'es pas mieux qu'eux finalement...Ose revenir et tu goûteras à ma fureur");
                 } else {
                     //on change le texte du pnj
