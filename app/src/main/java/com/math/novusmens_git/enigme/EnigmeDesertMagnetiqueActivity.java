@@ -46,6 +46,7 @@ public class EnigmeDesertMagnetiqueActivity extends Enigme {
     private static final int FINAL_STEP = 4; //niveau des reponses
     private BTree bTreeCourant;
     private int stepCourant;
+    private BTree bTreeResolu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,6 +128,7 @@ public class EnigmeDesertMagnetiqueActivity extends Enigme {
 
         bTreeCourant = bTreeNiv1;
         stepCourant = 1; //on est au bTree niveau 1
+        bTreeResolu = new BTree();
 
         findViewById(R.id.btnDesertRG).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,7 +142,7 @@ public class EnigmeDesertMagnetiqueActivity extends Enigme {
                 ((TextView)findViewById(R.id.btnDesertRG)).setText(bTreeCourant.getReponseGauche());
                 ((TextView)findViewById(R.id.btnDesertRD)).setText(bTreeCourant.getReponseDroite());
                 stepCourant++;
-                if(estResolue()) {
+                if(stepCourant == FINAL_STEP) {
                     resultat();
                 }
             }
@@ -158,7 +160,7 @@ public class EnigmeDesertMagnetiqueActivity extends Enigme {
                 ((TextView)findViewById(R.id.btnDesertRG)).setText(bTreeCourant.getReponseGauche());
                 ((TextView)findViewById(R.id.btnDesertRD)).setText(bTreeCourant.getReponseDroite());
                 stepCourant++;
-                if(estResolue()) {
+                if(stepCourant == FINAL_STEP) {
                     resultat();
                 }
             }
@@ -167,7 +169,7 @@ public class EnigmeDesertMagnetiqueActivity extends Enigme {
 
     @Override
     public boolean estResolue() {
-        return (stepCourant == FINAL_STEP);
+        return (!bTreeResolu.isEmpty());
     }
 
     @Override
@@ -193,6 +195,8 @@ public class EnigmeDesertMagnetiqueActivity extends Enigme {
             //gain d'item = pierre ambre
             item = getItemByName(ITEM_ENIMGE);
             getJoueur().win(item);
+            //on a trouvé l'item --> l'énigme est résolue
+            bTreeResolu = bTreeCourant;
         }
         else if(bTreeCourant.getQuestion() == getString(R.string.DM_Res_Q3_D_G_RG)) {
             //perte de points de temps
@@ -207,6 +211,8 @@ public class EnigmeDesertMagnetiqueActivity extends Enigme {
         }
         else if(bTreeCourant.getQuestion() == getString(R.string.DM_Res_Q3_D_D_RG)) {
             //enigme des blocs débloquée (lol)
+            //on a debloque un nouvel endroid --> l'enigme est aussi resolue
+            bTreeResolu = bTreeCourant;
         }
         else if(bTreeCourant.getQuestion() == getString(R.string.DM_Res_Q3_D_D_RD)) {
             //perte de points de temps

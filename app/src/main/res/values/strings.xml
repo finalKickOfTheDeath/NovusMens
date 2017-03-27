@@ -38,6 +38,9 @@
     <string name="pointPNJ_btnAgree2">J\'accepte</string>
     <string name="pointPNJ_btnDisagree2">Je ne peux pas</string>
     <string name="pointPNJ_dialogEnd">Grrr...il fait froid dans ce temps gris</string>
+    <string name="pointPNJ_txtResolu">Je vois que tu détiens quelque chose qui m\'est cher...</string>
+    <string name="pointPNJ_btnRendre">Rendre l\'âme (à qui elle appartient)</string>
+    <string name="pointPNJ_btnPasMaintenant">Ce n\'est pas le bon moment</string>
 
     <string name="pointBloque_desc">Elle est là. Devant vous. Celle que vous croyiez avoir oublié. Si fragile et si forte à la fois. Elle n\'a pas de coeur qui bat mais le vôtre resonne à sa vue.</string>
     <string name="pointBloque_btnTake">L\'emmener avec vous</string>

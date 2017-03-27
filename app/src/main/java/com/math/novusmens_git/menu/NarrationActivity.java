@@ -89,7 +89,7 @@ public class NarrationActivity extends AppCompatActivity {
         imageOver[3]=R.drawable.bombe_h_resize;
 
         if(joueur.getTimePoint()>0 && joueur.getTimePoint()<12){
-            gameOver[0]="En plaçant la gemme dans le totem, vos souvenir vous reviennent";
+            gameOver[0]="En plaçant la gemme dans le totem, vos souvenirs vous reviennent";
             gameOver[1]="L'image d'une route déserte menant vers un autre monde"; //"L'image d'un homme et d'un enfant, marchant vers l'horizon";
             gameOver[2]="D'un homme et d'un enfant, marchant vers l'horizon"; //"Cette image devient réalité alors que vous vous reveillez";
             gameOver[3]="A suivre...";

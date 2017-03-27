@@ -60,25 +60,36 @@ public class EnigmePNJActivity extends Enigme {
         repG.setTextSize(22);
         repD.setTextSize(22);
 
-        if(estResolue()) {
-            resultat();
-        }
 
+        Item ame1 = getItemByName(ITEM_NEEDED_1);
+        Item ame2 = getItemByName(ITEM_NEEDED_2);
+        if(getJoueur().has(ame1) && getJoueur().has(ame2)) {
+            //on change les textes
+            ((TextView)findViewById(R.id.txtViewPNJ)).setText(R.string.pointPNJ_txtResolu);
+            ((Button)findViewById(R.id.btnAgree)).setText(R.string.pointPNJ_btnRendre);
+            ((Button)findViewById(R.id.btnDisagree)).setText(R.string.pointPNJ_btnPasMaintenant);
+        }
 
         findViewById(R.id.btnAgree).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(etape == 1) {
-                    //on change les textes
-                    ((TextView)findViewById(R.id.txtViewPNJ)).setText(R.string.pointPNJ_dialogProposition);
-                    ((Button)findViewById(R.id.btnAgree)).setText(R.string.pointPNJ_btnAgree2);
-                    ((Button)findViewById(R.id.btnDisagree)).setText(R.string.pointPNJ_btnDisagree2);
-                    etape++;
-                }
-                else if(etape == 2) {
-                    ((TextView)findViewById(R.id.txtViewPNJ)).setText(R.string.pointPNJ_dialogEnd);
-                    findViewById(R.id.btnAgree).setVisibility(View.INVISIBLE);
-                    findViewById(R.id.btnDisagree).setVisibility(View.INVISIBLE);
+                Item ame1 = getItemByName(ITEM_NEEDED_1);
+                Item ame2 = getItemByName(ITEM_NEEDED_2);
+                if(getJoueur().has(ame1) && getJoueur().has(ame2)) {
+                    resultat();
+                } else {
+                    if(etape == 1) {
+                        //on change les textes
+                        ((TextView)findViewById(R.id.txtViewPNJ)).setText(R.string.pointPNJ_dialogProposition);
+                        ((Button)findViewById(R.id.btnAgree)).setText(R.string.pointPNJ_btnAgree2);
+                        ((Button)findViewById(R.id.btnDisagree)).setText(R.string.pointPNJ_btnDisagree2);
+                        etape++;
+                    }
+                    else if(etape == 2) {
+                        ((TextView)findViewById(R.id.txtViewPNJ)).setText(R.string.pointPNJ_dialogEnd);
+                        findViewById(R.id.btnAgree).setVisibility(View.INVISIBLE);
+                        findViewById(R.id.btnDisagree).setVisibility(View.INVISIBLE);
+                    }
                 }
             }
         });
@@ -86,11 +97,17 @@ public class EnigmePNJActivity extends Enigme {
         findViewById(R.id.btnDisagree).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //on change le texte du pnj
-                ((TextView)findViewById(R.id.txtViewPNJ)).setText(R.string.pointPNJ_dialogEnd);
-                //on desactive les boutons
-                findViewById(R.id.btnAgree).setVisibility(View.INVISIBLE);
-                findViewById(R.id.btnDisagree).setVisibility(View.INVISIBLE);
+                Item ame1 = getItemByName(ITEM_NEEDED_1);
+                Item ame2 = getItemByName(ITEM_NEEDED_2);
+                if(getJoueur().has(ame1) && getJoueur().has(ame2)) {
+                    showResult(0, null, "Tu n'es pas mieux qu'eux finalement...Ose revenir et tu goûteras à ma fureur");
+                } else {
+                    //on change le texte du pnj
+                    ((TextView)findViewById(R.id.txtViewPNJ)).setText(R.string.pointPNJ_dialogEnd);
+                    //on desactive les boutons
+                    findViewById(R.id.btnAgree).setVisibility(View.INVISIBLE);
+                    findViewById(R.id.btnDisagree).setVisibility(View.INVISIBLE);
+                }
             }
         });
     }
@@ -98,9 +115,8 @@ public class EnigmePNJActivity extends Enigme {
 
     @Override
     public boolean estResolue() {
-        Item ame1 = getItemByName(ITEM_NEEDED_1);
-        Item ame2 = getItemByName(ITEM_NEEDED_2);
-        return (getJoueur().has(ame1) && getJoueur().has(ame2));
+        Item key = getItemByName(ITEM_ENIMGE);
+        return (getJoueur().has(key));
     }
 
     @Override

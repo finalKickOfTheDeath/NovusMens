@@ -44,6 +44,7 @@ public class EnigmeMaisonAbandonneeActivity extends Enigme {
     private static final int FINAL_STEP = 4; //niveau des reponses
     private BTree bTreeCourant;
     private int stepCourant;
+    private BTree bTreeResolu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,6 +127,7 @@ public class EnigmeMaisonAbandonneeActivity extends Enigme {
 
         bTreeCourant = bTreeNiv1;
         stepCourant = 1; //on est au bTree niveau 1
+        bTreeResolu = new BTree();
 
         findViewById(R.id.btnMaisonAbdnRG).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,7 +141,7 @@ public class EnigmeMaisonAbandonneeActivity extends Enigme {
                 ((TextView)findViewById(R.id.btnMaisonAbdnRG)).setText(bTreeCourant.getReponseGauche());
                 ((TextView)findViewById(R.id.btnMaisonAbdnRD)).setText(bTreeCourant.getReponseDroite());
                 stepCourant++;
-                if(estResolue()) {
+                if(stepCourant == FINAL_STEP) {
                     resultat();
                 }
             }
@@ -157,7 +159,7 @@ public class EnigmeMaisonAbandonneeActivity extends Enigme {
                 ((TextView)findViewById(R.id.btnMaisonAbdnRG)).setText(bTreeCourant.getReponseGauche());
                 ((TextView)findViewById(R.id.btnMaisonAbdnRD)).setText(bTreeCourant.getReponseDroite());
                 stepCourant++;
-                if(estResolue()) {
+                if(stepCourant == FINAL_STEP) {
                     resultat();
                 }
             }
@@ -166,7 +168,7 @@ public class EnigmeMaisonAbandonneeActivity extends Enigme {
 
     @Override
     public boolean estResolue() {
-        return (stepCourant == FINAL_STEP);
+        return (!bTreeResolu.isEmpty());
     }
 
     @Override

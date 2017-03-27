@@ -48,6 +48,7 @@ public class EnigmePluiesAcidesActivity extends Enigme {
     private static final int FINAL_STEP = 4; //niveau des reponses
     private BTree bTreeCourant;
     private int stepCourant;
+    private BTree bTreeResolu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,6 +131,7 @@ public class EnigmePluiesAcidesActivity extends Enigme {
 
         bTreeCourant = bTreeNiv1;
         stepCourant = 1; //on est au bTree niveau 1
+        bTreeResolu = new BTree();
 
         findViewById(R.id.btnPluiesAcidesRG).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,7 +145,7 @@ public class EnigmePluiesAcidesActivity extends Enigme {
                 ((TextView)findViewById(R.id.btnPluiesAcidesRG)).setText(bTreeCourant.getReponseGauche());
                 ((TextView)findViewById(R.id.btnPluiesAcidesRD)).setText(bTreeCourant.getReponseDroite());
                 stepCourant++;
-                if(estResolue()) {
+                if(stepCourant == FINAL_STEP) {
                     resultat();
                 }
             }
@@ -161,7 +163,7 @@ public class EnigmePluiesAcidesActivity extends Enigme {
                 ((TextView)findViewById(R.id.btnPluiesAcidesRG)).setText(bTreeCourant.getReponseGauche());
                 ((TextView)findViewById(R.id.btnPluiesAcidesRD)).setText(bTreeCourant.getReponseDroite());
                 stepCourant++;
-                if(estResolue()) {
+                if(stepCourant == FINAL_STEP) {
                     resultat();
                 }
             }
@@ -170,7 +172,7 @@ public class EnigmePluiesAcidesActivity extends Enigme {
 
     @Override
     public boolean estResolue() {
-        return (stepCourant == FINAL_STEP);
+        return (!bTreeResolu.isEmpty());
     }
 
     @Override
@@ -188,6 +190,8 @@ public class EnigmePluiesAcidesActivity extends Enigme {
             //gain d'item = bout d'âme pnj
             item = getItemByName(ITEM_ENIMGE);
             getJoueur().win(item);
+            //on a trouvé l'item --> l'énigme est resolue
+            bTreeResolu = bTreeCourant;
         }
         else if(bTreeCourant.getQuestion() == getString(R.string.PA_Res_Q3_G_D_RG)) {
             //game over
@@ -197,11 +201,15 @@ public class EnigmePluiesAcidesActivity extends Enigme {
             //gain d'item = bout d'âme pnj
             item = getItemByName(ITEM_ENIMGE);
             getJoueur().win(item);
+            //on a trouvé l'item --> l'énigme est resolue
+            bTreeResolu = bTreeCourant;
         }
         else if(bTreeCourant.getQuestion() == getString(R.string.PA_Res_Q3_D_G_RG)) {
             //gain d'item = bout d'âme pnj
             item = getItemByName(ITEM_ENIMGE);
             getJoueur().win(item);
+            //on a trouvé l'item --> l'énigme est resolue
+            bTreeResolu = bTreeCourant;
         }
         else if(bTreeCourant.getQuestion() == getString(R.string.PA_Res_Q3_D_G_RD)) {
             //perte de points de temps
@@ -214,6 +222,8 @@ public class EnigmePluiesAcidesActivity extends Enigme {
             //gain d'item = bout d'âme pnj
             item = getItemByName(ITEM_ENIMGE);
             getJoueur().win(item);
+            //on a trouvé l'item --> l'énigme est resolue
+            bTreeResolu = bTreeCourant;
         }
         else if(bTreeCourant.getQuestion() == getString(R.string.PA_Res_Q3_D_D_RD)) {
             //perte de points de temps
