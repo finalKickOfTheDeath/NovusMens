@@ -5,15 +5,17 @@ import android.content.pm.ActivityInfo;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 import com.github.javiersantos.bottomdialogs.BottomDialog;
 import com.math.novusmens_git.R;
+import com.math.novusmens_git.database.ItemDAO;
+import com.math.novusmens_git.database.PointDAO;
+import com.math.novusmens_git.database.Sauvegarde;
+import com.math.novusmens_git.database.SauvegardeDAO;
 import com.math.novusmens_git.enigme.EnigmeBlocsActivity;
 import com.math.novusmens_git.enigme.EnigmeDesertMagnetiqueActivity;
 import com.math.novusmens_git.enigme.EnigmeJarresActivity;
@@ -29,12 +31,21 @@ import com.math.novusmens_git.personnage.Item;
 import com.math.novusmens_git.personnage.Joueur;
 import com.merkmod.achievementtoastlibrary.AchievementToast;
 
-public class Niveau1Activity extends AppCompatActivity {
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
-    private static  final int REQUEST_RETOURJOUEUR = 100;
+public class Niveau1Activity extends Niveau {
+
+    private static final int NB_POINT_NIVEAU = 10;
+    private static final int NUM_NIVEAU = 1;
+    private static final int REQUEST_RETOURJOUEUR = 100;
 
     private final String EXTRA_MUSIQUE = "musique";
     private MediaPlayer player;
+
+    private String[] nomItems = {"Morceau d'âme 1(1/2)", "Morceau d'âme 2(1/2)", "Caillou mystique", "Heart key", "Pousse d'espoir"};
     private Joueur joueur;
 
     @Override
@@ -58,6 +69,22 @@ public class Niveau1Activity extends AppCompatActivity {
         //cacher l'action bar
         if(getSupportActionBar() != null)
             getSupportActionBar().hide();
+
+        setNumNiveau(NUM_NIVEAU);
+
+        //si pas de sauvegarde on envoie le joueur sur l'énigme ordi
+        Log.d("data", "dans on create niveau 1 activity");
+        SauvegardeDAO sauvegardeDAO = new SauvegardeDAO(this);
+        sauvegardeDAO.open();
+        Sauvegarde last = sauvegardeDAO.selectionSave();
+        sauvegardeDAO.close();
+        if(last == null) {
+            Log.d("data", "pas de sauvegarde existante");
+            Log.d("data", "Vous avez actuellement " + joueur.getTimePoint() + " points de temps");
+            Intent intentOrdi = new Intent(this, EnigmeOrdiActivity.class);
+            intentOrdi.putExtra("joueur", joueur);
+            startActivityForResult(intentOrdi, REQUEST_RETOURJOUEUR);
+        }
 
         findViewById(R.id.btn1_narrationMaisonAbandonnee).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -207,11 +234,95 @@ public class Niveau1Activity extends AppCompatActivity {
     @Override
     protected void onPause(){
         super.onPause();
-        Log.i("iut","je suis dans onPause");
+        Log.i("data", "on est dans le onPause de niveau1activity");
         if(player != null){
             player.release();
             player=null;
         }
+        //on recupere la derniere sauvegarde
+        SauvegardeDAO sauvegardeDAO = new SauvegardeDAO(this);
+        sauvegardeDAO.open();
+        Sauvegarde last = sauvegardeDAO.selectionSave();
+        //si pas de sauvegarde --> on la créée
+        //                     --> on initialise les points du niveau
+        //                     --> on initialise les items du niveau
+        if(last == null) {
+            Log.d("data", "pas de sauvegarde dans niveau 1 --> on la créée");
+            //initialisation des points et des items du niveau
+            initPoint();
+            initItem();
+            //création de la premiere sauvegarde
+            SimpleDateFormat format = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
+            String now = format.format(new Date().getTime());
+            //on insert la sauvegarde dans la base
+            sauvegardeDAO.ajouter(new Sauvegarde(now, joueur.getTimePoint(), getNumNiveau()));
+            last = sauvegardeDAO.selectionSave();
+            Log.d("data", "ce qu'il y a dans la dernière sauvegarde");
+            Log.d("data", "id : " + last.getId());
+            Log.d("data", "date : " + last.getDate());
+            Log.d("data", "point de temps : " + last.getPointTemps());
+            Log.d("data", "numNiveau : " + last.getNumNiveau());
+        }
+        //si il y une sauvegarde --> on l'update
+        else {
+            SimpleDateFormat format = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
+            String now = format.format(new Date().getTime());
+            last.setDate(now);
+            last.setPointTemps(joueur.getTimePoint());
+            sauvegardeDAO.update(last);
+            Log.d("data", "ce qu'il y a dans la sauvegarde update");
+            Log.d("data", "id : " + last.getId());
+            Log.d("data", "date : " + last.getDate());
+            Log.d("data", "point de temps : " + last.getPointTemps());
+            Log.d("data", "numNiveau : " + last.getNumNiveau());
+        }
+        sauvegardeDAO.close();
+    }
+
+    private void initPoint() {
+        //creation de la liste de point du niveau
+        ArrayList<Point> listPoint = new ArrayList<Point>();
+        for(int i = 1; i <= NB_POINT_NIVEAU; i++) {
+            listPoint.add(new Point(i, false));
+        }
+        setPoints(listPoint);
+        Log.d("data", "on a set l'arrayList de points du niveau 1");
+        //recuperation des points du niveau 1 (debug)
+        ArrayList<Point> points = getPoints();
+        Log.d("data", "ce qu'il y a dans l'arrayList de point");
+        for(int i = 0; i < points.size(); i++) {
+            Log.d("data", "point : " + points.get(i).getId() + "resolu = " + points.get(i).isResolu());
+        }
+        //on met les points dans la base de donnée
+        PointDAO pointDAO = new PointDAO(this);
+        pointDAO.open();
+        for(int i = 0; i < listPoint.size(); i++) {
+            pointDAO.ajouter(listPoint.get(i));
+        }
+        pointDAO.close();
+    }
+
+    private void initItem() {
+        //creation de la liste d'item du niveau
+        ArrayList<Item> listItem = new ArrayList<Item>();
+        for(int i = 1; i <= nomItems.length; i++) {
+            listItem.add(new Item(i, nomItems[i - 1]));
+        }
+        setItems(listItem);
+        Log.d("data", "on a set l'arrayList d'item du niveau 1");
+        //recuperation des items du niveau 1 (debug)
+        ArrayList<Item> items = getItems();
+        Log.d("data", "ce qu'il y a dans l'arrayList d'item");
+        for(int i = 0; i < items.size(); i++) {
+            Log.d("data", "item : " + items.get(i).getId() + "nom = " + items.get(i).getNom());
+        }
+        //on met les items dans la base de donnée
+        ItemDAO itemDAO = new ItemDAO(this);
+        itemDAO.open();
+        for(int i = 0; i < listItem.size(); i++) {
+            itemDAO.ajouter(listItem.get(i));
+        }
+        itemDAO.close();
     }
 
     @Override
@@ -242,9 +353,10 @@ public class Niveau1Activity extends AppCompatActivity {
             }
         }
         // si le code de retour est égal à 1 on stoppe l'activité 1
+        /*
         if(resultCode == 1){
             finish();
-        }
+        }*/
        // }
     }
 
@@ -268,7 +380,6 @@ public class Niveau1Activity extends AppCompatActivity {
                         dialog.dismiss();
                     }
                 })
-                .setCancelable(false) //empeche de faire disparaitre la fenetre quand on tap en dehors
                 .build();
         bottomDialog.show();
     }

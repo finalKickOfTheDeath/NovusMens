@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">NovusMens_Git</string>
+    <string name="app_name">Novus Mens</string>
 
     <string name="level1_btn1">Enigme narrative maison abandonnée</string>
     <string name="level1_btn2">Enigme racine</string>
@@ -38,5 +38,11 @@
     <string name="pointPNJ_btnAgree2">J\'accepte</string>
     <string name="pointPNJ_btnDisagree2">Je ne peux pas</string>
     <string name="pointPNJ_dialogEnd">Grrr...il fait froid dans ce temps gris</string>
+
+    <string name="pointBloque_desc">Elle est là. Devant vous. Celle que vous croyiez avoir oublié. Si fragile et si forte à la fois. Elle n\'a pas de coeur qui bat mais le vôtre resonne à sa vue.</string>
+    <string name="pointBloque_btnTake">L\'emmener avec vous</string>
+    <string name="pointBloqye_txtTake">Vous prenez délicatement cette petite pousse de vie.</string>
+    <string name="pointBloque_btnLet">La laisser ici</string>
+    <string name="pointBloque_txtLet">Vous préférez ne pas y toucher et continuer à explorer les environs.</string>
 
 </resources>

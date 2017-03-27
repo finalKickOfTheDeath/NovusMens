@@ -12,11 +12,11 @@ import java.util.ArrayList;
 public class Joueur implements Parcelable {
 
     private int timePoint; // number of time points of the player
-    private ItemList object; // List of player's object
+    private ItemList itemList; // List of player's itemList
 
     public Joueur(int timePoint){
         this.timePoint = timePoint;
-        object = new ItemList();
+        itemList = new ItemList();
     }
 
     public Joueur(Parcel in) {
@@ -40,7 +40,7 @@ public class Joueur implements Parcelable {
     }
 
     public ArrayList<Item> getItems() {
-        return object;
+        return itemList;
     }
 
     public void move() {
@@ -52,8 +52,28 @@ public class Joueur implements Parcelable {
     }
 
     public void win(Item i) {
-        if(!object.contains(i))
-            object.add(i);
+        //if(!itemList.contains(i))
+        if(!has(i))
+            itemList.add(i);
+    }
+
+    public boolean has(Item item) {
+        //tester si le joueur possede l'item avec le nom de l'item
+        for(Item i : itemList) {
+            if(i.getNom().equals(item.getNom())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void dismiss(Item item) {
+        //enlever l'item d'un joueur par son nom
+        for(int i = 0; i < itemList.size(); i++) {
+            if(itemList.get(i).getNom().equals(item.getNom())) {
+                itemList.remove(i);
+            }
+        }
     }
 
     public void winTimePoint(int quantite) {
@@ -79,12 +99,12 @@ public class Joueur implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(timePoint);
-        dest.writeParcelable(object,flags); //on ecrit la liste d'item du joueur
+        dest.writeParcelable(itemList,flags); //on ecrit la liste d'item du joueur
     }
 
     public void getFromParcel(Parcel in) {
         timePoint = in.readInt();
         //on lit la liste d'items
-        object = in.readParcelable(ItemList.class.getClassLoader());
+        itemList = in.readParcelable(ItemList.class.getClassLoader());
     }
 }

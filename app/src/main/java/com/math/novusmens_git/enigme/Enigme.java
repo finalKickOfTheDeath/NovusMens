@@ -5,7 +5,9 @@ import android.util.Log;
 
 import com.github.javiersantos.bottomdialogs.BottomDialog;
 import com.math.novusmens_git.R;
+import com.math.novusmens_git.database.ItemDAO;
 import com.math.novusmens_git.database.PointDAO;
+import com.math.novusmens_git.database.PossedeItemDAO;
 import com.math.novusmens_git.database.PossedePointDAO;
 import com.math.novusmens_git.database.Sauvegarde;
 import com.math.novusmens_git.database.SauvegardeDAO;
@@ -63,6 +65,14 @@ public abstract class Enigme extends AppCompatActivity implements IEnigme {
         return (int) Math.round(r);
     }
 
+    public Item getItemByName(String name) {
+        ItemDAO itemDAO = new ItemDAO(this);
+        itemDAO.open();
+        Item item = itemDAO.getByName(name);
+        itemDAO.close();
+        return item;
+    }
+
     public void showResult(int point, Item item, String other) {
         Log.d("btree", "point : " + point);
         if(item != null)
@@ -110,6 +120,7 @@ public abstract class Enigme extends AppCompatActivity implements IEnigme {
 
     public void saveState() {
         //sauvegarde de l'état du jeu
+        //on récupère la derniere sauvegarde
         SauvegardeDAO sauvegardeDAO = new SauvegardeDAO(this);
         sauvegardeDAO.open();
         Sauvegarde last = sauvegardeDAO.selectionSave();
@@ -124,11 +135,26 @@ public abstract class Enigme extends AppCompatActivity implements IEnigme {
         last.setDate(now);
         last.setPointTemps(getJoueur().getTimePoint());
         sauvegardeDAO.update(last);
-        Log.d("data", "ce qu'il y a dans la sauvegarde updateSetResolu");
+        Log.d("data", "ce qu'il y a dans la sauvegarde updateResolu");
         Log.d("data", "id : " + last.getId());
         Log.d("data", "date : " + last.getDate());
         Log.d("data", "point de temps : " + last.getPointTemps());
         Log.d("data", "numNiveau : " + last.getNumNiveau());
+        //on recupere la liste d'items du joueur
+        ArrayList<Item> listItem = joueur.getItems();
+        //on insere chaque item dans la table possede point
+        PossedeItemDAO possedeItemDAO = new PossedeItemDAO(this);
+        possedeItemDAO.open();
+        for(Item item : listItem) {
+            possedeItemDAO.ajouter(last.getId(), item.getId());
+            Log.d("data", "item : " + item.getId() + " nom = " + item.getNom() + " ajouté dans la table possedeItem");
+        }
+        //on recupere ce qu'il y a dans la table possedeItem (debug)
+        ArrayList<Item> items = possedeItemDAO.selectionner(last);
+        Log.d("data", "ce qu'il y a dans la table possede item pour la derniere sauvegarde");
+        for(Item item : items) {
+            Log.d("data", "item : " + item.getId() + " nom : " + item.getNom());
+        }
         //on recupere la liste de point (debug)
         PointDAO pointDAO = new PointDAO(this);
         pointDAO.open();
@@ -140,9 +166,9 @@ public abstract class Enigme extends AppCompatActivity implements IEnigme {
         //on insert le point resolu
         if(estResolue()) {
             //on upadate le point resolu
-            Log.d("data", "point to be updateSetResolu : " + points.get(getNumEnigme()).getId() + " " + points.get(getNumEnigme()).isResolu());
-            pointDAO.updateSetResolu(points.get(getNumEnigme()));
-            Log.d("data", "liste de point apres l'updateSetResolu");
+            Log.d("data", "point to be updateResolu : " + points.get(getNumEnigme()).getId() + " " + points.get(getNumEnigme()).isResolu());
+            pointDAO.updateResolu(points.get(getNumEnigme()));
+            Log.d("data", "liste de point après l'updateResolu");
             for(int i = 0; i < points.size(); i++) {
                 Log.d("data", "point : " + points.get(i).getId() + " resolu = " + points.get(i).isResolu());
             }
@@ -150,6 +176,7 @@ public abstract class Enigme extends AppCompatActivity implements IEnigme {
             PossedePointDAO possedePointDAO = new PossedePointDAO(this);
             possedePointDAO.open();
             possedePointDAO.ajouter(last.getId(), points.get(getNumEnigme()).getId());
+            //ce qu'il y a dans le liste de point résolus (debug)
             Log.d("data", "liste des points resolus");
             ArrayList<Point> pointsResolus = possedePointDAO.selectionner(last);
             for(int j = 0; j < pointsResolus.size(); j++) {
@@ -158,6 +185,7 @@ public abstract class Enigme extends AppCompatActivity implements IEnigme {
             possedePointDAO.close();
         }
         pointDAO.close();
+        possedeItemDAO.close();
         sauvegardeDAO.close();
     }
 

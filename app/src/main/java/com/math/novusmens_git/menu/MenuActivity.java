@@ -17,11 +17,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.math.novusmens_git.R;
+import com.math.novusmens_git.database.PossedeItemDAO;
 import com.math.novusmens_git.database.Sauvegarde;
 import com.math.novusmens_git.database.SauvegardeDAO;
 import com.math.novusmens_git.niveau.Niveau1Activity;
+import com.math.novusmens_git.personnage.Item;
 import com.math.novusmens_git.personnage.Joueur;
 import com.merkmod.achievementtoastlibrary.AchievementToast;
+
+import java.util.ArrayList;
 
 
 public class MenuActivity extends AppCompatActivity {
@@ -47,7 +51,7 @@ public class MenuActivity extends AppCompatActivity {
 
         sharedPreferences = getBaseContext().getSharedPreferences(JOUEUR,MODE_PRIVATE);
 
-        //definir les polices personnalisees
+        //font perso
         TextView title =(TextView)findViewById(R.id.txtEnigmeOrdi);
         Button btnJouer = (Button)findViewById(R.id.btnJouer);
         Button btnReset = (Button) findViewById(R.id.btnReset);
@@ -102,6 +106,16 @@ public class MenuActivity extends AppCompatActivity {
             Log.d("data", "derniere sauvegarde recuperee --> reprendre partie");
             //creation du joueur
             Joueur joueur = new Joueur(s.getPointTemps());
+            //on récupère la liste d'item sauvegarde
+            PossedeItemDAO possedeItemDAO = new PossedeItemDAO(this);
+            possedeItemDAO.open();
+            ArrayList<Item> listItem = possedeItemDAO.selectionner(s);
+            possedeItemDAO.close();
+            Log.d("data", "ce que contient la liste d'item dans menu");
+            for(Item item : listItem) {
+                joueur.win(item);
+                Log.d("data", "item : " + item.getId() + " " + item.getNom());
+            }
             //Toast.makeText(this, "Une partie à déja été commencé. Nous sommes toujours en développement", Toast.LENGTH_SHORT).show();
             sauvegardeDAO.close();
             Intent intent = new Intent(this, Niveau1Activity.class);
@@ -141,7 +155,7 @@ public class MenuActivity extends AppCompatActivity {
         sauvegardeDAO.close();
         //sharedPreferences.edit().remove(PREF_PTEMPS).apply(); //.remove(PREFS_NAME)
         //Toast.makeText(this, "Vous avez réinitialisé votre partie. Amusez-vous bien !", Toast.LENGTH_LONG).show();
-        AchievementToast.makeAchievement(this, "Vous avez réinitialisé votre partie. Amusez-vous bien !", AchievementToast.LENGTH_MEDIUM, ContextCompat.getDrawable(this, R.drawable.clickerordi)).show();
+        AchievementToast.makeAchievement(this, "Vous avez réinitialisé votre partie.", AchievementToast.LENGTH_LONG, ContextCompat.getDrawable(this, R.drawable.clickerordi)).show();
     }
 
     @Override

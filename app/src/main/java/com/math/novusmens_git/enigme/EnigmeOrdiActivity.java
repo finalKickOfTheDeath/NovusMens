@@ -27,7 +27,6 @@ import com.math.novusmens_git.niveau.Niveau1Activity;
 import com.math.novusmens_git.niveau.Point;
 import com.math.novusmens_git.personnage.Item;
 import com.math.novusmens_git.personnage.Joueur;
-import com.merkmod.achievementtoastlibrary.AchievementToast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -146,9 +145,11 @@ public class EnigmeOrdiActivity extends Enigme {
 
     @Override
     protected void onPause() {
-        Log.d("data", "on est dans onPause");
+        Log.d("data", "on est dans onPause enigme ordi activity");
+        saveState();
         super.onPause();
         player.stop();
+        /*
         //on sauvegarde l'état du jeu
         SauvegardeDAO sauvegardeDAO = new SauvegardeDAO(this);
         sauvegardeDAO.open();
@@ -169,13 +170,13 @@ public class EnigmeOrdiActivity extends Enigme {
             Log.d("data", "point de temps : " + last.getPointTemps());
             Log.d("data", "numNiveau : " + last.getNumNiveau());
         }
-        //on updateSetResolu la sauvegarde
+        //on updateResolu la sauvegarde
         SimpleDateFormat format = new SimpleDateFormat("dd MMM yyyy", Locale.FRANCE);
         String now = format.format(new Date().getTime());
         last.setDate(now);
         last.setPointTemps(getJoueur().getTimePoint());
         sauvegardeDAO.update(last);
-        Log.d("data", "ce qu'il y a dans la sauvegarde updateSetResolu");
+        Log.d("data", "ce qu'il y a dans la sauvegarde updateResolu");
         Log.d("data", "id : " + last.getId());
         Log.d("data", "date : " + last.getDate());
         Log.d("data", "point de temps : " + last.getPointTemps());
@@ -190,10 +191,10 @@ public class EnigmeOrdiActivity extends Enigme {
         }
         //on insert le point resolu
         if(estResolue()) {
-            //on upadate le point resolu
-            Log.d("data", "point to be updateSetResolu : " + points.get(getNumEnigme()).getId() + " " + points.get(getNumEnigme()).isResolu());
-            pointDAO.updateSetResolu(points.get(getNumEnigme()));
-            Log.d("data", "liste de point apres l'updateSetResolu");
+            //on update le point resolu
+            Log.d("data", "point to be updateResolu : " + points.get(getNumEnigme()).getId() + " " + points.get(getNumEnigme()).isResolu());
+            pointDAO.updateResolu(points.get(getNumEnigme()));
+            Log.d("data", "liste de point apres l'updateResolu");
             for(int i = 0; i < points.size(); i++) {
                 Log.d("data", "point : " + points.get(i).getId() + " resolu = " + points.get(i).isResolu());
             }
@@ -209,6 +210,7 @@ public class EnigmeOrdiActivity extends Enigme {
         }
         pointDAO.close();
         sauvegardeDAO.close();
+        */
     }
 
     @Override
@@ -232,6 +234,7 @@ public class EnigmeOrdiActivity extends Enigme {
         return(mdpFind);
     }
 
+    /*
     private void initPoint() {
         //creation du niveau 1 et de ses points
         Niveau niveau1 = new Niveau(1);
@@ -248,13 +251,14 @@ public class EnigmeOrdiActivity extends Enigme {
             pointDAO.ajouter(points.get(i));
         }
         pointDAO.close();
-    }
+    }*/
 
     @Override
     public void resultat() {
         showResult(0, null, "Dehors, tout n'est que désolation. Saurez-vous trouver la source de la vie ?");
     }
 
+    /*
     @Override
     public void showResult(int point, Item item, String other) {
         String nom = "aucun";
@@ -281,6 +285,6 @@ public class EnigmeOrdiActivity extends Enigme {
                 .setCancelable(false) //empeche de faire disparaitre la fenetre quand on tap en dehors
                 .build();
         bottomDialog.show();
-    }
+    }*/
 
 }

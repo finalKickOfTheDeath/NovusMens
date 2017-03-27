@@ -7,7 +7,7 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:weightSum="1"
-    android:background="@drawable/relai_satellite"
+    android:background="@drawable/relai_satellite_resize"
     android:orientation="vertical">
 
 

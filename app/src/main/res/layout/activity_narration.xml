@@ -16,7 +16,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/cote_devaste"
+        app:srcCompat="@drawable/cote_devaste_resize"
         android:id="@+id/imageView"
         android:scaleX="0.75"
         android:scaleY="0.75"
