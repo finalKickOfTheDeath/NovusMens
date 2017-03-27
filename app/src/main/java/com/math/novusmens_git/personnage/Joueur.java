@@ -2,6 +2,7 @@ package com.math.novusmens_git.personnage;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -61,6 +62,7 @@ public class Joueur implements Parcelable {
         //tester si le joueur possede l'item avec le nom de l'item
         for(Item i : itemList) {
             if(i.getNom().equals(item.getNom())) {
+                Log.d("enigme", "on a retirer un item au joueur");
                 return true;
             }
         }

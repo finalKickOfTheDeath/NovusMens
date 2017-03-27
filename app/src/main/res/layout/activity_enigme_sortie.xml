@@ -8,13 +8,32 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/totem_resize"
     tools:context="com.math.novusmens_git.enigme.EnigmeSortie">
 
-    <TextView
-        android:text="sortie en cours de construction"
-        android:layout_width="wrap_content"
+    <Button
+        android:text="@string/sortie_put"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
+        android:padding="10dp"
+        android:id="@+id/btnPutSortie"
+        android:background="@drawable/border"
+        android:textColor="@color/white"
+        android:layout_below="@+id/txtSortie"
         android:layout_centerHorizontal="true"
-        android:id="@+id/textView3" />
+        android:layout_marginTop="66dp" />
+
+    <TextView
+        android:text="@string/sortie_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:id="@+id/txtSortie"
+        android:gravity="center"
+        android:padding="10dp"
+        android:textColor="@color/white"
+        android:background="@drawable/border"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
 </RelativeLayout>
