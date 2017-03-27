@@ -27,8 +27,8 @@ public class Niveau extends AppCompatActivity {
     int numNiveau;
     PointList points;
     ItemList items;
-    ArrayList<Point> points;
-    ArrayList<Item> items;
+    //ArrayList<Point> points;
+    //ArrayList<Item> items;
     private MediaPlayer player;
 
    /* protected void onCreate(Bundle savedInstanceState) {

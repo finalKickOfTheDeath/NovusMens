@@ -383,9 +383,10 @@ public class Niveau1Activity extends Niveau {
                 Log.d("intent", "joueur point temps revenu : " + joueur.getTimePoint());
                 Log.d("intent", "liste de point revenu");
                 PointList pointList = getPoints();
+                /*
                 for(Point p : pointList) {
                     Log.d("intent", "Point : " + p.getId() + " est resolu : " + p.isResolu());
-                }
+                }*/
             }
             else if(resultCode == RESULT_CANCELED) {
                 Log.d("intent", "RESULT_CANCELED = " + RESULT_CANCELED + " && resultCode = " + resultCode);
@@ -397,9 +398,10 @@ public class Niveau1Activity extends Niveau {
                 setPoints((PointList) data.getExtras().getParcelable("listePoint"));
                 Log.d("intent", "joueur point temps revenu : " + joueur.getTimePoint());
                 PointList pointList = getPoints();
+                /*
                 for(Point p : pointList) {
                     Log.d("intent", "Point : " + p.getId() + " est resolu : " + p.isResolu());
-                }
+                }*/
                 showDidactitiel();
             }
             else if(resultCode == RESULT_CANCELED) {

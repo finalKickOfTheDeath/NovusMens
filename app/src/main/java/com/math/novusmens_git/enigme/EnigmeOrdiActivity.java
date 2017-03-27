@@ -154,7 +154,7 @@ public class EnigmeOrdiActivity extends Enigme {
         Log.d("data", "on est dans onPause enigme ordi activity");
         saveState();
         super.onPause();
-        player.stop();
+        //player.stop();
         //player.stop();
         /*
         //on sauvegarde l'état du jeu

@@ -92,6 +92,7 @@ public class NarrationActivity extends AppCompatActivity {
             imageOver[2]=R.drawable.homme_enfant;
             imageOver[3]=R.drawable.homme_enfant;
             joueur.gameOver();
+
         }
 
         numero = 0;
