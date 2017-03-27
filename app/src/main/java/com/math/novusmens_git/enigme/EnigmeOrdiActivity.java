@@ -50,9 +50,9 @@ public class EnigmeOrdiActivity extends Enigme {
         setContentView(R.layout.activity_enigme_ordi);
         Intent intent = getIntent();
         if(intent != null){
-            player = MediaPlayer.create(this, R.raw.pjs4);
+           /* player = MediaPlayer.create(this, R.raw.pjs4);
             player.setVolume(100, 100);
-            player.seekTo(intent.getIntExtra(EXTRA_MUSIQUE,0));
+            player.seekTo(intent.getIntExtra(EXTRA_MUSIQUE,0));*/
             setJoueur((Joueur) intent.getExtras().getParcelable("joueur"));
             Log.d("intent", "joueur point temps : " + getJoueur().getTimePoint());
         }
@@ -137,10 +137,10 @@ public class EnigmeOrdiActivity extends Enigme {
     @Override
     protected void onResume() {
         super.onResume();
-        if(player != null) {
+        /*if(player != null) {
             player.start();
             player.setLooping(true);
-        }
+        }*/
     }
 
     @Override
@@ -148,7 +148,7 @@ public class EnigmeOrdiActivity extends Enigme {
         Log.d("data", "on est dans onPause enigme ordi activity");
         saveState();
         super.onPause();
-        player.stop();
+        //player.stop();
         /*
         //on sauvegarde l'état du jeu
         SauvegardeDAO sauvegardeDAO = new SauvegardeDAO(this);
@@ -222,10 +222,10 @@ public class EnigmeOrdiActivity extends Enigme {
     @Override
     protected void onDestroy(){
         super.onDestroy();
-        if(player != null){
+        /*if(player != null){
             player.release();
             player=null;
-        }
+        }*/
         Log.i("iut","je suis dans onDestroy");
     }
 

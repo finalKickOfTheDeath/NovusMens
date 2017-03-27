@@ -1,5 +1,7 @@
 package com.math.novusmens_git.enigme;
 
+import android.media.MediaPlayer;
+import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
@@ -32,6 +34,40 @@ public abstract class Enigme extends AppCompatActivity implements IEnigme {
     private int numEnigme; //correspond à l'index dans la liste de point du niveau
     private Joueur joueur;
 
+    private MediaPlayer player;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        player = MediaPlayer.create(this, R.raw.pjs4);
+        player.setVolume(100, 100);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(player != null) {
+            player.start();
+            player.setLooping(true);
+        }
+    }
+
+    protected void onPause() {
+        Log.d("data", "on est dans onPause enigme ordi activity");
+        //saveState();
+        super.onPause();
+        player.stop();
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        if(player != null){
+            player.release();
+            player=null;
+        }
+        Log.i("iut","je suis dans onDestroy");
+    }
 
     public int getNumNiveau() {
         return numNiveau;

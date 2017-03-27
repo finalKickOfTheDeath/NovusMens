@@ -213,7 +213,7 @@ public class Niveau1Activity extends Niveau {
     @Override
     protected void onResume(){
         super.onResume();
-        if(joueur.getTimePoint() <= 0){
+        /*if(joueur.getTimePoint() <= 0){
             //Toast.makeText(this, "Vous avez perdu", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, NarrationActivity.class);
             startActivity(intent);
@@ -228,7 +228,7 @@ public class Niveau1Activity extends Niveau {
             player.setLooping(true);
             //Toast.makeText(this, "Vous avez actuellement " + joueur.getTimePoint() + " points de temps", Toast.LENGTH_SHORT).show();
             AchievementToast.makeAchievement(this, "Point de temps : " + joueur.getTimePoint(), AchievementToast.LENGTH_SHORT, ContextCompat.getDrawable(this, R.drawable.clickerordi)).show();
-        }
+        }*/
     }
 
     @Override
