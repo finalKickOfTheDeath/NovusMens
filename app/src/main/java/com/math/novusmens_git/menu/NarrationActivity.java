@@ -14,9 +14,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.math.novusmens_git.R;
+import com.math.novusmens_git.database.Sauvegarde;
+import com.math.novusmens_git.database.SauvegardeDAO;
 import com.math.novusmens_git.enigme.EnigmeOrdiActivity;
 import com.math.novusmens_git.niveau.Niveau1Activity;
 import com.math.novusmens_git.personnage.Joueur;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 
 public class NarrationActivity extends AppCompatActivity {
@@ -92,7 +98,15 @@ public class NarrationActivity extends AppCompatActivity {
             imageOver[2]=R.drawable.homme_enfant;
             imageOver[3]=R.drawable.homme_enfant;
             joueur.gameOver();
-
+            SauvegardeDAO sauvegardeDAO = new SauvegardeDAO(this);
+            sauvegardeDAO.open();
+            Sauvegarde last = sauvegardeDAO.selectionSave();
+            SimpleDateFormat format = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
+            String now = format.format(new Date().getTime());
+            last.setDate(now);
+            last.setPointTemps(joueur.getTimePoint());
+            sauvegardeDAO.update(last);
+            sauvegardeDAO.close();
         }
 
         numero = 0;
