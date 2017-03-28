@@ -7,14 +7,21 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Checkable;
 
 import com.math.novusmens_git.R;
 import com.math.novusmens_git.personnage.Item;
 import com.math.novusmens_git.personnage.Joueur;
 
+import java.util.LinkedList;
+
 public class EnigmeRacines extends Enigme {
 
     private static final String ITEM_ENIMGE = "Morceau d'âme 1(1/2)";
+
+    private LinkedList<Racine> racines;
+    private LinkedList<Checkable> proposition;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,18 +43,59 @@ public class EnigmeRacines extends Enigme {
         Log.d("data", "num niveau devrait être 1 il est : " + getNumNiveau());
         Log.d("data", "num enigme devrait être 1 il est : " + getNumEnigme());
 
-        findViewById(R.id.btnRacineAme).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                resultat();
-            }
-        });
+        racines = new LinkedList<>();
+        proposition = new LinkedList<>();
+        initRacines();
+    }
 
+    private void initRacines() {
+        racines.add(new Racine(findViewById(R.id.buttonA),findViewById(R.id.button3)));
+        racines.add(new Racine(findViewById(R.id.buttonB),findViewById(R.id.button4)));
+        racines.add(new Racine(findViewById(R.id.buttonC),findViewById(R.id.button1)));
+        racines.add(new Racine(findViewById(R.id.buttonD),findViewById(R.id.button5)));
+        racines.add(new Racine(findViewById(R.id.buttonE),findViewById(R.id.button2)));
+    }
+
+    public void onClick(View view) {
+
+        if (! ((Checkable)view).isChecked() ){
+            proposition.removeLast();
+        }
+        else {
+            proposition.add((Checkable)view);
+            if(proposition.size() == 2){
+
+                Log.d("racine", "Il y a " + racines.size() +" racines");
+                for(Racine r : racines)
+                    if (r.estCorrect((View)proposition.get(0),(View)proposition.get(1))) {
+                        // Action de prop Correcte ( => retirer la racine)
+                        r.remove();
+                        racines.remove(r);
+                        Log.d("racine", "ON ENELVE UNE RACINE DE LA LISTE!!!");
+
+                        Log.d("racine", "Il reste " + racines.size() +" racines");
+                        proposition.clear();
+                        if(racines.isEmpty()) {
+                            resultat();
+                        }
+                        return;
+                    }
+
+                Log.d("racine", "Il reste " + racines.size() +" racines");
+                //Aucune racine ne convient, la prop est donc incorrecte
+
+                //désactivation des widgets sélectionnés
+                for (Checkable element : proposition)
+                    element.setChecked(false);
+                proposition.clear();
+
+            }
+        }
     }
 
     @Override
     public boolean estResolue() {
-        return false;
+        return (getJoueur().has(getItemByName(ITEM_ENIMGE)));
     }
 
     @Override
@@ -62,7 +110,7 @@ public class EnigmeRacines extends Enigme {
         intent.putExtra("joueur", getJoueur());
         setResult(RESULT_OK, intent);
         //on ouvre le dialog pour montrer les résultat
-        showResult(0, item, "Bravo!");
+        showResult(0, item, "Le circuit semble refonctionner!");
     }
 
     @Override
