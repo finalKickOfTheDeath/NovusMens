@@ -55,11 +55,12 @@ public class EnigmePointBloqueActivity extends Enigme {
         let.setTextSize(25);
 
         //la premiere fois qu'on arrive sur l'enigme on enleve la heart key au joueur
+        /*
         if(getJoueur().has(getItemByName(ITEM_NEEDED))) {
             Log.d("enigme", "on va enlever la heart key au joueur");
             letKey();
         }
-
+        */
 
         findViewById(R.id.btnTakePointBloque).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,6 +110,8 @@ public class EnigmePointBloqueActivity extends Enigme {
 
     @Override
     public void resultat() {
+        //on enleve l'item key au joueur
+        letKey();
         //on ajoute la pousse d'espoir au joueur
         Item pousse = getItemByName(ITEM_ENIMGE);
         getJoueur().win(pousse);

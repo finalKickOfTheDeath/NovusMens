@@ -19,6 +19,8 @@ public class EnigmeSortie extends Enigme {
 
     private static final String ITEM_NEEDED = "Pousse d'espoir";
 
+    private boolean estRendu = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +50,7 @@ public class EnigmeSortie extends Enigme {
         desc.setTextSize(22);
         put.setTextSize(25);
 
-        if(estResolue()) {
+        if(getJoueur().has(getItemByName(ITEM_NEEDED))) {
             saveState();
             Log.d("enigme", "sortie resolue");
             findViewById(R.id.btnPutSortie).setVisibility(View.VISIBLE);
@@ -56,6 +58,7 @@ public class EnigmeSortie extends Enigme {
             findViewById(R.id.btnPutSortie).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    estRendu = true;
                     resultat();
                 }
             });
@@ -68,7 +71,7 @@ public class EnigmeSortie extends Enigme {
 
     @Override
     public boolean estResolue() {
-        return getJoueur().has(getItemByName(ITEM_NEEDED));
+        return (estRendu);
     }
 
     @Override

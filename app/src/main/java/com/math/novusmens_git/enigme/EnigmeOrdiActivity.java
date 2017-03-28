@@ -3,7 +3,6 @@ package com.math.novusmens_git.enigme;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Typeface;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -16,30 +15,15 @@ import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.github.javiersantos.bottomdialogs.BottomDialog;
 import com.math.novusmens_git.R;
-import com.math.novusmens_git.database.PointDAO;
-import com.math.novusmens_git.database.PossedePointDAO;
-import com.math.novusmens_git.database.Sauvegarde;
-import com.math.novusmens_git.database.SauvegardeDAO;
-import com.math.novusmens_git.niveau.Niveau;
-import com.math.novusmens_git.niveau.Niveau1Activity;
-import com.math.novusmens_git.niveau.Point;
-import com.math.novusmens_git.personnage.Item;
 import com.math.novusmens_git.personnage.Joueur;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
 
 
 public class EnigmeOrdiActivity extends Enigme {
 
     private final static String PASSWORD = "AnimusRoot12";
     private boolean mdpFind = false;
-    private final String EXTRA_MUSIQUE = "musique";
-    private MediaPlayer player;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +34,6 @@ public class EnigmeOrdiActivity extends Enigme {
         setContentView(R.layout.activity_enigme_ordi);
         Intent intent = getIntent();
         if(intent != null){
-           /* player = MediaPlayer.create(this, R.raw.pjs4);
-            player.setVolume(100, 100);
-            player.seekTo(intent.getIntExtra(EXTRA_MUSIQUE,0));*/
             setJoueur((Joueur) intent.getExtras().getParcelable("joueur"));
             Log.d("intent", "joueur point temps : " + getJoueur().getTimePoint());
         }
@@ -137,10 +118,6 @@ public class EnigmeOrdiActivity extends Enigme {
     @Override
     protected void onResume() {
         super.onResume();
-        /*if(player != null) {
-            player.start();
-            player.setLooping(true);
-        }*/
     }
 
     @Override
@@ -148,69 +125,6 @@ public class EnigmeOrdiActivity extends Enigme {
         Log.d("data", "on est dans onPause enigme ordi activity");
         saveState();
         super.onPause();
-        //player.stop();
-        /*
-        //on sauvegarde l'état du jeu
-        SauvegardeDAO sauvegardeDAO = new SauvegardeDAO(this);
-        sauvegardeDAO.open();
-        Sauvegarde last = sauvegardeDAO.selectionSave();
-        if(last == null) {
-            Log.d("data", "pas de sauvegarde dans enimge ordi --> on la créée");
-            //initialisation des points dans la base de données
-            initPoint();
-            //creation de la premiere sauvegarde
-            SimpleDateFormat format = new SimpleDateFormat("dd MMM yyyy", Locale.FRANCE);
-            String now = format.format(new Date().getTime());
-            //on insert la sauvegarde dans la base
-            sauvegardeDAO.ajouter(new Sauvegarde(now, getJoueur().getTimePoint(), getNumNiveau()));
-            last = sauvegardeDAO.selectionSave();
-            Log.d("data", "ce qu'il y a dans la dernière sauvegarde");
-            Log.d("data", "id : " + last.getId());
-            Log.d("data", "date : " + last.getDate());
-            Log.d("data", "point de temps : " + last.getPointTemps());
-            Log.d("data", "numNiveau : " + last.getNumNiveau());
-        }
-        //on updateResolu la sauvegarde
-        SimpleDateFormat format = new SimpleDateFormat("dd MMM yyyy", Locale.FRANCE);
-        String now = format.format(new Date().getTime());
-        last.setDate(now);
-        last.setPointTemps(getJoueur().getTimePoint());
-        sauvegardeDAO.update(last);
-        Log.d("data", "ce qu'il y a dans la sauvegarde updateResolu");
-        Log.d("data", "id : " + last.getId());
-        Log.d("data", "date : " + last.getDate());
-        Log.d("data", "point de temps : " + last.getPointTemps());
-        Log.d("data", "numNiveau : " + last.getNumNiveau());
-        //on recupere la liste de point
-        PointDAO pointDAO = new PointDAO(this);
-        pointDAO.open();
-        ArrayList<Point> points = pointDAO.selectionner();
-        Log.d("data", "ce qu'il y a dans la liste de point");
-        for(int i = 0; i < points.size(); i++) {
-            Log.d("data", "point : " + points.get(i).getId() + " resolu = " + points.get(i).isResolu());
-        }
-        //on insert le point resolu
-        if(estResolue()) {
-            //on update le point resolu
-            Log.d("data", "point to be updateResolu : " + points.get(getNumEnigme()).getId() + " " + points.get(getNumEnigme()).isResolu());
-            pointDAO.updateResolu(points.get(getNumEnigme()));
-            Log.d("data", "liste de point apres l'updateResolu");
-            for(int i = 0; i < points.size(); i++) {
-                Log.d("data", "point : " + points.get(i).getId() + " resolu = " + points.get(i).isResolu());
-            }
-            PossedePointDAO possedePointDAO = new PossedePointDAO(this);
-            possedePointDAO.open();
-            possedePointDAO.ajouter(last.getId(), points.get(getNumEnigme()).getId());
-            Log.d("data", "liste des points resolus");
-            ArrayList<Point> pointsResolus = possedePointDAO.selectionner(last);
-            for(int j = 0; j < pointsResolus.size(); j++) {
-                Log.d("data", "point : " + pointsResolus.get(j).getId());
-            }
-            possedePointDAO.close();
-        }
-        pointDAO.close();
-        sauvegardeDAO.close();
-        */
     }
 
     @Override
@@ -222,10 +136,6 @@ public class EnigmeOrdiActivity extends Enigme {
     @Override
     protected void onDestroy(){
         super.onDestroy();
-        /*if(player != null){
-            player.release();
-            player=null;
-        }*/
         Log.i("iut","je suis dans onDestroy");
     }
 
@@ -234,57 +144,13 @@ public class EnigmeOrdiActivity extends Enigme {
         return(mdpFind);
     }
 
-    /*
-    private void initPoint() {
-        //creation du niveau 1 et de ses points
-        Niveau niveau1 = new Niveau(1);
-        //recuperation des points du niveau 1
-        ArrayList<Point> points = niveau1.getPoints();
-        Log.d("data", "ce qu'il y a dans l'arrayList de point");
-        for(int i = 0; i < points.size(); i++) {
-            Log.d("data", "point : " + points.get(i).getId() + "resolu = " + points.get(i).isResolu());
-        }
-        PointDAO pointDAO = new PointDAO(this);
-        pointDAO.open();
-        //on met les points dans la base de donnée
-        for(int i = 0; i < points.size(); i++) {
-            pointDAO.ajouter(points.get(i));
-        }
-        pointDAO.close();
-    }*/
-
     @Override
     public void resultat() {
+        //on prepare l'intent de retour vers la map du niveau
+        Intent intent = getIntent();
+        intent.putExtra("joueur", getJoueur());
+        setResult(RESULT_OK, intent);
         showResult(0, null, "Dehors, tout n'est que désolation. Saurez-vous trouver la source de la vie ?");
     }
-
-    /*
-    @Override
-    public void showResult(int point, Item item, String other) {
-        String nom = "aucun";
-        if(item != null) {
-            nom = item.getNom();
-        }
-        BottomDialog bottomDialog = new BottomDialog.Builder(this)
-                .setTitle("Enigme resolue!")
-                .setContent(other)
-                .setIcon(R.drawable.wolf_head)
-                .setPositiveText("Continuer")
-                .setPositiveBackgroundColorResource(R.color.black)
-                .setPositiveTextColorResource(R.color.white)
-                .onPositive(new BottomDialog.ButtonCallback() {
-                    @Override
-                    public void onClick(BottomDialog dialog) {
-                        Log.d("enigme", "on va finish");
-                        Intent intent = new Intent(getApplicationContext(), Niveau1Activity.class);
-                        intent.putExtra("joueur", getJoueur());
-                        startActivity(intent);
-                        finish();
-                    }
-                })
-                .setCancelable(false) //empeche de faire disparaitre la fenetre quand on tap en dehors
-                .build();
-        bottomDialog.show();
-    }*/
 
 }

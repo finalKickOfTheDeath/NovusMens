@@ -10,6 +10,7 @@ import android.util.Log;
 import com.math.novusmens_git.R;
 import com.math.novusmens_git.menu.NarrationActivity;
 import com.math.novusmens_git.personnage.Item;
+import com.math.novusmens_git.personnage.ItemList;
 import com.math.novusmens_git.personnage.Joueur;
 import com.merkmod.achievementtoastlibrary.AchievementToast;
 
@@ -21,11 +22,13 @@ import java.util.ArrayList;
 
 public class Niveau extends AppCompatActivity {
 
-    public static final int NB_POINT_NIVEAU1 = 10;
+    //public static final int NB_POINT_NIVEAU1 = 10;
 
     int numNiveau;
-    ArrayList<Point> points;
-    ArrayList<Item> items;
+    PointList points;
+    ItemList items;
+    //ArrayList<Point> points;
+    //ArrayList<Item> items;
     private MediaPlayer player;
 
    /* protected void onCreate(Bundle savedInstanceState) {
@@ -92,11 +95,11 @@ public class Niveau extends AppCompatActivity {
         return numNiveau;
     }
 
-    public ArrayList<Point> getPoints() {
+    public PointList getPoints() {
         return points;
     }
 
-    public ArrayList<Item> getItems() {
+    public ItemList getItems() {
         return items;
     }
 
@@ -104,11 +107,11 @@ public class Niveau extends AppCompatActivity {
         this.numNiveau = numNiveau;
     }
 
-    public void setPoints(ArrayList<Point> points) {
+    public void setPoints(PointList points) {
         this.points = points;
     }
 
-    public void setItems(ArrayList<Item> items) {
+    public void setItems(ItemList items) {
         this.items = items;
     }
 }

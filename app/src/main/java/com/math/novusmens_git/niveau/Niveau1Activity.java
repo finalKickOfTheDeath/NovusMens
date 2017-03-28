@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +15,7 @@ import com.github.javiersantos.bottomdialogs.BottomDialog;
 import com.math.novusmens_git.R;
 import com.math.novusmens_git.database.ItemDAO;
 import com.math.novusmens_git.database.PointDAO;
+import com.math.novusmens_git.database.PossedePointDAO;
 import com.math.novusmens_git.database.Sauvegarde;
 import com.math.novusmens_git.database.SauvegardeDAO;
 import com.math.novusmens_git.enigme.EnigmeBlocsActivity;
@@ -28,6 +30,7 @@ import com.math.novusmens_git.enigme.EnigmePointBloqueActivity;
 import com.math.novusmens_git.enigme.EnigmeSortie;
 import com.math.novusmens_git.menu.NarrationActivity;
 import com.math.novusmens_git.personnage.Item;
+import com.math.novusmens_git.personnage.ItemList;
 import com.math.novusmens_git.personnage.Joueur;
 import com.merkmod.achievementtoastlibrary.AchievementToast;
 
@@ -41,6 +44,7 @@ public class Niveau1Activity extends Niveau {
     private static final int NB_POINT_NIVEAU = 10;
     private static final int NUM_NIVEAU = 1;
     private static final int REQUEST_RETOURJOUEUR = 100;
+    private static final int REQUEST_FIRSTRETOUR = 200;
 
     private final String EXTRA_MUSIQUE = "musique";
     private MediaPlayer player;
@@ -50,6 +54,7 @@ public class Niveau1Activity extends Niveau {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d("niveau", "on est dans le onCreate");
         super.onCreate(savedInstanceState);
         //on récupère l'intent qui a lancé l'activité
         Intent intent = getIntent();
@@ -72,131 +77,7 @@ public class Niveau1Activity extends Niveau {
 
         setNumNiveau(NUM_NIVEAU);
 
-        //si pas de sauvegarde on envoie le joueur sur l'énigme ordi
-        Log.d("data", "dans on create niveau 1 activity");
-        SauvegardeDAO sauvegardeDAO = new SauvegardeDAO(this);
-        sauvegardeDAO.open();
-        Sauvegarde last = sauvegardeDAO.selectionSave();
-        sauvegardeDAO.close();
-        if(last == null) {
-            Log.d("data", "pas de sauvegarde existante");
-            Log.d("data", "Vous avez actuellement " + joueur.getTimePoint() + " points de temps");
-            Intent intentOrdi = new Intent(this, EnigmeOrdiActivity.class);
-            intentOrdi.putExtra("joueur", joueur);
-            startActivityForResult(intentOrdi, REQUEST_RETOURJOUEUR);
-        }
-
-        findViewById(R.id.btn1_narrationMaisonAbandonnee).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                joueur.move();
-                Log.i("data", "Vous avez actuellement " + joueur.getTimePoint() + " points de temps");
-                Intent intent = new Intent(v.getContext(), EnigmeMaisonAbandonneeActivity.class);
-                intent.putExtra("joueur", joueur);
-                startActivityForResult(intent, REQUEST_RETOURJOUEUR);
-            }
-        });
-
-        findViewById(R.id.btn2_enigmeRacine).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                joueur.move();
-                Log.i("data", "Vous avez actuellement " + joueur.getTimePoint() + " points de temps");
-                Intent intent = new Intent(v.getContext(), EnigmeRacines.class);
-                intent.putExtra("joueur", joueur);
-                startActivityForResult(intent, REQUEST_RETOURJOUEUR);
-            }
-        });
-
-        findViewById(R.id.btn3_pnj).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                joueur.move();
-                Log.i("data", "Vous avez actuellement " + joueur.getTimePoint() + " points de temps");
-                Intent intent = new Intent(v.getContext(), EnigmePNJActivity.class);
-                intent.putExtra("joueur", joueur);
-                startActivityForResult(intent, REQUEST_RETOURJOUEUR);
-            }
-        });
-
-        findViewById(R.id.btn4_enigmeJarres).setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                joueur.move();
-                Log.i("data", "Vous avez actuellement " + joueur.getTimePoint() + " points de temps");
-                Intent intent = new Intent(v.getContext(), EnigmeJarresActivity.class);
-                intent.putExtra("joueur", joueur);
-                startActivityForResult(intent, REQUEST_RETOURJOUEUR);
-            }
-        });
-
-        findViewById(R.id.btn5_sortie).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                joueur.move();
-                Log.i("data", "Vous avez actuellement " + joueur.getTimePoint() + " points de temps");
-                Intent intent = new Intent(v.getContext(), EnigmeSortie.class);
-                intent.putExtra("joueur", joueur);
-                startActivityForResult(intent, REQUEST_RETOURJOUEUR);
-            }
-        });
-
-        findViewById(R.id.btn6_enigmeOrdi).setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                joueur.move();
-                Log.i("data", "Vous avez actuellement " + joueur.getTimePoint() + " points de temps");
-                Intent intent = new Intent(v.getContext(), EnigmeOrdiActivity.class);
-                intent.putExtra("joueur", joueur);
-                startActivityForResult(intent, REQUEST_RETOURJOUEUR);
-            }
-        });
-
-        findViewById(R.id.btn7_narrationDesertMagnetique).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                joueur.move();
-                Log.i("data", "Vous avez actuellement " + joueur.getTimePoint() + " points de temps");
-                Intent intent = new Intent(v.getContext(), EnigmeDesertMagnetiqueActivity.class);
-                intent.putExtra("joueur", joueur);
-                startActivityForResult(intent, REQUEST_RETOURJOUEUR);
-            }
-        });
-
-        findViewById(R.id.btn8_pointBloqué).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                joueur.move();
-                Log.i("data", "Vous avez actuellement " + joueur.getTimePoint() + " points de temps");
-                Intent intent = new Intent(v.getContext(), EnigmePointBloqueActivity.class);
-                intent.putExtra("joueur", joueur);
-                startActivityForResult(intent, REQUEST_RETOURJOUEUR);
-            }
-        });
-
-        findViewById(R.id.btn9_enigmeBloc).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                joueur.move();
-                Log.i("data", "Vous avez actuellement " + joueur.getTimePoint() + " points de temps");
-                Intent intent = new Intent(v.getContext(), EnigmeBlocsActivity.class);
-                intent.putExtra("joueur", joueur);
-                startActivityForResult(intent, REQUEST_RETOURJOUEUR);
-            }
-        });
-
-        findViewById(R.id.btn10_narrationPluiesAcides).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                joueur.move();
-                Log.i("data", "Vous avez actuellement " + joueur.getTimePoint() + " points de temps");
-                Intent intent = new Intent(v.getContext(), EnigmePluiesAcidesActivity.class);
-                intent.putExtra("joueur", joueur);
-                startActivityForResult(intent, REQUEST_RETOURJOUEUR);
-            }
-        });
+        Log.d("data", "Vous avez actuellement " + joueur.getTimePoint() + " points de temps");
 
         findViewById(R.id.GridLayout).setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -211,55 +92,246 @@ public class Niveau1Activity extends Niveau {
     }
 
     @Override
-    protected void onResume(){
+    protected void onResume() {
+        Log.d("niveau", "on est dans onResume");
         super.onResume();
-        ArrayList<Point> point = null;
+        //on récupere la dernière sauvegarde
         SauvegardeDAO sauvegardeDAO = new SauvegardeDAO(this);
         sauvegardeDAO.open();
         Sauvegarde last = sauvegardeDAO.selectionSave();
-        if(last != null) {
-            PointDAO pointDAO = new PointDAO(this);
-            pointDAO.open();
-            point = pointDAO.selectionner();
-            pointDAO.close();
-            for (int i = 0; i < point.size(); i++) {
-                Log.d("data", "point : " + point.get(i).getId() + "resolu = " + point.get(i).isResolu());
-                Log.d("fin", "point : " + point.get(i).getId() + "resolu = " + point.get(i).isResolu());
-            }
+        sauvegardeDAO.close();
+        //si pas de sauvegarde existante --> initalisation des tables point et item
+        if(last == null) {
+            initPoint();
+            initItem();
         }
-        if(point != null && point.get(4).isResolu()){
-            if (joueur.getTimePoint()==0){ // si le joueur gagne mais n'a plus de point de temps, on lui en rajoute un pour qu'il n'est pas un game over
-                //joueur.winTimePoint(1);
-            }
-            Intent intent = new Intent(this, NarrationActivity.class);
-            intent.putExtra("joueur", joueur);
-            startActivity(intent);
-            finish();
+        //on recupère la liste de point du niveau
+        PointDAO pointDAO = new PointDAO(this);
+        pointDAO.open();
+        final ArrayList<Point> points = pointDAO.selectionner();
+        pointDAO.close();
+        Log.d("data", "dans la table points !!!!!!!");
+        for(Point p : points) {
+            Log.d("data", "point " + p.getId() + " " + p.isResolu());
         }
+        //si pas de sauvegarde ou point de l'enigme ordi pas resolu --> on envoie le joueur sur l'enigme ordi
+        if(last == null || (!points.get(getResources().getInteger(R.integer.level1_enigmeOrdinateur)).isResolu())) {
+            Intent intentOrdi = new Intent(this, EnigmeOrdiActivity.class);
+            intentOrdi.putExtra("joueur", joueur);
+            intentOrdi.putExtra("listePoint", (Parcelable) getPoints());
+            startActivityForResult(intentOrdi, REQUEST_FIRSTRETOUR);
+        }
+        //si une sauvegarde existe (last != null)
         else {
-            if (joueur.getTimePoint() <= 0) {
-                //Toast.makeText(this, "Vous avez perdu", Toast.LENGTH_SHORT).show();
+            if(/*points != null &&*/ points.get(getResources().getInteger(R.integer.level1_enigmeSortie)).isResolu()){
+                // si le joueur gagne mais n'a plus de point de temps, on lui en rajoute un pour qu'il n'est pas un game over
+                if(joueur.getTimePoint()==0) {
+                    joueur.winTimePoint(1);
+                }
+                //narration pour aller vers le niveau suivant
                 Intent intent = new Intent(this, NarrationActivity.class);
                 intent.putExtra("joueur", joueur);
                 startActivity(intent);
                 finish();
-            } else {
-                if (player == null) {
-                    player = MediaPlayer.create(this, R.raw.pjs4_menu);
-                    player.setVolume(100, 100);
-                }
-                player.start();
-                player.setLooping(true);
-                //Toast.makeText(this, "Vous avez actuellement " + joueur.getTimePoint() + " points de temps", Toast.LENGTH_SHORT).show();
-                AchievementToast.makeAchievement(this, "Point de temps : " + joueur.getTimePoint(), AchievementToast.LENGTH_SHORT, ContextCompat.getDrawable(this, R.drawable.clickerordi)).show();
             }
+            else {
+                if (joueur.getTimePoint() <= 0) {
+                    //Toast.makeText(this, "Vous avez perdu", Toast.LENGTH_SHORT).show();
+                    //narration game over
+                    Intent intent = new Intent(this, NarrationActivity.class);
+                    intent.putExtra("joueur", joueur);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    if (player == null) {
+                        player = MediaPlayer.create(this, R.raw.pjs4_menu);
+                        player.setVolume(100, 100);
+                    }
+                    player.start();
+                    player.setLooping(true);
+                    //Toast.makeText(this, "Vous avez actuellement " + joueur.getTimePoint() + " points de temps", Toast.LENGTH_SHORT).show();
+                    AchievementToast.makeAchievement(this, "Point de temps : " + joueur.getTimePoint(), AchievementToast.LENGTH_SHORT, ContextCompat.getDrawable(this, R.drawable.clickerordi)).show();
+                }
+            }
+
+            findViewById(R.id.btn1_narrationMaisonAbandonnee).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(points.get(getResources().getInteger(R.integer.level1_enigmeNarrative1MaisonAbandonne)).isResolu()) {
+                        AchievementToast.makeAchievement(Niveau1Activity.this, "Enigme déjà résolue!", AchievementToast.LENGTH_SHORT, ContextCompat.getDrawable(getApplicationContext(), R.drawable.clickerordi)).show();
+                    }
+                    else {
+                        joueur.move();
+                        Log.i("data", "Vous avez actuellement " + joueur.getTimePoint() + " points de temps");
+                        Intent intent = new Intent(v.getContext(), EnigmeMaisonAbandonneeActivity.class);
+                        intent.putExtra("joueur", joueur);
+                        startActivityForResult(intent, REQUEST_RETOURJOUEUR);
+                    }
+                }
+            });
+
+            findViewById(R.id.btn2_enigmeRacine).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(points.get(getResources().getInteger(R.integer.level1_enigmeRacine)).isResolu()) {
+                        AchievementToast.makeAchievement(Niveau1Activity.this, "Enigme déjà résolue!", AchievementToast.LENGTH_SHORT, ContextCompat.getDrawable(getApplicationContext(), R.drawable.clickerordi)).show();
+                    }
+                    else {
+                        joueur.move();
+                        Log.i("data", "Vous avez actuellement " + joueur.getTimePoint() + " points de temps");
+                        Intent intent = new Intent(v.getContext(), EnigmeRacines.class);
+                        intent.putExtra("joueur", joueur);
+                        startActivityForResult(intent, REQUEST_RETOURJOUEUR);
+                    }
+                }
+            });
+
+            findViewById(R.id.btn3_pnj).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(points.get(getResources().getInteger(R.integer.level1_enigmePNJ)).isResolu()) {
+                        AchievementToast.makeAchievement(Niveau1Activity.this, "Enigme déjà résolue!", AchievementToast.LENGTH_SHORT, ContextCompat.getDrawable(getApplicationContext(), R.drawable.clickerordi)).show();
+                    }
+                    else {
+                        joueur.move();
+                        Log.i("data", "Vous avez actuellement " + joueur.getTimePoint() + " points de temps");
+                        Intent intent = new Intent(v.getContext(), EnigmePNJActivity.class);
+                        intent.putExtra("joueur", joueur);
+                        startActivityForResult(intent, REQUEST_RETOURJOUEUR);
+                    }
+                }
+            });
+
+            findViewById(R.id.btn4_enigmeJarres).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(points.get(getResources().getInteger(R.integer.level1_enigmeJarre)).isResolu()) {
+                        AchievementToast.makeAchievement(Niveau1Activity.this, "Enigme déjà résolue!", AchievementToast.LENGTH_SHORT, ContextCompat.getDrawable(getApplicationContext(), R.drawable.clickerordi)).show();
+                    }
+                    else {
+                        joueur.move();
+                        Log.i("data", "Vous avez actuellement " + joueur.getTimePoint() + " points de temps");
+                        Intent intent = new Intent(v.getContext(), EnigmeJarresActivity.class);
+                        intent.putExtra("joueur", joueur);
+                        startActivityForResult(intent, REQUEST_RETOURJOUEUR);
+                    }
+                }
+            });
+
+            findViewById(R.id.btn5_sortie).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(points.get(getResources().getInteger(R.integer.level1_enigmeSortie)).isResolu()) {
+                        AchievementToast.makeAchievement(Niveau1Activity.this, "Enigme déjà résolue!", AchievementToast.LENGTH_SHORT, ContextCompat.getDrawable(getApplicationContext(), R.drawable.clickerordi)).show();
+                    }
+                    else {
+                        joueur.move();
+                        Log.i("data", "Vous avez actuellement " + joueur.getTimePoint() + " points de temps");
+                        Intent intent = new Intent(v.getContext(), EnigmeSortie.class);
+                        intent.putExtra("joueur", joueur);
+                        startActivityForResult(intent, REQUEST_RETOURJOUEUR);
+                    }
+                }
+            });
+
+            findViewById(R.id.btn6_enigmeOrdi).setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    if(points.get(getResources().getInteger(R.integer.level1_enigmeOrdinateur)).isResolu()) {
+                        AchievementToast.makeAchievement(Niveau1Activity.this, "Enigme déjà résolue!", AchievementToast.LENGTH_SHORT, ContextCompat.getDrawable(getApplicationContext(), R.drawable.clickerordi)).show();
+                    }
+                    else {
+                        joueur.move();
+                        Log.i("data", "Vous avez actuellement " + joueur.getTimePoint() + " points de temps");
+                        Intent intent = new Intent(v.getContext(), EnigmeOrdiActivity.class);
+                        intent.putExtra("joueur", joueur);
+                        intent.putExtra("listePoint", (Parcelable) getPoints());
+                        startActivityForResult(intent, REQUEST_RETOURJOUEUR);
+                    }
+                }
+            });
+
+            findViewById(R.id.btn7_narrationDesertMagnetique).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(points.get(getResources().getInteger(R.integer.level1_enigmeNarrative2DesertMagnetique)).isResolu()) {
+                        AchievementToast.makeAchievement(Niveau1Activity.this, "Enigme déjà résolue!", AchievementToast.LENGTH_SHORT, ContextCompat.getDrawable(getApplicationContext(), R.drawable.clickerordi)).show();
+                    }
+                    else {
+                        joueur.move();
+                        Log.i("data", "Vous avez actuellement " + joueur.getTimePoint() + " points de temps");
+                        Intent intent = new Intent(v.getContext(), EnigmeDesertMagnetiqueActivity.class);
+                        intent.putExtra("joueur", joueur);
+                        startActivityForResult(intent, REQUEST_RETOURJOUEUR);
+                    }
+                }
+            });
+
+            findViewById(R.id.btn8_pointBloqué).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ItemDAO itemDAO = new ItemDAO(getApplicationContext());
+                    itemDAO.open();
+                    Item key = itemDAO.getByName(nomItems[3]);
+                    itemDAO.close();
+                    if(points.get(getResources().getInteger(R.integer.level1_enigmePointBloque)).isResolu()) {
+                        AchievementToast.makeAchievement(Niveau1Activity.this, "Enigme déjà résolue!", AchievementToast.LENGTH_SHORT, ContextCompat.getDrawable(getApplicationContext(), R.drawable.clickerordi)).show();
+                    }
+                    else if(!joueur.has(key)) {
+                        AchievementToast.makeAchievement(Niveau1Activity.this, "Ce point est bloqué", AchievementToast.LENGTH_SHORT, ContextCompat.getDrawable(getApplicationContext(), R.drawable.clickerordi)).show();
+                    }
+                    else {
+                        joueur.move();
+                        Log.i("data", "Vous avez actuellement " + joueur.getTimePoint() + " points de temps");
+                        Intent intent = new Intent(v.getContext(), EnigmePointBloqueActivity.class);
+                        intent.putExtra("joueur", joueur);
+                        startActivityForResult(intent, REQUEST_RETOURJOUEUR);
+                    }
+                }
+            });
+
+            findViewById(R.id.btn9_enigmeBloc).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(!points.get(getResources().getInteger(R.integer.level1_enigmeNarrative2DesertMagnetique)).isResolu()) {
+                        AchievementToast.makeAchievement(Niveau1Activity.this, "Ce point est bloqué", AchievementToast.LENGTH_SHORT, ContextCompat.getDrawable(getApplicationContext(), R.drawable.clickerordi)).show();
+                    }
+                    else if(points.get(getResources().getInteger(R.integer.level1_enigmeBloc)).isResolu()) {
+                        AchievementToast.makeAchievement(Niveau1Activity.this, "Enigme déjà résolue!", AchievementToast.LENGTH_SHORT, ContextCompat.getDrawable(getApplicationContext(), R.drawable.clickerordi)).show();
+                    }
+                    else {
+                        joueur.move();
+                        Log.i("data", "Vous avez actuellement " + joueur.getTimePoint() + " points de temps");
+                        Intent intent = new Intent(v.getContext(), EnigmeBlocsActivity.class);
+                        intent.putExtra("joueur", joueur);
+                        startActivityForResult(intent, REQUEST_RETOURJOUEUR);
+                    }
+                }
+            });
+
+            findViewById(R.id.btn10_narrationPluiesAcides).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(points.get(getResources().getInteger(R.integer.level1_enigmeNarrative3PluiesAcides)).isResolu()) {
+                        AchievementToast.makeAchievement(Niveau1Activity.this, "Enigme déjà résolue!", AchievementToast.LENGTH_SHORT, ContextCompat.getDrawable(getApplicationContext(), R.drawable.clickerordi)).show();
+                    }
+                    else {
+                        joueur.move();
+                        Log.i("data", "Vous avez actuellement " + joueur.getTimePoint() + " points de temps");
+                        Intent intent = new Intent(v.getContext(), EnigmePluiesAcidesActivity.class);
+                        intent.putExtra("joueur", joueur);
+                        startActivityForResult(intent, REQUEST_RETOURJOUEUR);
+                    }
+                }
+            });
         }
     }
 
     @Override
     protected void onPause(){
         super.onPause();
-        Log.i("data", "on est dans le onPause de niveau1activity");
+        Log.d("niveau", "on est dans le onPause de niveau1activity");
         if(player != null){
             player.release();
             player=null;
@@ -269,13 +341,11 @@ public class Niveau1Activity extends Niveau {
         sauvegardeDAO.open();
         Sauvegarde last = sauvegardeDAO.selectionSave();
         //si pas de sauvegarde --> on la créée
-        //                     --> on initialise les points du niveau
-        //                     --> on initialise les items du niveau
         if(last == null) {
             Log.d("data", "pas de sauvegarde dans niveau 1 --> on la créée");
             //initialisation des points et des items du niveau
-            initPoint();
-            initItem();
+            //initPoint();
+            //initItem();
             //création de la premiere sauvegarde
             SimpleDateFormat format = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
             String now = format.format(new Date().getTime());
@@ -306,7 +376,7 @@ public class Niveau1Activity extends Niveau {
 
     private void initPoint() {
         //creation de la liste de point du niveau
-        ArrayList<Point> listPoint = new ArrayList<Point>();
+        PointList listPoint = new PointList();
         for(int i = 1; i <= NB_POINT_NIVEAU; i++) {
             listPoint.add(new Point(i, false));
         }
@@ -329,7 +399,7 @@ public class Niveau1Activity extends Niveau {
 
     private void initItem() {
         //creation de la liste d'item du niveau
-        ArrayList<Item> listItem = new ArrayList<Item>();
+        ItemList listItem = new ItemList();
         for(int i = 1; i <= nomItems.length; i++) {
             listItem.add(new Item(i, nomItems[i - 1]));
         }
@@ -362,27 +432,30 @@ public class Niveau1Activity extends Niveau {
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.d("enimge", "on est dans onActivityResult niveau 1");
-        Log.d("enigme", "resultCode = " + resultCode);
-        Log.d("enigme", "RESULT_OK = " + RESULT_OK);
-        Log.d("enigme", "requestCode = " + requestCode);
-        // on récupère le statut de retour de l'activité 2 c'est à dire l'activité numéro 1000
-        //if(requestCode==1000){
+        Log.d("intent", "on est dans onActivityResult niveau 1");
+        Log.d("intent", "resultCode = " + resultCode);
+        Log.d("intent", "RESULT_OK = " + RESULT_OK);
+        Log.d("intent", "requestCode = " + requestCode);
         if(requestCode == REQUEST_RETOURJOUEUR) {
             if(resultCode == RESULT_OK) {
                 joueur = data.getExtras().getParcelable("joueur");
-                Log.d("intent", "joueur point temps revenu de maison : " + joueur.getTimePoint());
+                Log.d("intent", "joueur point temps revenu : " + joueur.getTimePoint());
             }
             else if(resultCode == RESULT_CANCELED) {
                 Log.d("intent", "RESULT_CANCELED = " + RESULT_CANCELED + " && resultCode = " + resultCode);
             }
         }
-        // si le code de retour est égal à 1 on stoppe l'activité 1
-        /*
-        if(resultCode == 1){
-            finish();
-        }*/
-       // }
+        else if(requestCode == REQUEST_FIRSTRETOUR) {
+            if(resultCode == RESULT_OK) {
+                joueur = data.getExtras().getParcelable("joueur");
+                Log.d("intent", "joueur point temps revenu : " + joueur.getTimePoint());
+                showDidactitiel();
+            }
+            else if(resultCode == RESULT_CANCELED) {
+                Log.d("intent", "RESULT_CANCELED = " + RESULT_CANCELED + " && resultCode = " + resultCode);
+                finish();
+            }
+        }
     }
 
     private void showPlayerMenu() {
@@ -390,7 +463,7 @@ public class Niveau1Activity extends Niveau {
         for(Item i : joueur.getItems()) {
             listeItem += i.getNom() + "\n";
         }
-        final BottomDialog bottomDialog = new BottomDialog.Builder(this)
+        BottomDialog bottomDialog = new BottomDialog.Builder(this)
                 .setTitle("Inventaire")
                 .setContent("Points de temps : " + joueur.getTimePoint() + "\n" + listeItem)
                 .setIcon(R.drawable.wolf_head)
@@ -401,7 +474,7 @@ public class Niveau1Activity extends Niveau {
                 .onPositive(new BottomDialog.ButtonCallback() {
                     @Override
                     public void onClick(BottomDialog dialog) {
-                        Log.d("enigme", "on va finish");
+                        Log.d("intent", "on va finish");
                         dialog.dismiss();
                     }
                 })
@@ -409,5 +482,22 @@ public class Niveau1Activity extends Niveau {
         bottomDialog.show();
     }
 
-
+    private void showDidactitiel() {
+        BottomDialog bottomDialog = new BottomDialog.Builder(this)
+                .setTitle("Didactitiel")
+                .setContent("Pour accéder à votre inventaire, effectuer un tap long sur l'écran")
+                .setIcon(R.drawable.clickerordi)
+                .setPositiveText("Fermer")
+                .setCancelable(true)
+                .setPositiveBackgroundColorResource(R.color.black)
+                .setPositiveTextColorResource(R.color.white)
+                .onPositive(new BottomDialog.ButtonCallback() {
+                    @Override
+                    public void onClick(BottomDialog dialog) {
+                        dialog.dismiss();
+                    }
+                })
+                .build();
+        bottomDialog.show();
+    }
 }
