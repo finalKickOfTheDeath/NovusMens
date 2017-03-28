@@ -14,7 +14,7 @@ public class Personnage implements Element{
 
     public Personnage(Context context){
         représentation = new ImageView(context);
-        représentation.setImageResource(R.mipmap.fox);
+        représentation.setImageResource(R.mipmap.wolf);
 
     }
 

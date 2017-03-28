@@ -3,8 +3,10 @@ package com.math.novusmens_git.enigme;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Point;
+import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -15,7 +17,9 @@ import android.widget.Toast;
 
 import com.github.javiersantos.bottomdialogs.BottomDialog;
 import com.math.novusmens_git.R;
+import com.math.novusmens_git.niveau.Niveau1Activity;
 import com.math.novusmens_git.personnage.Joueur;
+import com.merkmod.achievementtoastlibrary.AchievementToast;
 
 public class EnigmeBlocsActivity extends Enigme {
     private Carte carte;
@@ -46,6 +50,19 @@ public class EnigmeBlocsActivity extends Enigme {
         initCarte();
         Log.d("data", "num niveau devrait être 1 il est : " + getNumNiveau());
         Log.d("data", "num enigme devrait être 8 il est : " + getNumEnigme());
+
+        //font persos
+        Typeface typeFaceSav = Typeface.createFromAsset(getAssets(),"fonts/savior1.ttf");
+        TextView txtPas = (TextView) findViewById(R.id.tVPas);
+        TextView nbPas = (TextView) findViewById(R.id.nbPas);
+        TextView retry = (TextView) findViewById(R.id.buttonRetour);
+        txtPas.setTypeface(typeFaceSav);
+        nbPas.setTypeface(typeFaceSav);
+        retry.setTypeface(typeFaceSav);
+        txtPas.setTextSize(35);
+        nbPas.setTextSize(35);
+        retry.setTextSize(25);
+
     }
 
     protected void onResume(){
@@ -75,7 +92,7 @@ public class EnigmeBlocsActivity extends Enigme {
 
     @Override
     public void resultat() {
-//on obtient des points de temps
+        //on obtient des points de temps
         int pt = giveRandomPointTemps();
         Log.d("enigme", "point de temps avant = " + getJoueur().getTimePoint());
         Log.d("enigme", "gain point temps : " + pt);
@@ -167,12 +184,13 @@ public class EnigmeBlocsActivity extends Enigme {
     }
 
     private void badEnding() {
-        Toast.makeText(this, "-1 point de temps", Toast.LENGTH_SHORT).show();
+        AchievementToast.makeAchievement(this, "-1 point de temps", AchievementToast.LENGTH_SHORT, ContextCompat.getDrawable(getApplicationContext(), R.drawable.clickerordi)).show();
+        //Toast.makeText(this, "-1 point de temps", Toast.LENGTH_SHORT).show();
     }
 
     private void goodEnding() {
         resultat();
         saveState();
-        Toast.makeText(this, "gagné", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "gagné", Toast.LENGTH_SHORT).show();
     }
 }
