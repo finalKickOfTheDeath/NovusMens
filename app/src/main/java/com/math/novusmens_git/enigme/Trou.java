@@ -14,7 +14,7 @@ public class Trou implements Element {
 
     public Trou(Activity activité){
         représentation = new ImageView(activité.getApplicationContext());
-        représentation.setImageResource(R.mipmap.trou);
+        représentation.setImageResource(R.mipmap.eau);
         représentation.setTag("trou");
     }
 

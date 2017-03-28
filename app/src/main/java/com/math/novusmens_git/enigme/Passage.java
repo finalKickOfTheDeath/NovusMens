@@ -14,7 +14,7 @@ public class Passage implements Element {
 
     public Passage(Context context){
         représentation = new ImageView(context);
-        représentation.setImageResource(R.mipmap.chemin);
+        représentation.setImageResource(R.mipmap.sol);
     }
 
     public ImageView getReprésentation(){
