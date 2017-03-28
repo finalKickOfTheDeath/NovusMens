@@ -44,8 +44,8 @@ public abstract class Enigme extends AppCompatActivity implements IEnigme {
         player = MediaPlayer.create(this, R.raw.pjs4);
         player.setVolume(100, 100);
 
-        resolution = MediaPlayer.create(this, R.raw.resolution);
-        resolution.setVolume(100, 100);
+        resolution = MediaPlayer.create(this, R.raw.pjs4_good);
+        resolution.setVolume(2, 2);
     }
 
     @Override

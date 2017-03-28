@@ -45,9 +45,6 @@ public class NarrationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_narration);
         Intent intent = getIntent();
         if(intent != null){
-            player = MediaPlayer.create(this, R.raw.pjs4_menu);
-            player.setVolume(100, 100);
-            player.seekTo(intent.getIntExtra(EXTRA_MUSIQUE,0));
             Bundle bundle = intent.getExtras();
             if(bundle != null && bundle.containsKey("joueur")) {
                 joueur = intent.getExtras().getParcelable("joueur");
@@ -58,6 +55,14 @@ public class NarrationActivity extends AppCompatActivity {
                 Log.d("intent", "le joueur est null narration");
             }
 
+            if(joueur.getTimePoint()<=0){
+                player = MediaPlayer.create(this, R.raw.pjs4_gameover);
+            }
+            else {
+                player = MediaPlayer.create(this, R.raw.pjs4_menu);
+            }
+            player.setVolume(100, 100);
+            player.seekTo(intent.getIntExtra(EXTRA_MUSIQUE,0));
         }
         getSupportActionBar().hide();
 
