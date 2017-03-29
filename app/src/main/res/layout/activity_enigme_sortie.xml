@@ -36,4 +36,14 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
 
+    <Button
+        android:id="@+id/btnSortieRetour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Partir"
+        android:layout_below="@+id/btnPutSortie"
+        android:background="@drawable/border"
+        android:textColor="@color/white"
+        android:layout_alignParentEnd="true" />
+
 </RelativeLayout>

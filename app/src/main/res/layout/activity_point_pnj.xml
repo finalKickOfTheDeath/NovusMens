@@ -18,9 +18,9 @@
         android:layout_height="100dp"
         app:srcCompat="@drawable/wolf_head"
         android:id="@+id/imgViewPlayer"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="24dp" />
+        android:layout_marginTop="11dp"
+        android:layout_below="@+id/txtViewPNJ"
+        android:layout_alignParentStart="true" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -80,5 +80,15 @@
         android:layout_marginStart="28dp"
         android:layout_alignTop="@+id/txtViewPNJ"
         android:layout_toEndOf="@+id/txtViewPNJ" />
+
+    <Button
+        android:id="@+id/btnPartirPNJ"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/border"
+        android:textColor="@color/white"
+        android:text="Partir" />
 
 </RelativeLayout>

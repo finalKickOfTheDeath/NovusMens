@@ -33,10 +33,10 @@
     <string name="DM_Res_Q3_G_G_RG">Je me réveille, revigoré. Quel rêve étrange…</string>
     <string name="DM_Res_Q3_G_G_RD">La tension est insoutenable. Au loin j\'entrevois une forme étrange. On dirait un humain. C\'est moi? Je fini par perdre connaissance.</string>
     <string name="DM_Res_Q3_G_D_RG">Impossible de retrouver sa trace. Elle s\'est évanouie. Certaines choses restent perdues à jamais, je devrais le savoir.</string>
-    <string name="DM_Res_Q3_G_D_RD">Je trébuche et m\'étale lamentablement. Devant mon regard dépité, une petite pierre ambrée semble me regarder. Ce n\'est qu\'un cailloux mais je l\'emporte avec moi.</string>
+    <string name="DM_Res_Q3_G_D_RD">Je trébuche et m\'étale lamentablement. Devant mon regard dépité, une petite pierre ambrée semble me regarder. Ce n\'est qu\'un cailloux mais je l\'emporte avec moi. (Vous avez débloqué un point sur la carte)</string>
     <string name="DM_Res_Q3_D_G_RG">J\'ai beau tout essayer, mes forces me quittent. Je sombre.</string>
     <string name="DM_Res_Q3_D_G_RD">Je me laisse disparaître avec elles. Ces ténèbres m’appartiennent.</string>
-    <string name="DM_Res_Q3_D_D_RG">Quel surprise ! C\'est un tout autre paysage qui se dessine ici. Il va tout de même falloir faire un peu de place pour avancer</string>
+    <string name="DM_Res_Q3_D_D_RG">Quel surprise ! C\'est un tout autre paysage qui se dessine ici. Il va tout de même falloir faire un peu de place pour avancer. (Vous avez débloqué un point sur la carte)</string>
     <string name="DM_Res_Q3_D_D_RD">Je perds la notion du temps, je ne sais plus depuis quand je suis prostré là. Les ténèbres se dissipent peu à peu.</string>
 
 </resources>

@@ -6,6 +6,7 @@ import android.graphics.Point;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
@@ -148,10 +149,37 @@ public class EnigmeBlocsActivity extends Enigme {
     }
 
     public void onClickRetour(View view){
-        badEnding();
-        initCarte();
-        déplacements = NB_COUPS;
-        ((TextView)findViewById(R.id.nbPas)).setText(déplacements.toString());
+        BottomDialog bottomDialog = new BottomDialog.Builder(this)
+                .setTitle("Que souhaitez vous faire ?")
+                .setIcon(R.drawable.clickerordi)
+                .setPositiveText("Réessayer")
+                .setNegativeText("Partir")
+                .setCancelable(true)
+                .setPositiveBackgroundColorResource(R.color.black)
+                .setPositiveTextColorResource(R.color.white)
+                .setNegativeTextColor(R.color.black)
+                .onPositive(new BottomDialog.ButtonCallback() {
+                    @Override
+                    public void onClick(BottomDialog dialog) {
+                        badEnding();
+                        initCarte();
+                        déplacements = NB_COUPS;
+                        ((TextView)findViewById(R.id.nbPas)).setText(déplacements.toString());
+                        dialog.dismiss();
+                    }
+                })
+                .onNegative(new BottomDialog.ButtonCallback() {
+                    @Override
+                    public void onClick(BottomDialog bottomDialog) {
+                        //on prepare l'intent de retour vers la map du niveau
+                        Intent intent = getIntent();
+                        intent.putExtra("joueur", getJoueur());
+                        setResult(RESULT_OK, intent);
+                        finish();
+                    }
+                })
+                .build();
+        bottomDialog.show();
     }
 
     public void onClickDéplacement(View view){
@@ -184,6 +212,8 @@ public class EnigmeBlocsActivity extends Enigme {
     }
 
     private void badEnding() {
+        getJoueur().looseTimePoint(1);
+        Log.d("intent", "nombre de point de temps du joueur : " + getJoueur().getTimePoint());
         AchievementToast.makeAchievement(this, "-1 point de temps", AchievementToast.LENGTH_SHORT, ContextCompat.getDrawable(getApplicationContext(), R.drawable.clickerordi)).show();
         //Toast.makeText(this, "-1 point de temps", Toast.LENGTH_SHORT).show();
     }

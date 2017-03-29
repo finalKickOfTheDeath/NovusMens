@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.Checkable;
 import android.widget.TextView;
 
+import com.github.javiersantos.bottomdialogs.BottomDialog;
 import com.math.novusmens_git.R;
 import com.math.novusmens_git.personnage.Item;
 import com.math.novusmens_git.personnage.Joueur;
@@ -80,6 +81,26 @@ public class EnigmeRacines extends Enigme {
         racines = new LinkedList<>();
         proposition = new LinkedList<>();
         initRacines();
+    }
+
+    protected void onResume(){
+        super.onResume();
+        BottomDialog bottomDialog = new BottomDialog.Builder(this)
+                .setTitle("Enigme")
+                .setContent("Vous arrivez devant un bâtiment. Par la fenêtre, vous appercevez un objet à l'intérieur. Vous essayez d'ouvrir la porte magnétique mais elle est vérouillée. Cela semble venir du circuit électrique, à vous de jouez!")
+                .setIcon(R.drawable.clickerordi)
+                .setPositiveText("Fermer")
+                .setCancelable(true)
+                .setPositiveBackgroundColorResource(R.color.black)
+                .setPositiveTextColorResource(R.color.white)
+                .onPositive(new BottomDialog.ButtonCallback() {
+                    @Override
+                    public void onClick(BottomDialog dialog) {
+                        dialog.dismiss();
+                    }
+                })
+                .build();
+        bottomDialog.show();
     }
 
     private void initRacines() {

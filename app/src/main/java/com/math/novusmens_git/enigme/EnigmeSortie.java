@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.math.novusmens_git.R;
@@ -45,10 +46,13 @@ public class EnigmeSortie extends Enigme {
         Typeface typeFaceSav = Typeface.createFromAsset(getAssets(),"fonts/savior1.ttf");
         TextView desc = (TextView) findViewById(R.id.txtSortie);
         TextView put = (TextView) findViewById(R.id.btnPutSortie);
+        Button partir = (Button) findViewById(R.id.btnSortieRetour);
         desc.setTypeface(typeFaceSav);
         put.setTypeface(typeFaceSav);
+        partir.setTypeface(typeFaceSav);
         desc.setTextSize(22);
         put.setTextSize(25);
+        partir.setTextSize(25);
 
         if(getJoueur().has(getItemByName(ITEM_NEEDED))) {
             saveState();
@@ -66,6 +70,17 @@ public class EnigmeSortie extends Enigme {
         else {
             findViewById(R.id.btnPutSortie).setVisibility(View.INVISIBLE);
         }
+
+        findViewById(R.id.btnSortieRetour).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //on prepare l'intent de retour vers la map du niveau
+                Intent intent = getIntent();
+                intent.putExtra("joueur", getJoueur());
+                setResult(RESULT_OK, intent);
+                finish();
+            }
+        });
 
     }
 

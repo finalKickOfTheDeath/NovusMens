@@ -53,12 +53,15 @@ public class EnigmePNJActivity extends Enigme {
         TextView pnj = (TextView) findViewById(R.id.txtViewPNJ);
         TextView repG = (TextView) findViewById(R.id.btnAgree);
         TextView repD = (TextView) findViewById(R.id.btnDisagree);
+        Button partir = (Button) findViewById(R.id.btnPartirPNJ);
         pnj.setTypeface(typeFaceSav3);
         repG.setTypeface(typeFaceSav1);
         repD.setTypeface(typeFaceSav1);
+        partir.setTypeface(typeFaceSav1);
         pnj.setTextSize(25);
         repG.setTextSize(22);
         repD.setTextSize(22);
+        partir.setTextSize(25);
 
         if(getJoueur().has(getItemByName(ITEM_NEEDED_1)) && getJoueur().has(getItemByName(ITEM_NEEDED_2))) {
             //on change les textes
@@ -103,6 +106,17 @@ public class EnigmePNJActivity extends Enigme {
                     findViewById(R.id.btnAgree).setVisibility(View.INVISIBLE);
                     findViewById(R.id.btnDisagree).setVisibility(View.INVISIBLE);
                 }
+            }
+        });
+
+        findViewById(R.id.btnPartirPNJ).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //on prepare l'intent de retour vers la map du niveau
+                Intent intent = getIntent();
+                intent.putExtra("joueur", getJoueur());
+                setResult(RESULT_OK, intent);
+                finish();
             }
         });
     }

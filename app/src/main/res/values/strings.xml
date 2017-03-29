@@ -19,8 +19,7 @@
     <string name="descEnigmeJarres">
         Un mécanisme étrange se présente devant vous. Trois réservoirs sont alignés. Le premier
         porte l\'inscription 10, le deuxième 7 et le dernier 3. Le premier reservoir est rempli
-        d\'un liquide fluorescent. Au dessus, gravé dans la pierre, un message : \"L\'équité sera
-        la voie vers le monde que tu recherches\".
+        d\'un liquide fluorescent. Au dessus, gravé dans la pierre, un message : \" [V] [V] [ ] \".
     </string>
     <string name="tipEnigmeJarres">Partagez le contenu du premier réservoir en 2!</string>
     <string name="level1_enimgeJarres_10l">Bouton 10 litres</string>
